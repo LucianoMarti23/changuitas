@@ -1,0 +1,130 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+
+  .btn-standard {
+    @apply px-4 py-2  h-12 text-lg font-semibold whitespace-nowrap rounded-md transition-colors;
+  }
+
+  .btn-primary {
+    @apply text-base font-medium transition-colors rounded-full text-light-50 bg-primary-600 hover:bg-primary-900 focus:outline-none focus:ring-4 focus:ring-primary-300 active:bg-primary-800 disabled:bg-primary-400 dark:bg-primary-600 dark:hover:bg-primary-900 dark:focus:ring-info-800;
+  }
+
+
+  .btn-complem {
+    @apply text-base font-medium transition-colors rounded-full text-light-50 bg-complem-400 hover:bg-complem-500 focus:outline-none focus:ring-4 focus:ring-complem-300 active:bg-complem-400 disabled:bg-complem-400 dark:bg-complem-400 dark:hover:bg-complem-500 dark:focus:ring-complem-300;
+  }
+
+  .btn-danger {
+    @apply text-base font-medium transition-colors rounded-full text-light-50 bg-danger-600 hover:bg-danger-900 focus:outline-none focus:ring-4 focus:ring-danger-300 active:bg-danger-800 disabled:bg-danger-400 dark:bg-danger-600 dark:hover:bg-danger-900 dark:focus:ring-info-800;
+  }
+
+  .btn-success {
+    @apply text-base font-medium transition-colors rounded-full text-light-50 bg-success-600 hover:bg-success-900 focus:outline-none focus:ring-4 focus:ring-success-300 active:bg-success-800 disabled:bg-success-400 dark:bg-success-600 dark:hover:bg-success-900 dark:focus:ring-success-800;
+  }
+
+  .btn-info {
+    @apply text-base font-medium transition-colors rounded-full text-light-50 bg-info-600 hover:bg-info-900 focus:outline-none focus:ring-4 focus:ring-info-300 active:bg-info-800 disabled:bg-info-400 dark:bg-info-600 dark:hover:bg-info-900 dark:focus:ring-info-800;
+  }
+
+  .btn-info-dark {
+    @apply px-5 py-2 text-base font-medium transition-colors rounded-full text-light-50 bg-dark-800 hover:bg-info-900 focus:outline-none focus:ring-4 focus:ring-info-300 dark:bg-dark-800 dark:hover:bg-info-900 dark:focus:ring-info-800;
+}
+
+  /*ESTYLE texted BTN*/
+  .btn-primary-texted {
+    @apply text-base font-medium transition-colors rounded-full text-primary-600 hover:bg-primary-100 focus:outline-none focus:ring-4 focus:ring-primary-300 active:bg-primary-200 disabled:text-primary-400 dark:text-primary-400 dark:hover:bg-primary-700 dark:focus:ring-info-800 border border-primary-600;
+  }
+
+  .btn-complem-texted {
+    @apply text-base font-medium transition-colors rounded-full text-complem-500 hover:bg-complem-100 focus:outline-none focus:ring-4 focus:ring-complem-300 active:bg-complem-200 disabled:text-complem-400 dark:text-complem-400 dark:hover:bg-complem-700 dark:focus:ring-complem-300 border border-complem-600;
+  }
+
+  .btn-danger-texted {
+    @apply text-base font-medium transition-colors rounded-full text-danger-600 hover:bg-danger-100 focus:outline-none focus:ring-4 focus:ring-danger-300 active:bg-danger-200 disabled:text-danger-400 dark:text-danger-400 dark:hover:bg-danger-700 dark:focus:ring-info-800 border border-danger-600;
+  }
+
+  .btn-success-texted {
+    @apply text-base font-medium transition-colors rounded-full text-success-600 hover:bg-success-100 focus:outline-none focus:ring-4 focus:ring-success-300 active:bg-success-200 disabled:text-success-400 dark:text-success-500 dark:hover:bg-success-700 dark:focus:ring-success-800 border border-success-600;
+  }
+
+  .btn-info-texted {
+    @apply text-base font-medium transition-colors rounded-full text-info-600 hover:bg-info-100 focus:outline-none focus:ring-4 focus:ring-info-300 active:bg-info-200 disabled:text-info-400 dark:text-info-400 dark:hover:bg-info-700 dark:focus:ring-info-800 border border-info-600;
+  }
+
+
+
+    /*ESTYLE BTN celu o redondos*/
+  .btn-R-neutro {
+    @apply w-16 h-16 rounded-full bg-light-100 dark:bg-light-700 hover:bg-dark-300 hover:dark:bg-dark-500 transition-colors duration-300 hover:shadow-sm;
+}
+
+
+
+  /* ESTILOS PARA MENSAJES */
+  .message-transparent {
+    @apply border-none bg-transparent  shadow-md inline-block 
+   mb-4;
+}
+  .message-error {
+    @apply border border-danger-500 bg-danger-200 text-danger-700 p-4 rounded-md shadow-md inline-block 
+    dark:bg-danger-950 dark:border-danger-700 dark:text-danger-500 mb-4;
+  }
+
+  .message-success {
+    @apply border border-success-500 bg-success-200 text-success-700 p-4 rounded-md shadow-md inline-block 
+    dark:bg-success-950 dark:border-success-700 dark:text-success-300 mb-4;
+  }
+
+  .message-alert {
+    @apply border border-alert-400 bg-alert-200 text-alert-700 p-4 rounded-md shadow-md inline-block 
+    dark:bg-alert-100 dark:border-alert-600 dark:text-alert-500 mb-4;
+  }
+
+  .message-info {
+    @apply border border-info-500 bg-info-200 text-info-700 p-4 rounded-md shadow-md inline-block 
+    dark:bg-info-950 dark:border-info-700 dark:text-info-400 mb-4;
+  }
+  .message-dark {
+    @apply border border-dark-500 bg-dark-200 text-dark-700 p-4 rounded-md shadow-md inline-block 
+    dark:bg-dark-950 dark:border-dark-700 dark:text-dark-400 mb-4;
+}
+
+/*Estilos para Modales*/
+
+.modal-bg {
+    @apply hidden fixed inset-0 z-50 flex items-center justify-center bg-dark-800 bg-opacity-50;
+}
+.modal-content {
+    @apply bg-light-100 rounded-lg shadow-md p-6 w-full max-w-md;
+}
+.modal-icon {
+    @apply mx-auto mb-4 text-dark-500 w-12 h-12;
+}
+.modal-title {
+    @apply mb-5 text-lg font-normal text-dark-500;
+}
+
+
+
+  /*ESTilo Formularios*/
+  .form-input {
+    @apply p-2 bg-dark-50 border border-dark-300 text-dark-900 rounded-lg dark:bg-dark-700 dark:border-dark-600 dark:text-light-100;
+  }
+
+  .form-selec {
+    @apply block mt-1 py-2 px-3 border border-dark-300 bg-dark-50 text-dark-900 rounded-lg shadow-sm focus:ring-primary-500 focus:border-primary-500 dark:bg-dark-700 dark:border-dark-600 dark:text-light-100 dark:focus:border-primary-500;
+  }
+
+
+   /*BORDE*/
+  .border-gradient {
+    @apply border-4 border-transparent rounded-lg; /* Estilos base para el borde */
+    border-image: linear-gradient(to right, #6ee7b7, #3b82f6) 1; /* Color del borde degradado */
+}
+
+
+
+}
