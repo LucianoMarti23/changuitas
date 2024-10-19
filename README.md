@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 # changuitas-project
 
 ## Entorno de desarrollo
