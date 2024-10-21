@@ -949,12 +949,14 @@
             <!-- Donación -->
             <div class="flex flex-col py-8">
     <h2 class="text-xl font-semibold mb-2 text-center">Haz una Donación</h2>
-    <form action="/donate" method="post" class="flex flex-col items-center">
-        @csrf
-        <input type="number" name="amount" placeholder="Monto de la donación"
-            class="mb-4 p-2 border border-dark-300 rounded w-full max-w-xs" required>
-        <button type="submit" class="btn-primary mb-2">Donar</button>
-    </form>
+    <form id="donationForm" action="/donate" method="post" class="flex flex-col items-center">
+    @csrf
+    <input type="number" name="amount" placeholder="Monto de la donación"
+        class="mb-4 p-2 border border-dark-300 rounded w-full max-w-xs" required>
+    <button type="submit" id="donateButton" class="btn-primary mb-2">Donar</button>
+</form>
+
+
 </div>
 
         </div>
@@ -1007,20 +1009,42 @@
     </main>
 
     <script src="https://sdk.mercadopago.com/js/v2"></script>
-<script>
-    document.querySelector('form').onsubmit = async (event) => {
-        event.preventDefault();
-        const response = await fetch('/donate', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'X-CSRF-TOKEN': document.querySelector('input[name="_token"]').value
-            },
-            body: JSON.stringify({ amount: document.querySelector('input[name="amount"]').value })
-        });
-        const data = await response.json();
-        window.location.href = data.init_point; // Redirigir a la URL de pago
+    <script>
+    document.querySelector('button[type="submit"]').onclick = (event) => {
+        const amount = document.querySelector('input[name="amount"]').value;
+
+        // Verifica que el campo 'amount' no esté vacío y sea un número válido
+        if (!amount || isNaN(amount) || amount <= 0) {
+            return; // No hacer nada si la validación falla
+        }
+
+        // Si se pasa la validación, crear la solicitud
+        const request = new XMLHttpRequest();
+        request.open('POST', '/donate');
+        request.setRequestHeader('Content-Type', 'application/json');
+        request.setRequestHeader('X-CSRF-TOKEN', document.querySelector('input[name="_token"]').value);
+        
+        // Manejar la respuesta
+        request.onload = () => {
+            if (request.status >= 200 && request.status < 300) {
+                const data = JSON.parse(request.responseText);
+                window.location.href = data.init_point; // Redirigir a la URL de pago
+            } else {
+                const errorData = JSON.parse(request.responseText);
+                alert(`Error: ${errorData.error || 'Ocurrió un error al procesar la donación.'}`);
+            }
+        };
+
+        // Manejar errores de red
+        request.onerror = () => {
+            alert('Ocurrió un error en la comunicación con el servidor.');
+        };
+
+        // Enviar la solicitud con el monto
+        request.send(JSON.stringify({ amount }));
     };
 </script>
+
+
 
 </x-page>

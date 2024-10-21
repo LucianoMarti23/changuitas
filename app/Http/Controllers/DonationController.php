@@ -1,6 +1,5 @@
 <?php
 
-
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
@@ -12,23 +11,22 @@ class DonationController extends Controller
 {
     public function donate(Request $request)
     {
-        // Configurar Mercado Pago
+        $request->validate([
+            'amount' => 'required|numeric|min:0',
+        ]);
+
         SDK::setAccessToken(env('MERCADO_PAGO_ACCESS_TOKEN'));
 
-        // Crear preferencia
         $preference = new Preference();
-        
-        // Datos de la donación
         $item = new Item();
         $item->title = 'Donación';
         $item->quantity = 1;
         $item->unit_price = (float)$request->input('amount');
         $preference->items = array($item);
 
-        // Guardar la preferencia
         $preference->save();
 
-        return response()->json(['init_point' => $preference->init_point]);
+        return redirect($preference->init_point);
     }
 }
 
