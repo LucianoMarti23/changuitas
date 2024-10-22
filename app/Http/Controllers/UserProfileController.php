@@ -37,6 +37,10 @@ class UserProfileController extends Controller
 
         $user = $this->userAuth->getAuthenticatedUser();
 
+       if ($user->profile_complete){
+            return redirect()->route('profile.personalData' , $user->id);
+       }
+
         $profile = $user->profile ?? new UserProfile();
         return view('profile.createprofile', compact('profile'));
     }
