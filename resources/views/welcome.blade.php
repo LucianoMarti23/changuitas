@@ -942,7 +942,7 @@
                 <form action="#" method="post" class="flex flex-col items-center">
                     <input type="email" placeholder="Tu correo electrónico"
                         class="mb-4 p-2 border border-dark-300 rounded w-full max-w-xs" required>
-                    <button type="submit" class="btn-primary mb-2">Suscribirse</button>
+                    <button type="submit" class="btn-primary  btn-standard mb-2">Suscribirse</button>
                 </form>
             </div>
 
@@ -953,7 +953,7 @@
     @csrf
     <input type="number" name="amount" placeholder="Monto de la donación"
         class="mb-4 p-2 border border-dark-300 rounded w-full max-w-xs" required>
-    <button type="submit" id="donateButton" class="btn-primary mb-2">Donar</button>
+    <button type="submit" id="donateButton" class="btn-primary btn-standard mb-2">Donar</button>
 </form>
 
 

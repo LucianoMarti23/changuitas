@@ -5,7 +5,7 @@
 
         <!-- Panel izquierdo -->
         <div id="panel"
-            class=" max-w-sm sm:max-w-screen-sm  p-4 bg-light-200 dark:bg-dark-950 overflow-hidden transition-all duration-300 ">
+            class="min-h-screen w-full p-4 bg-light-200 dark:bg-dark-950 overflow-hidden transition-all duration-300 ">
             <div class="flex justify-between">
 
                 <button id="open-modal-btn" class="m-4 p-2 text-light-600 dark:text-light-200 border rounded">
@@ -161,7 +161,7 @@
                                 <div class="relative w-12 h-12">
                                     <img src="{{ asset('storage/' . ($job->userProfile ? $job->userProfile->profile_picture : 'ruta/a/imagen/default.jpg')) }}"
                                         alt="Foto de usuario" class="object-cover w-full h-full rounded-full">
-
+        
                                 </div>
                                 <div class="ml-4">
                                     <h4 class="text-xl font-semibold">{{ $job->user->name }}</h4>
@@ -173,6 +173,7 @@
                             <div class="flex items-center space-x-4">
                                 <p class="text-sm sm:text-base text-complem-400 flex items-center space-x-1">
                                     <span class="hidden text-medium sm:block">Promocionada</span>
+                                    
                                 </p>
                                 <div class="relative">
                                     <!-- Botón de menú -->
@@ -212,7 +213,7 @@
                                 </svg>
                                 <span>{{ $job->locality }}</span> <!-- Localidad -->
                             </div>
-
+                            
                             <div class="flex items-center text-base pl-2 text-dark-400 dark:text-dark-400">
                                 <svg class="w-5 h-5 mr-1 text-primary-500" aria-hidden="true"
                                     xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
@@ -233,14 +234,27 @@
                                 <span class="text-sm px-1 py-1 rounded-full">{{ $job->category->name }}</span>
                                 <!-- Categoría -->
                             </div>
+                            <div class="flex items-center text-base pl-2 text-dark-400 dark:text-dark-400">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-eye" viewBox="0 0 16 16">
+  <path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8zM8 13c-2.967 0-5.5-2.239-5.5-5S5.033 3 8 3s5.5 2.239 5.5 5-2.533 5-5.5 5zm0-1a4 4 0 1 1 0-8 4 4 0 0 1 0 8z"/>
+  <path d="M8 5a3 3 0 1 0 0 6 3 3 0 0 0 0-6z"/>
+</svg>
+<p>Visitas  {{$job->views}}</p>
 
+                            </div>
+
+                            
+                            
                             <div
                                 class="text-md sm:text-xl pt-2 text-dark-700 dark:text-dark-200 overflow-hidden text-ellipsis line-clamp-2">
                                 <p>{{ $job->job_description }}</p> <!-- Descripción del trabajo -->
                             </div>
                         </div>
-
+                        
                         <div class="flex justify-end p-2 gap-2">
+                     
+                        
+
                             <a href="{{ route('jobsInfo', $job->id) }}" class="flex items-center btn-info-dark">
                                 <!-- Enlace a más información -->
                                 <svg class="flex w-6 h-6 mr-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
@@ -251,6 +265,7 @@
                                 Ver Más
                             </a>
                         </div>
+                        
                     </div>
                 @endforeach
 
@@ -272,13 +287,13 @@
             <div class="flex items-center">
                 <!-- foto -->
                 <div class="relative w-12 h-12">
-                    <img src="{{ asset('storage/' . ($job->userProfile ? $job->userProfile->profile_picture : 'ruta/a/imagen/default.jpg')) }}"
+                    <img src=""
                         alt="Foto de usuario"
                         class="object-cover w-full h-full rounded-full">
                 </div>
                 <!-- Información de usuario -->
                 <div class="ml-4">
-                    <h4 class="text-xl font-semibold">{{$job->user->name}}</h4>
+                    <h4 class="text-xl font-semibold"></h4>
                 </div>
             </div>
 

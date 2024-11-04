@@ -52,7 +52,7 @@
                         class="text-xl font-medium  hover:text-primary-600  block px-4 py-2 rounded">Express</a>
                 </li>
                 <li>
-                    <a href="#" class="text-xl font-medium  hover:text-primary-600 block px-4 py-2 rounded">Perfiles</a>
+                    <a href="/profiles" class="text-xl font-medium  hover:text-primary-600 block px-4 py-2 rounded">Perfiles</a>
                 </li>
                 <li>
                     <a href="{{route('notificaciones.index')}}"

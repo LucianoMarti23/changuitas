@@ -42,10 +42,10 @@ class JobServiceImpl implements JobServiceInterface{
         'work_schedule' => 'required|in:Full time,Part time',
         'province' => 'required|string|max:100',
         'locality' => 'required|string|max:100',
-        'job_description' => 'required|string|max:100',
+        'job_description' => 'required|string|max:255',
         'category_id' => 'required|exists:job_categories,id',
-        'job_benefits' => 'required|string', // Nueva validación para beneficios
-        'job_requirements' => 'required|string', // Nueva validación para requisitos
+        'job_benefits' => 'required|string|max:255', // Nueva validación para beneficios
+        'job_requirements' => 'required|string|max:255', // Nueva validación para requisitos
     ]);
 
     Job::create([
