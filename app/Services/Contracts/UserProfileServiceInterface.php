@@ -30,4 +30,6 @@ interface UserProfileServiceInterface
 
 
     public function deletePicture();
+
+    public function showProfiles();
 }

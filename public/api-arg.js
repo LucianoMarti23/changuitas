@@ -35,6 +35,7 @@ function provincia() {
             json.provincias.forEach(el => {
                 $options += `<option value="${el.nombre}">${el.nombre}</option>`;
             });
+            
             document.getElementById("selectProvincias").innerHTML = $options;
         })
         .catch(error => {

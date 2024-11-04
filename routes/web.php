@@ -26,9 +26,7 @@ Route::get('/chat', [ChatController::class, 'index']);
 Route::post('/send-message', [ChatController::class, 'sendMessage']);
 Route::get('/messages/{recipient_id}', [ChatController::class, 'getMessages']);
 
-Route::get('/profiles', function () {
-    return view('profile.profiles');
-})->name('profile.profiles');
+
 // web.php
 
 Route::get('/', function () {

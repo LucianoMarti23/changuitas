@@ -13,6 +13,9 @@ Route::put('/personalData/edit/{id}', [UserProfileController::class, 'update'])-
 Route::post('/upload-picture', [UserProfileController::class, 'uploadProfilePicture'])->name('profile.uploadPicture');
 Route::delete('/profile/delete-picture', [UserProfileController::class, 'deleteProfilePicture'])->name('profile.deletePicture');
 
+Route::get('/profiles', [UserProfileController::class , 'showProfiles'])->name('profile.profiles');
+   
+
 
 
 Route::post('/user-profile/update-summary/{profileId}', [UserProfileController::class, 'updateSummary'])

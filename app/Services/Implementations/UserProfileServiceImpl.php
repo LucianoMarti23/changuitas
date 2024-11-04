@@ -278,4 +278,8 @@ return 'No se encontró ninguna foto de perfil para eliminar.';
 
 }
 
+public function showProfiles(){
+    return UserProfile::all();
+}
+
 }

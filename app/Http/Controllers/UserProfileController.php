@@ -159,6 +159,11 @@ public function showNotifications(){
     return view('profile.notificacions');
 }
 
+public function showProfiles(){
+    $profiles = $this->userProfileService->showProfiles();
+    return view('profile.profiles' , compact('profiles'));
+}
+
 }
 
 
