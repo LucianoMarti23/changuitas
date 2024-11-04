@@ -3,8 +3,8 @@
 use Illuminate\Support\Facades\Route;
 
 
-
-
+use App\Http\Controllers\ChatController;
+use App\Models\User;
 
 use App\Http\Controllers\DonationController;
 
@@ -20,6 +20,11 @@ require base_path('routes/profile/profile.php');
 require base_path('routes/password/password.php');
 require base_path('routes/jobs/jobs.php');
 
+
+
+Route::get('/chat', [ChatController::class, 'index']);
+Route::post('/send-message', [ChatController::class, 'sendMessage']);
+Route::get('/messages/{recipient_id}', [ChatController::class, 'getMessages']);
 
 
 // web.php

@@ -127,7 +127,7 @@
             </a>
            </li>
             <li>
-            <a href="{{ url('messageHistory') }}" class="block  text-normal text-lg hover:bg-primary-800 hover:text-light-200 rounded-full rounded-r-none pl-2 py-1">
+            <a href="{{ url('/chat') }}" class="block  text-normal text-lg hover:bg-primary-800 hover:text-light-200 rounded-full rounded-r-none pl-2 py-1">
                 <svg class="w-7 h-7 mr-2 inline-block hover:fill-light-100" aria-hidden="true"
                     xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"

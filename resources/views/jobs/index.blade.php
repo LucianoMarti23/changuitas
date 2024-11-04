@@ -273,13 +273,16 @@
                 <div class="flex items-center">
                     <!-- foto -->
                     <div class="relative w-12 h-12">
-                        <img src="img/Profile-none.jpg" alt="Foto de usuario"
+                    
+
+                        <img src="{{ asset('storage/' . ($job->userProfile ? $job->userProfile->profile_picture : 'ruta/a/imagen/default.jpg')) }}"
+                        alt="Foto de usuario"
                             class="object-cover w-full h-full rounded-full">
                     </div>
                     <!-- Información de usuario -->
                     <div class="ml-4">
-                        <h4 class="text-xl font-semibold">Nombre del usuario</h4>
-                        <p class="text-sm font-light text-dark-400">Hace 2 horas</p>
+                        <h4 class="text-xl font-semibold">{{$job->user->name}}</h4>
+                        
                     </div>
                 </div>
 
@@ -419,6 +422,16 @@
             <label for="job_description"
                 class="block text-dm font-medium text-dark-700 dark:text-dark-200">Descripción</label>
             <textarea id="job_description" name="job_description" rows="4"
+                class="mt-1 block w-full rounded-md p-2 text-dark-700 text-sm sm:text-dm"
+                required></textarea>
+        </div>
+
+
+
+        <div>
+            <label for="job_beneficios"
+                class="block text-dm font-medium text-dark-700 dark:text-dark-200">Beneficios</label>
+            <textarea id="job_beneficios" name="job_beneficios" rows="4"
                 class="mt-1 block w-full rounded-md p-2 text-dark-700 text-sm sm:text-dm"
                 required></textarea>
         </div>
