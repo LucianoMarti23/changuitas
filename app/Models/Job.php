@@ -18,8 +18,11 @@ class Job extends Model
         'province',
         'locality',
         'job_description',
-        'views', // Agregar el campo 'views'
+        'views',
+        'job_benefits', // Nuevo campo para beneficios
+        'job_requirements', // Nuevo campo para requisitos
     ];
+    
 
     public function user()
     {

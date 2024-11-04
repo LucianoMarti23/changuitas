@@ -267,182 +267,127 @@
 
     <!-- Modal -->
     <div id="modal" class="fixed inset-0 bg-dark-800 bg-opacity-75 flex items-center justify-center hidden">
-        <div
-            class="bg-light-200 dark:bg-light-700 text-dark-800 dark:text-dark-200 p-4 rounded-lg shadow w-full  lg:w-1/3 ">
-            <div class="flex items-center pb-8 justify-between">
-                <div class="flex items-center">
-                    <!-- foto -->
-                    <div class="relative w-12 h-12">
-                    
-
-                        <img src="{{ asset('storage/' . ($job->userProfile ? $job->userProfile->profile_picture : 'ruta/a/imagen/default.jpg')) }}"
+    <div class="bg-light-200 dark:bg-light-700 text-dark-800 dark:text-dark-200 p-4 rounded-lg shadow w-full lg:w-1/3 max-h-[90vh] overflow-y-auto">
+        <div class="flex items-center pb-8 justify-between">
+            <div class="flex items-center">
+                <!-- foto -->
+                <div class="relative w-12 h-12">
+                    <img src="{{ asset('storage/' . ($job->userProfile ? $job->userProfile->profile_picture : 'ruta/a/imagen/default.jpg')) }}"
                         alt="Foto de usuario"
-                            class="object-cover w-full h-full rounded-full">
-                    </div>
-                    <!-- Información de usuario -->
-                    <div class="ml-4">
-                        <h4 class="text-xl font-semibold">{{$job->user->name}}</h4>
-                        
-                    </div>
+                        class="object-cover w-full h-full rounded-full">
                 </div>
+                <!-- Información de usuario -->
+                <div class="ml-4">
+                    <h4 class="text-xl font-semibold">{{$job->user->name}}</h4>
+                </div>
+            </div>
 
-                <!-- Estado de Promoción y Menú Desplegable -->
+            <!-- Estado de Promoción y Menú Desplegable -->
+          
+
+                <!-- Menú desplegable -->
+               
+        </div>
+
+        <!-- FORMULARIO -->
+        <form action="{{ route('jobs.store') }}" method="POST">
+            @csrf
+            <div class="flex flex-col space-y-4">
+
                 <div class="flex items-center space-x-4">
-                    <button type="submit" class="flex bg-complem-400 text-light-700 rounded px-4 py-2">
-                        <svg class="w-6 h-6 pr-1 text-dark-700 dark:text-dark-700" aria-hidden="true"
-                            xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="m10.051 8.102-3.778.322-1.994 1.994a.94.94 0 0 0 .533 1.6l2.698.316m8.39 1.617-.322 3.78-1.994 1.994a.94.94 0 0 1-1.595-.533l-.4-2.652m8.166-11.174a1.366 1.366 0 0 0-1.12-1.12c-1.616-.279-4.906-.623-6.38.853-1.671 1.672-5.211 8.015-6.31 10.023a.932.932 0 0 0 .162 1.111l.828.835.833.832a.932.932 0 0 0 1.111.163c2.008-1.102 8.35-4.642 10.021-6.312 1.475-1.478 1.133-4.77.855-6.385Zm-2.961 3.722a1.88 1.88 0 1 1-3.76 0 1.88 1.88 0 0 1 3.76 0Z" />
-                        </svg>
-                        Promocionar</button>
-
-                    <!-- Menú desplegable -->
-                    <div class="relative">
-                        <button id="optionsButton" class="focus:outline-none">
-                            <svg class="h-6 w-6 text-dark-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                                width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                <path stroke="currentColor" stroke-linecap="round" stroke-width="2"
-                                    d="M5 7h14M5 12h14M5 17h14" />
-                            </svg>
-                        </button>
-                        <!-- Menú desplegable oculto -->
-                        <div id="optionsMenu-crear"
-                            class="absolute right-0 mt-2 w-36 bg-light-100 dark:bg-dark-700 border border-dark-500 rounded-md shadow-md hidden z-10">
-                            <a href="#"
-                                class="flex px-2 py-1 text-dark-700  dark:text-light-100 hover:text-light-200 hover:bg-primary-800"><svg
-                                    class="w-6 h-6 text-dark-800 dark:text-light-100 hover:text-light-100"
-                                    aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                    fill="none" viewBox="0 0 24 24">
-                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                        stroke-width="2"
-                                        d="M4.248 19C3.22 15.77 5.275 8.232 12.466 8.232V6.079a1.025 1.025 0 0 1 1.644-.862l5.479 4.307a1.108 1.108 0 0 1 0 1.723l-5.48 4.307a1.026 1.026 0 0 1-1.643-.861v-2.154C5.275 13.616 4.248 19 4.248 19Z" />
-                                </svg>
-                                Compartir</a>
-                            <a href="#"
-                                class="flex px-2 py-1 text-dark-700  dark:text-light-100 hover:text-light-200 hover:bg-primary-800"><svg
-                                    class="w-6 h-6 text-dark-800 dark:text-light-100 hover:text-light-100"
-                                    aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                    fill="currentColor" viewBox="0 0 24 24">
-                                    <path fill-rule="evenodd"
-                                        d="M4 4a2 2 0 1 0 0 4h16a2 2 0 1 0 0-4H4Zm0 6h16v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-8Zm10.707 5.707a1 1 0 0 0-1.414-1.414l-.293.293V12a1 1 0 1 0-2 0v2.586l-.293-.293a1 1 0 0 0-1.414 1.414l2 2a1 1 0 0 0 1.414 0l2-2Z"
-                                        clip-rule="evenodd" />
-                                </svg>
-                                Guardar</a>
-                            <a href="#"
-                                class="flex px-2 py-1 text-dark-700  dark:text-light-100 hover:text-light-200 hover:bg-primary-800"><svg
-                                    class="w-6 h-6 text-dark-800 dark:text-light-100 hover:text-light-100"
-                                    aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                    fill="none" viewBox="0 0 24 24">
-                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                        stroke-width="2"
-                                        d="M5 14v7M5 4.971v9.541c5.6-5.538 8.4 2.64 14-.086v-9.54C13.4 7.61 10.6-.568 5 4.97Z" />
-                                </svg>
-                                Reportar</a>
-                        </div>
+                    <div class="flex-1">
+                        <label for="job_title" class="block text-dm font-medium text-dark-600 dark:text-light-100">
+                            Título de la Publicación
+                        </label>
+                        <input type="text" id="job_title" name="job_title" class="mt-1 block form-input w-full"
+                            placeholder="Ingrese el título de la publicación" required />
                     </div>
 
+                    <div class="flex-1">
+                        <label for="modality" class="block text-dm font-medium text-dark-600 dark:text-light-100">
+                            Modalidad
+                        </label>
+                        <select id="modality" name="modality" class="mt-1 block form-input w-full" required>
+                            <option value="">Seleccionar modalidad</option>
+                            <option value="presencial">Presencial</option>
+                            <option value="remoto">Remoto</option>
+                            <option value="hibrida">Híbrido</option>
+                        </select>
+                    </div>
                 </div>
+
+                <div class="flex space-x-4">
+                    <div class="flex-1">
+                        <label for="category_id" class="block text-dm font-medium text-dark-600 dark:text-light-100">
+                            Categoría
+                        </label>
+                        <select id="category_id" name="category_id" class="mt-1 block form-input w-full" required>
+                            <option value="">Seleccionar categoría</option>
+                            @foreach ($categories as $category)
+                                <option value="{{ $category->id }}">{{ $category->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+
+                    <div class="flex-1">
+                        <label for="work_schedule" class="block text-dm font-medium text-dark-600 dark:text-light-100">
+                            Jornada
+                        </label>
+                        <select id="work_schedule" name="work_schedule" class="mt-1 block form-input w-full" required>
+                            <option value="">Seleccionar jornada</option>
+                            <option value="Full time">Completa</option>
+                            <option value="Part time">Parcial</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="mb-4">
+                    <label for="selectProvincias"
+                        class="block mb-2 text-base font-medium text-dark-900 dark:text-light-400">
+                        Provincia
+                    </label>
+                    <select id="selectProvincias" name="province" class="mt-1 block form-input w-full" required>
+                        <option value="">Elige una provincia</option>
+                    </select>
+                </div>
+
+                <div class="mb-4">
+                    <label for="selectLocalidades"
+                        class="block mb-2 text-base font-medium text-dark-900 dark:text-light-400">
+                        Ciudad
+                    </label>
+                    <select id="selectLocalidades" name="locality" class="mt-1 block form-input w-full" required>
+                        <option value="">Elige una localidad</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label for="job_description"
+                        class="block text-dm font-medium text-dark-700 dark:text-dark-200">Descripción del trabajo</label>
+                    <textarea id="job_description" name="job_description" rows="4"
+                        class="mt-1 block w-full rounded-md p-2 text-dark-700 text-sm sm:text-dm"
+                        required></textarea>
+                </div>
+
+                <div>
+    <label for="job_benefits" class="block text-dm font-medium text-dark-700 dark:text-dark-200">Beneficios</label>
+    <textarea id="job_benefits" name="job_benefits" rows="4" class="mt-1 block w-full rounded-md p-2 text-dark-700 text-sm sm:text-dm" required></textarea>
+</div>
+
+<div>
+    <label for="job_requirements" class="block text-dm font-medium text-dark-700 dark:text-dark-200">Requisitos</label>
+    <textarea id="job_requirements" name="job_requirements" rows="4" class="mt-1 block w-full rounded-md p-2 text-dark-700 text-sm sm:text-dm" required></textarea>
+</div>
+
+
+            <div class="flex justify-end mt-4 space-x-2">
+                <button type="button" id="close-modal-btn" class="btn-danger">Cancelar</button>
+                <button type="submit" class="btn-primary">Publicar</button>
             </div>
-
-            <!--FORMULARIO-->
-            <form action="{{ route('jobs.store') }}" method="POST">
-    @csrf
-    <div class="flex flex-col space-y-4">
-
-        <div class="flex items-center space-x-4">
-            <div class="flex-1">
-                <label for="job_title" class="block text-dm font-medium text-dark-600 dark:text-light-100">
-                    Título de la Publicación
-                </label>
-                <input type="text" id="job_title" name="job_title" class="mt-1 block form-input w-full"
-                    placeholder="Ingrese el título de la publicación" required />
-            </div>
-
-            <div class="flex-1">
-                <label for="modality" class="block text-dm font-medium text-dark-600 dark:text-light-100">
-                    Modalidad
-                </label>
-                <select id="modality" name="modality" class="mt-1 block form-input w-full" required>
-                    <option value="">Seleccionar modalidad</option>
-                    <option value="presencial">Presencial</option>
-                    <option value="remoto">Remoto</option>
-                    <option value="hibrida">Híbrido</option>
-                </select>
-            </div>
-        </div>
-
-        <div class="flex space-x-4">
-            <div class="flex-1">
-                <label for="category_id"
-                    class="block text-dm font-medium text-dark-600 dark:text-light-100">
-                    Categoría
-                </label>
-                <select id="category_id" name="category_id" class="mt-1 block form-input w-full" required>
-                    <option value="">Seleccionar categoría</option>
-                    @foreach ($categories as $category)
-                        <option value="{{ $category->id }}">{{ $category->name }}</option>
-                    @endforeach
-                </select>
-            </div>
-
-            <div class="flex-1">
-                <label for="work_schedule"
-                    class="block text-dm font-medium text-dark-600 dark:text-light-100">
-                    Jornada
-                </label>
-                <select id="work_schedule" name="work_schedule" class="mt-1 block form-input w-full" required>
-                    <option value="">Seleccionar jornada</option>
-                    <option value="Full time">Completa</option>
-                    <option value="Part time">Parcial</option>
-                </select>
-            </div>
-        </div>
-
-        <div class="mb-4">
-            <label for="selectProvincias"
-                class="block mb-2 text-base font-medium text-dark-900 dark:text-light-400">
-                Provincia
-            </label>
-            <select id="selectProvincias" name="province" class="mt-1 block form-input w-full" required>
-                <option value="">Elige una provincia</option>
-            </select>
-        </div>
-
-        <div class="mb-4">
-            <label for="selectLocalidades"
-                class="block mb-2 text-base font-medium text-dark-900 dark:text-light-400">
-                Ciudad
-            </label>
-            <select id="selectLocalidades" name="locality" class="mt-1 block form-input w-full" required>
-                <option value="">Elige una localidad</option>
-            </select>
-        </div>
-
-        <div>
-            <label for="job_description"
-                class="block text-dm font-medium text-dark-700 dark:text-dark-200">Descripción</label>
-            <textarea id="job_description" name="job_description" rows="4"
-                class="mt-1 block w-full rounded-md p-2 text-dark-700 text-sm sm:text-dm"
-                required></textarea>
-        </div>
-
-
-
-        <div>
-            <label for="job_beneficios"
-                class="block text-dm font-medium text-dark-700 dark:text-dark-200">Beneficios</label>
-            <textarea id="job_beneficios" name="job_beneficios" rows="4"
-                class="mt-1 block w-full rounded-md p-2 text-dark-700 text-sm sm:text-dm"
-                required></textarea>
-        </div>
-
+        </form>
     </div>
+</div>
 
-    <div class="flex justify-end mt-4 space-x-2">
-        <button type="button" id="close-modal-btn" class="btn-danger">Cancelar</button>
-        <button type="submit" class="btn-primary">Publicar</button>
-    </div>
-</form>
 
 <script src="{{ asset('api-arg.js') }}"></script>
 

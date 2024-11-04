@@ -34,36 +34,36 @@ class JobServiceImpl implements JobServiceInterface{
 
     }
 
-    public function store(Request $request){
+    public function store(Request $request)
+{
+    $request->validate([
+        'job_title' => 'required|string|max:50',
+        'modality' => 'required|in:presencial,hibrida,remoto',
+        'work_schedule' => 'required|in:Full time,Part time',
+        'province' => 'required|string|max:100',
+        'locality' => 'required|string|max:100',
+        'job_description' => 'required|string|max:100',
+        'category_id' => 'required|exists:job_categories,id',
+        'job_benefits' => 'required|string', // Nueva validación para beneficios
+        'job_requirements' => 'required|string', // Nueva validación para requisitos
+    ]);
 
-        $request->validate([
-            'job_title' => 'required|string|max:50',
-            'modality' => 'required|in:presencial,hibrida,remoto',
-            'work_schedule' => 'required|in:Full time,Part time',
-            'province' => 'required|string|max:100',
-            'locality' => 'required|string|max:100',
-            'job_description' => 'required|string|max:100',
-            'category_id' => 'required|exists:job_categories,id',
-        ]);
+    Job::create([
+        'user_id' => $this->userAuth->getAuthenticatedUser()->id,
+        'category_id' => $request->category_id,
+        'job_title' => $request->job_title,
+        'modality' => $request->modality,
+        'work_schedule' => $request->work_schedule,
+        'province' => $request->province,
+        'locality' => $request->locality,
+        'job_description' => $request->job_description,
+        'job_benefits' => $request->job_benefits, // Guardar beneficios
+        'job_requirements' => $request->job_requirements, // Guardar requisitos
+    ]);
 
+    return "Publicación Creada";
+}
 
-
-    
-        Job::create([
-            'user_id' => $this->userAuth->getAuthenticatedUser()->id,
-            'category_id' => $request->category_id,
-            'job_title' => $request->job_title,
-            'modality' => $request->modality,
-            'work_schedule' => $request->work_schedule,
-            'province' => $request->province,
-            'locality' => $request->locality,
-            'job_description' => $request->job_description,
-        ]);
-
-
-        return "Publicacion Creada";
-
-    }
 
     public function show($id){
 
