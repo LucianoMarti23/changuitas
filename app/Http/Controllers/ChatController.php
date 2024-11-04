@@ -97,6 +97,21 @@ class ChatController extends Controller
     
         return response()->json($messages);
     }
+    public function getNewMessagesCount()
+{
+    $userId = Auth::id();
+    $users = User::all(); // O filtra según tus necesidades
+    $counts = [];
+
+    foreach ($users as $user) {
+        $counts[$user->id] = Message::where('recipient_id', $user->id)
+                                     ->where('is_read', false)
+                                     ->count();
+    }
+
+    return response()->json($counts);
+}
+
     
 }
 
