@@ -164,6 +164,13 @@ public function showProfiles(){
     return view('profile.profiles' , compact('profiles'));
 }
 
+public function showProfileDetail($id){
+    $profile = $this->userProfileService->profilePublic($id);
+
+    $workExperiences = $profile->workExperiences()->latest()->take(3)->get();
+
+    return view('profile.profiledetails' , compact('workExperiences','profile'));
+}
 }
 
 

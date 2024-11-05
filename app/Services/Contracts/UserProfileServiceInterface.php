@@ -32,4 +32,6 @@ interface UserProfileServiceInterface
     public function deletePicture();
 
     public function showProfiles();
+
+    public function profilePublic($id);
 }

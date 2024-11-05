@@ -282,4 +282,9 @@ public function showProfiles(){
     return UserProfile::all();
 }
 
+public function profilePublic($id){
+
+    return UserProfile::findOrFail($id);
+}
+
 }

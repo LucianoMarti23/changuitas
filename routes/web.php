@@ -23,7 +23,9 @@ require base_path('routes/jobs/jobs.php');
 
 
 Route::get('/chat', [ChatController::class, 'index']);
-Route::post('/send-message', [ChatController::class, 'sendMessage']);
+Route::post('/send-message', [ChatController::class, 'sendMessage'])->name('sendMessage');
+
+
 Route::get('/messages/{recipient_id}', [ChatController::class, 'getMessages']);
 
 

@@ -15,7 +15,7 @@ Route::delete('/profile/delete-picture', [UserProfileController::class, 'deleteP
 
 Route::get('/profiles', [UserProfileController::class , 'showProfiles'])->name('profile.profiles');
    
-
+Route::get('/profile/details/{id}' , [UserProfileController::class , 'showProfileDetail'])->name('profile.profiledetails');
 
 
 Route::post('/user-profile/update-summary/{profileId}', [UserProfileController::class, 'updateSummary'])
