@@ -37,10 +37,10 @@
 
                         <!-- Opciones del desplegable -->
                         <div class="py-2 px-4">
-                            <a href="#" class="block text-green-500 hover:bg-green-100 py-2 px-4 rounded" onclick="document.getElementById('file-input').click(); return false;">
+                            <a href="#" class=" block text-green-500 hover:bg-green-100 py-2 px-4 " onclick="document.getElementById('file-input').click(); return false;">
                                 Cambiar foto
                             </a>
-                            <button id="save-button" type="submit" class="mt-2 px-4 py-2 bg-green-500 text-white rounded hidden">
+                            <button id="save-button" type="submit" class="btn-success mt-2 px-4 py-2 bg-green-500 text-white rounded hidden">
                                 Guardar
                             </button>
                         </div>
@@ -73,143 +73,23 @@
             <!-- Información de usuario -->
             <div class="flex-grow text-dark-700 dark:text-light-200">
                 <p class="text-3xl font-normal">{{ $userData->name }}</p>
-                <p class="text-md text-wrap pt-2 text-dark-600 dark:text-light-400">Estado: Desempleado</p>
                 <p class="text-md pt-2 text-dark-600 dark:text-light-400">Fecha de ingreso: {{ $userData->created_at->format('d/m/Y') }}</p>
-            
+                <p>{{$userData->email}}</p>
 
                         
                
                         
 
 
-                <p class="text-md pt-2 text-dark-600 dark:text-light-400">Oficio principal: [nidea]</p>
+             
 
                 <!-- Puntuación con estrellas -->
-                <div class="flex items-center pt-2 text-dark-600 dark:text-light-400">
-                    <p class="text-md mr-2">Puntuación:</p>
-                    <div class="flex">
-                        <svg class="w-5 h-5 text-alert-400" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                            <path
-                                d="M12 15.39l3.76 2.16-.99-4.29 3.41-3.2-4.37-.38L12 4.5l-1.76 4.64-4.37.38 3.41 3.2-.99 4.29L12 15.39z" />
-                        </svg>
-                        <svg class="w-5 h-5 text-alert-400" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                            <path
-                                d="M12 15.39l3.76 2.16-.99-4.29 3.41-3.2-4.37-.38L12 4.5l-1.76 4.64-4.37.38 3.41 3.2-.99 4.29L12 15.39z" />
-                        </svg>
-                        <svg class="w-5 h-5 text-alert-400" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                            <path
-                                d="M12 15.39l3.76 2.16-.99-4.29 3.41-3.2-4.37-.38L12 4.5l-1.76 4.64-4.37.38 3.41 3.2-.99 4.29L12 15.39z" />
-                        </svg>
-                        <svg class="w-5 h-5 text-alert-400" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                            <path
-                                d="M12 15.39l3.76 2.16-.99-4.29 3.41-3.2-4.37-.38L12 4.5l-1.76 4.64-4.37.38 3.41 3.2-.99 4.29L12 15.39z" />
-                        </svg>
-                        <svg class="w-5 h-5 text-dark-400" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                            <path
-                                d="M12 15.39l3.76 2.16-.99-4.29 3.41-3.2-4.37-.38L12 4.5l-1.76 4.64-4.37.38 3.41 3.2-.99 4.29L12 15.39z" />
-                        </svg>
-                    </div>
-                </div>
+               
             </div>
 
 
             <!-- Botón de contacto -->
-            <div class=" flex-grow">
-                <div class="">
-                    <!-- Editar hidden[solo lo puede ver el dueño 
-                            de la publicación para posible edición] -->
-                    <div class="flex justify-end gap-2 pb-20 ">
-                        <div class="text-primary-700 hover:text-complem-400">
-                            <svg class="w-6 h-6 cursor-pointer" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                                fill="none" viewBox="0 0 24 24" id="edit-btn">
-                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                    stroke-width="2"
-                                    d="M18 5V4a1 1 0 0 0-1-1H8.914a1 1 0 0 0-.707.293L4.293 7.207A1 1 0 0 0 4 7.914V20a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-5M9 3v4a1 1 0 0 1-1 1H4m11.383.772 2.745 2.746m1.215-3.906a2.089 2.089 0 0 1 0 2.953l-6.65 6.646L9 17.95l.739-3.692 6.646-6.646a2.087 2.087 0 0 1 2.958 0Z" />
-                            </svg>
-                        </div>
-
-
-                        <!-- Botón Menu 3puntitos id="optionsButton" id="optionsMenu"-->
-                        <div class="relative inline-block text-left z-10">
-                            <button id="optionsButton"
-                                class="flex items-center text-primary-700  hover:text-complem-500">
-                                <svg class="w-6 h-6 text-xl cursor-pointer" aria-hidden="true"
-                                    xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
-                                    viewBox="0 0 24 24">
-                                    <path stroke="currentColor" stroke-linecap="round" stroke-width="2"
-                                        d="M12 6h.01M12 12h.01M12 18h.01" />
-                                </svg>
-                            </button>
-                            <div id="optionsMenu"
-                                class="hidden absolute right-0 mt-2 w-48 bg-dark-100 border border-primary-800 rounded-md shadow-lg dark:bg-dark-700">
-                                <ul class="py-1">
-                                    <li>
-                                        <button
-                                            class="flex items-center w-full text-sm text-left px-1 py-1 hover:bg-complem-400 hover:text-dark-900 dark:bg-dark-700 dark:hover:bg-complem-400 dark:hover:text-dark-900"
-                                            data-action="report">
-                                            <svg class="w-6 h-6 text-current mr-2" aria-hidden="true"
-                                                xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
-                                                viewBox="0 0 24 24">
-                                                <path stroke="currentColor" stroke-linecap="round"
-                                                    stroke-linejoin="round" stroke-width="2"
-                                                    d="M5 14v7M5 4.971v9.541c5.6-5.538 8.4 2.64 14-.086v-9.54C13.4 7.61 10.6-.568 5 4.97Z" />
-                                            </svg>
-                                            Reportar
-                                        </button>
-                                    </li>
-                                    <li>
-                                        <button
-                                            class="flex items-center w-full text-sm text-left px-1 py-1 hover:bg-complem-400 dark:bg-dark-700"
-                                            data-action="share">
-                                            <svg class="w-6 h-6 text-base font-medium text-current mr-2"
-                                                aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
-                                                height="24" fill="none" viewBox="0 0 24 24">
-                                                <path stroke="currentColor" stroke-linecap="round"
-                                                    stroke-linejoin="round" stroke-width="2"
-                                                    d="M13.213 9.787a3.391 3.391 0 0 0-4.795 0l-3.425 3.426a3.39 3.39 0 0 0 4.795 4.794l.321-.304m-.321-4.49a3.39 3.39 0 0 0 4.795 0l3.424-3.426a3.39 3.39 0 0 0-4.794-4.795l-1.028.961" />
-                                            </svg>
-                                            Compartir
-                                        </button>
-                                    </li>
-                                    <li>
-                                        <button
-                                            class="flex items-center w-full text-sm text-left px-1 py-1 hover:bg-complem-400 dark:bg-dark-700"
-                                            data-action="save">
-                                            <svg class="w-6 h-6 text-base font-medium text-current mr-2"
-                                                aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
-                                                height="24" fill="none" viewBox="0 0 24 24">
-                                                <path stroke="currentColor" stroke-linecap="round"
-                                                    stroke-linejoin="round" stroke-width="2"
-                                                    d="m17 21-5-4-5 4V3.889a.92.92 0 0 1 .244-.629.808.808 0 0 1 .59-.26h8.333a.81.81 0 0 1 .589.26.92.92 0 0 1 .244.63V21Z" />
-                                            </svg>
-                                            Guardar
-                                        </button>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!--LLAMADA A LA ACCION DE CONTACTAR -->
-                <div class="flex justify-end gap-8 pt-18 ">
-                    <button
-                        class="relative inline-flex h-12 active:scale-95 transition overflow-hidden rounded-full p-[1px] focus:outline-none">
-                        <span
-                            class="absolute inset-[-1000%] animate-[spin_2s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,#8b5cf6_0%,#fbbf24_50%,#8b5cf6_100%)]">
-                        </span>
-                        <span
-                            class="inline-flex h-full w-full cursor-pointer items-center justify-center rounded-full bg-slate-950 px-7 text-md font-medium text-light-100 backdrop-blur-3xl gap-2">
-                            Contacta
-                            <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 448 512"
-                                height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
-                                <path
-                                    d="M429.6 92.1c4.9-11.9 2.1-25.6-7-34.7s-22.8-11.9-34.7-7l-352 144c-14.2 5.8-22.2 20.8-19.3 35.8s16.1 25.8 31.4 25.8H224V432c0 15.3 10.8 28.4 25.8 31.4s30-5.1 35.8-19.3l144-352z">
-                                </path>
-                            </svg>
-                        </span>
-                    </button>
-                </div>
-            </div>
+            
         </div>
     </div>
     
@@ -616,72 +496,7 @@
 
     </div>
 
-    <div class="mt-4 h- p-4 rounded shadow-md dark:shadow-[0_0_10px_theme(colors.primary.700/50%)]">
-        <div class="p-2 ">
-            <!-- BTN -->
-            <div class="flex items-center justify-end gap-2">
-                <!-- Editar -->
-                <button id="open-modal-2" title="Editar"
-                    class="open-modal-button flex items-center text-primary-700 hover:text-complem-400">
-                    <svg class="w-6 h-6" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
-                        viewBox="0 0 24 24">
-                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M18 5V4a1 1 0 0 0-1-1H8.914a1 1 0 0 0-.707.293L4.293 7.207A1 1 0 0 0 4 7.914V20a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-5M9 3v4a1 1 0 0 1-1 1H4m11.383.772 2.745 2.746m1.215-3.906a2.089 2.089 0 0 1 0 2.953l-6.65 6.646L9 17.95l.739-3.692 6.646-6.646a2.087 2.087 0 0 1 2.958 0Z" />
-                    </svg>
-                </button>
-
-
-                <!--informacion: politicas de la pagina-->
-                <div class="relative inline-flex items-center">
-                    <button id="popover-button" type="button" class="relative flex items-center">
-                        <svg class="w-6 h-6 text-primary-700 dark:text-primary-700" aria-hidden="true"
-                            xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M10 11h2v5m-2 0h4m-2.592-8.5h.01M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
-                        </svg>
-                    </button>
-                    <div id="popover-content"
-                        class="absolute z-10 hidden w-64 text-xs transition-opacity duration-300 border rounded-lg shadow-lg opacity-0 text-dark-500 bg-light-200 border-dark-200 dark:text-dark-400 dark:border-dark-600 dark:bg-dark-800 top-full mt-2">
-                        <div class="px-2 py-1">
-                            <p>Elija al menos una opción.
-                                <a href="#" class="inline-flex items-center underline text-primary-800">Leer más...</a>
-                            </p>
-                        </div>
-                    </div>
-                </div>
-
-
-            </div>
-        </div>
-        <!-- Datos de Email y Contraseña -->
-        <section id="datos-credencial" class="mb-8">
-            <h2 class="font-normal text-1xl sm:text-2xl mb-2">Datos de Acceso</h2>
-
-            <p class="text-lg font-semibold">Correo Electrónico:
-                <span class="font-normal">{{
-                
-                $user->email}}
-                </span>
-            </p>
-
-            <div class="flex items-center gap-2 mt-4">
-                <p class="text-lg font-semibold  flex justify-center">Contraseña:
-                    <input type="password" id="password" value="ContraseñaEjemplo123"
-                        class="font-normal bg-transparent border-none focus:outline-none">
-                    <!--Ojito visivilidada-->
-                    <button type="button" onclick="togglePassword()"
-                        class="text-dark-500 dark:text-dark-400 hover:text-dark-700 dark:hover:text-dark-300">
-
-                        <svg id="password-icon" class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true"
-                            xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M3.933 13.909A4.357 4.357 0 0 1 3 12c0-1 4-6 9-6m7.6 3.8A5.068 5.068 0 0 1 21 12c0 1-3 6-9 6-.314 0-.62-.014-.918-.04M5 19 19 5m-4 7a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
-                        </svg>
-                    </button>
-                </p>
-            </div>
-        </section>
-    </div>
+   
 
 </div>
 
@@ -789,54 +604,7 @@
 
 
 <!-- Modal Cambio de Contraseña -->
-<div id="modal-2" class="fixed inset-0 z-50 hidden bg-dark-800 bg-opacity-75 flex items-center justify-center">
-    <div
-        class="bg-light-200 dark:bg-dark-800 w-full max-w-md mx-4 p-6 rounded-lg shadow-md dark:shadow-[0_0_10px_theme(colors.primary.700/50%)]">
-        <!-- Modal Header -->
-        <div class="flex justify-between items-center mb-4">
-            <h2 class="text-2xl font-semibold text-dark-900 dark:text-dark-100">Cambiar Contraseña</h2>
-            <button id="close-modal-2"
-                class="text-dark-500 dark:text-dark-400 hover:text-dark-700 dark:hover:text-dark-300">
-                <svg class="w-6 h-6" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
-                    viewBox="0 0 24 24">
-                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                        d="M6 18L18 6M6 6l12 12" />
-                </svg>
-            </button>
-        </div>
-        <!-- Modal Body -->
-        <form class="space-y-4">
-            <div>
-                <label for="email" class="block text-sm font-medium text-dark-700 dark:text-dark-300">Correo
-                    Electrónico</label>
-                <input type="email" id="email" name="email" readonly
-                    class="mt-1 block w-full px-3 py-2 border border-dark-300 rounded-lg shadow-sm focus:outline-none focus:ring-primary-500 focus:border-primary-500 sm:text-sm dark:bg-dark-700 dark:border-dark-600 dark:text-dark-300"
-                    value="email@ejemplo.com">
-            </div>
 
-            <div>
-                <label for="new-password" class="block text-sm font-medium text-dark-700 dark:text-dark-300">Nueva
-                    Contraseña</label>
-                <input type="password" id="new-password" name="new-password"
-                    class="mt-1 block w-full px-3 py-2 border border-dark-300 rounded-lg shadow-sm focus:outline-none focus:ring-primary-500 focus:border-primary-500 sm:text-sm dark:bg-dark-700 dark:border-dark-600 dark:text-dark-300"
-                    required>
-            </div>
-            <div>
-                <label for="confirm-password"
-                    class="block text-sm font-medium text-dark-700 dark:text-dark-300">Confirmar Nueva
-                    Contraseña</label>
-                <input type="password" id="confirm-password" name="confirm-password"
-                    class="mt-1 block w-full px-3 py-2 border border-dark-300 rounded-lg shadow-sm focus:outline-none focus:ring-primary-500 focus:border-primary-500 sm:text-sm dark:bg-dark-700 dark:border-dark-600 dark:text-dark-300"
-                    required>
-                    
-            </div>
-            <div class="flex justify-end gap-2">
-                <button type="button" id="cancel-btn-pw" class="btn-primary w-2/5 sm:w-auto">Cancelar</button>
-                <button type="submit" class="btn-primary w-2/5 sm:w-auto">Guardar Cambios</button>
-            </div>
-        </form>
-    </div>
-</div>
 
 <!-- JavaScript -->
 <script>
