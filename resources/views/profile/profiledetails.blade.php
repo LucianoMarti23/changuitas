@@ -90,17 +90,29 @@
 </button>
 
 
-                                    <button
-                                        class="profile_item bottom-8 -left-0 absolute rounded-full bg-cover cursor-pointer border border-dark-400/50 p-[2px] active:scale-95 hover:scale-95 transition-all duration-500"
-                                        id="button4">
-                                        <span
-                                            class="block w-[40px] h-[40px] transition-all duration-500 rounded-full z-[2] bg-light-200 p-1">
-                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6">
-  <path fill-rule="evenodd" d="M12 2.25a.75.75 0 0 1 .75.75v11.69l3.22-3.22a.75.75 0 1 1 1.06 1.06l-4.5 4.5a.75.75 0 0 1-1.06 0l-4.5-4.5a.75.75 0 1 1 1.06-1.06l3.22 3.22V3a.75.75 0 0 1 .75-.75Zm-9 13.5a.75.75 0 0 1 .75.75v2.25a1.5 1.5 0 0 0 1.5 1.5h13.5a1.5 1.5 0 0 0 1.5-1.5V16.5a.75.75 0 0 1 1.5 0v2.25a3 3 0 0 1-3 3H5.25a3 3 0 0 1-3-3V16.5a.75.75 0 0 1 .75-.75Z" clip-rule="evenodd" />
-</svg>
+                              <!-- Si el perfil tiene un currículum -->
+@if($profile && $profile->cv_path)
+    <a href="{{ asset('storage/' . $profile->cv_path) }}" target="_blank">
+        <button class="profile_item bottom-8 -left-0 absolute rounded-full bg-cover cursor-pointer border border-dark-400/50 p-[2px] active:scale-95 hover:scale-95 transition-all duration-500" id="button4">
+            <span class="block w-[40px] h-[40px] transition-all duration-500 rounded-full z-[2] bg-light-200 p-1">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6">
+                    <path fill-rule="evenodd" d="M12 2.25a.75.75 0 0 1 .75.75v11.69l3.22-3.22a.75.75 0 1 1 1.06 1.06l-4.5 4.5a.75.75 0 0 1-1.06 0l-4.5-4.5a.75.75 0 1 1 1.06-1.06l3.22 3.22V3a.75.75 0 0 1 .75-.75Zm-9 13.5a.75.75 0 0 1 .75.75v2.25a1.5 1.5 0 0 0 1.5 1.5h13.5a1.5 1.5 0 0 0 1.5-1.5V16.5a.75.75 0 0 1 1.5 0v2.25a3 3 0 0 1-3 3H5.25a3 3 0 0 1-3-3V16.5a.75.75 0 0 1 .75-.75Z" clip-rule="evenodd" />
+                </svg>
+            </span>
+        </button>
+    </a>
+@else
+    <!-- Si no tiene currículum -->
+    <button class="profile_item bottom-8 -left-0 absolute rounded-full bg-cover cursor-pointer border border-dark-400/50 p-[2px] active:scale-95 hover:scale-95 transition-all duration-500" id="button4" disabled>
+        <span class="block w-[40px] h-[40px] transition-all duration-500 rounded-full z-[2] bg-light-200 p-1">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6">
+                <path fill-rule="evenodd" d="M12 2.25a.75.75 0 0 1 .75.75v11.69l3.22-3.22a.75.75 0 1 1 1.06 1.06l-4.5 4.5a.75.75 0 0 1-1.06 0l-4.5-4.5a.75.75 0 1 1 1.06-1.06l3.22 3.22V3a.75.75 0 0 1 .75-.75Zm-9 13.5a.75.75 0 0 1 .75.75v2.25a1.5 1.5 0 0 0 1.5 1.5h13.5a1.5 1.5 0 0 0 1.5-1.5V16.5a.75.75 0 0 1 1.5 0v2.25a3 3 0 0 1-3 3H5.25a3 3 0 0 1-3-3V16.5a.75.75 0 0 1 .75-.75Z" clip-rule="evenodd" />
+            </svg>
+        </span>
+    </button>
+    <p></p>
+@endif
 
-                                        </span>
-                                    </button>
                                     <button
                                         class="profile_item bottom-8 -right-0 absolute rounded-full bg-cover cursor-pointer border border-dark-400/50 p-[2px] active:scale-95 hover:scale-95 transition-all duration-500 "
                                         id="butto5">
@@ -151,8 +163,16 @@
                 <textarea id="message" name="message" rows="4" class="w-full p-2 mt-1 border border-gray-300 rounded-md" required></textarea>
             </div>
 
-            <div class="text-right">
-                <button type="submit" class="bg-blue-500 text-white py-2 px-4 rounded-md">Enviar</button>
+            <div class="flex justify-between">
+                <!-- Botón de enviar -->
+                <div class="text-right">
+                    <button type="submit" class="bg-blue-500 text-white py-2 px-4 rounded-md">Enviar</button>
+                </div>
+                
+                <!-- Botón de cancelar -->
+                <div class="text-left">
+                    <button type="button" id="cancelContactModal" class="bg-gray-300 text-gray-800 py-2 px-4 rounded-md">Cancelar</button>
+                </div>
             </div>
         </form>
     </div>

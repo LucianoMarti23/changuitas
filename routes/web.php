@@ -96,6 +96,11 @@ Route::prefix('user/work-experiences')->group(function () {
     Route::delete('/{id}', [WorkExperienceController::class, 'destroy'])->name('work_experiences.destroy');
 });
 
+// routes/web.php
+use App\Http\Controllers\CvController;
+
+Route::get('subir-cv', [CvController::class, 'showForm']);
+Route::post('subir-cv', [CvController::class, 'uploadCv'])->name('upload.cv');
 
 
 

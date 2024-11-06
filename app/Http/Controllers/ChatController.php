@@ -27,61 +27,71 @@ class ChatController extends Controller
     }
     // Método para mostrar la vista de chat
     public function index(Request $request)
-    {
+{
+    $user = $this->userAuth->getAuthenticatedUser();
 
-        $user = $this->userAuth->getAuthenticatedUser();
+    if (!$user) {
+        return redirect()->route('login')->withErrors(['error' => 'Debe iniciar sesión para acceder a esta página.']);
+    }
 
-        if (!$user) {
-            return redirect()->route('login')->withErrors(['error' => 'Debe iniciar sesión para acceder a esta página.']);
-        }
+    // Obtener los IDs de los usuarios con los que has intercambiado mensajes
+    $userIds = Message::where('sender_id', Auth::id())
+                      ->pluck('recipient_id')
+                      ->merge(Message::where('recipient_id', Auth::id())->pluck('sender_id'))
+                      ->unique();
 
-        // Obtener los IDs de los usuarios con los que has intercambiado mensajes
-        $userIds = Message::where('sender_id', Auth::id())
-                          ->pluck('recipient_id')
-                          ->merge(Message::where('recipient_id', Auth::id())->pluck('sender_id'))
-                          ->unique();
+    // Obtener los usuarios con su perfil, ordenados por la fecha de la última interacción
+    $users = User::with('profile')
+        ->whereIn('id', $userIds)  // Solo usuarios con los que has interactuado// Ordenar por la fecha de la última interacción
+        ->get();
 
-        // Obtener solo los usuarios que tienen mensajes contigo y cargar su perfil
-        $users = User::with('profile') // Cargar el perfil de cada usuario
-                     ->whereIn('id', $userIds)
-                     ->get();
+    $selectedUserId = $request->input('user_id'); // Obtener el ID del usuario seleccionado
 
-        $selectedUserId = $request->input('user_id'); // Obtener el ID del usuario seleccionado
-        
-        // Cargar mensajes solo si hay un usuario seleccionado
-        $messages = [];
-        if ($selectedUserId) {
-            $messages = Message::where(function($query) use ($selectedUserId) {
+    // Cargar los mensajes solo si hay un usuario seleccionado
+    $messages = [];
+    if ($selectedUserId) {
+        $messages = Message::where(function($query) use ($selectedUserId) {
                 $query->where('sender_id', $selectedUserId)
                       ->where('recipient_id', Auth::id());
-            })->orWhere(function($query) use ($selectedUserId) {
+            })
+            ->orWhere(function($query) use ($selectedUserId) {
                 $query->where('sender_id', Auth::id())
                       ->where('recipient_id', $selectedUserId);
-            })->with(['sender', 'sender.profile']) // Cargar el remitente y su perfil
+            })
+            ->with(['sender', 'sender.profile']) // Cargar el remitente y su perfil
             ->get();
-        }
-        
-        return view('chat', compact('users', 'messages', 'selectedUserId'));
     }
+
+    return view('chat', compact('users', 'messages', 'selectedUserId'));
+}
+
+
     
 
 
     // Método para enviar un mensaje
     public function sendMessage(Request $request)
-    {
-        $request->validate([
-            'message' => 'required|string',
-            'recipient_id' => 'required|exists:users,id'
-        ]);
+{
+    // Validar los datos del mensaje
+    $request->validate([
+        'message' => 'required|string',
+        'recipient_id' => 'required|exists:users,id',
+    ]);
 
-        $message = Message::create([
-            'sender_id' => Auth::id(),
-            'recipient_id' => $request->recipient_id,
-            'message' => $request->message,
-        ]);
+    // Crear el mensaje
+    $message = Message::create([
+        'sender_id' => Auth::id(),
+        'recipient_id' => $request->recipient_id,
+        'message' => $request->message,
+    ]);
 
-        return response()->json($message);
-    }
+    // Verificar si $message->created_at tiene un valor válido
+
+    // Actualizar el campo last_interaction para el remitente
+
+    // Devolver el mensaje como respuesta
+    return response()->json($message);
+}
 
     // Método para obtener los mensajes entre usuarios
     public function getMessages($recipient_id)

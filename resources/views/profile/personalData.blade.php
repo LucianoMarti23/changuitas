@@ -382,13 +382,38 @@
 </section>
 
 
+
+
 </div>
 
+<div class="mt-4 h- p-4 rounded shadow-md dark:shadow-[0_0_10px_theme(colors.primary.700/50%)] " id="educacionDiv" >
+<section id="cv" class="mb-8">
+<h2 class="font-normal text-1xl sm:text-2xl mb-2">Curriculum</h2>
 
 
+@if($profile && $profile->cv_path)
+    <p><a href="{{ asset('storage/' . $profile->cv_path) }}" target="_blank">Ver mi Currículum</a></p>
+@else
+    <p>Aún no has subido tu currículum.</p>
+@endif
+
+<br>
+<!-- resources/views/upload.blade.php -->
+<!-- resources/views/userProfile/upload.blade.php -->
+<form action="{{ route('upload.cv') }}" method="POST" enctype="multipart/form-data">
+    @csrf
+    <div>
+        <label for="cv">Adjunta (PDF, DOC, DOCX, etc.)</label>
+        <input type="file" name="cv" id="cv" accept=".pdf,.doc,.docx" required>
+    </div>
+    <br>
+    <button class="btn-success " type="submit">Subir Currículum</button>
+</form>
 
 
+</section>
 
+</div>
 
 
 <br>
