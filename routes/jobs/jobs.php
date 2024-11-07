@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/jobs', [JobController::class, 'index'])->name('jobs');
 Route::get('/jobinfo/{id}', [JobController::class, 'showInfo'])->name('jobsInfo');
 Route::post('/jobs', [JobController::class, 'store'])->name('jobs.store');
-
+Route::get('/jobs/filter', [JobController::class, 'filterByCategory'])->name('jobs.filterByCategory');
 
 Route::post('/user-publicaciones/{id}', [JobController::class, 'destroy'])->name('jobs.delete');
 

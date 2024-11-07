@@ -1,5 +1,6 @@
 <x-page>
-   
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
     <div class="flex flex-col lg:flex-row pt-4 ">
         
 
@@ -25,19 +26,65 @@
             <hr class="text-dark-300 dark:text-dark-700 pb-2">
 
             <div class="space-y-4 overflow-y-auto">
-                <!-- Buscador de Categorías -->
-                <div>
-                    <div class="relative flex">
-                        <input type="text" placeholder="Buscar categorías" class="form-input flex-grow">
-                        <span class="absolute inset-y-0 right-0 -translate-x-3 flex items-center cursor-pointer">
-                            <svg class="h-5 w-5 text-dark-500" xmlns="http://www.w3.org/2000/svg" fill="none"
-                                viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M21 21l-4.35-4.35m0 0A7.5 7.5 0 1114.35 5.5a7.5 7.5 0 012.3 10.15z" />
-                            </svg>
-                        </span>
+    <!-- Buscador de Categorías -->
+  
+    <!-- Buscador de Categorías -->
+    <div>
+    <div class="relative flex flex-col space-y-4"> <!-- Cambié a flex-col para apilar verticalmente -->
+
+    <div>
+        <label for="selectCategory" class="text-sm sm:text-base font-medium text-dark-500 mb-2">Categoría</label>
+        <select id="selectCategory" name="category" class="form-input w-full border border-dark-300 rounded-lg py-2 px-3">
+            <option value="">Todas las categorías</option>
+            <!-- Aquí se cargarán dinámicamente las opciones de categorías -->
+            @foreach ($categories as $category)
+                <option value="{{ $category->id }}">{{ $category->name }}</option>
+            @endforeach
+        </select>
+    </div>
+
+    <div>
+        <label for="modality" class="text-sm sm:text-base font-medium text-dark-500 mb-2">Modalidad</label>
+        <select id="modality" name="modality" class="form-input w-full border border-dark-300 rounded-lg py-2 px-3" required>
+            <option value="">Todas las modalidades</option>
+            <option value="presencial">Presencial</option>
+            <option value="remoto">Remoto</option>
+            <option value="hibrida">Híbrido</option>
+        </select>
+    </div>
+
+
+
+    <div>
+                        <label for="work_schedule" class="block text-dm font-medium text-dark-600 dark:text-light-100">
+                            Jornada
+                        </label>
+                        <select id="work_schedule" name="work_schedule" class="mt-1 block form-input w-full" required>
+                            <option value="">Seleccionar jornada</option>
+                            <option value="Full time">Completa</option>
+                            <option value="Part time">Parcial</option>
+                        </select>
                     </div>
                 </div>
+</div>
+
+
+    
+                      
+                   
+
+</div>
+
+
+    
+
+                
+                
+
+
+    <!-- Contenedor para los trabajos -->
+  
+
                 @if(session('success'))
     <div id="successMessage" class="message-success">
         {{ session('success') }}
@@ -60,72 +107,15 @@
     </script>
 @endif
                 <!-- Buscador de Provincia -->
-                <div>
-
-                    <div class="relative">
-                        <input type="text" placeholder="Buscar provincia"
-                            class="w-full pl-3 pr-10 py-2 border border-dark-300 rounded-lg">
-                        <span class="absolute inset-y-0 right-0 flex items-center pr-3">
-                            <svg class="h-5 w-5 text-dark-500" xmlns="http://www.w3.org/2000/svg" fill="none"
-                                viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M21 21l-4.35-4.35m0 0A7.5 7.5 0 1114.35 5.5a7.5 7.5 0 012.3 10.15z" />
-                            </svg>
-                        </span>
-                    </div>
-                </div>
+             
 
                 <!-- Buscador de Ciudad -->
-                <div>
-
-                    <div class="relative">
-                        <input type="text" placeholder="Buscar ciudad"
-                            class="w-full pl-3 pr-10 py-2 border border-dark-300 rounded-lg">
-                        <span class="absolute inset-y-0 right-0 flex items-center pr-3">
-                            <svg class="h-5 w-5 text-dark-500" xmlns="http://www.w3.org/2000/svg" fill="none"
-                                viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M21 21l-4.35-4.35m0 0A7.5 7.5 0 1114.35 5.5a7.5 7.5 0 012.3 10.15z" />
-                            </svg>
-                        </span>
-                    </div>
-                </div>
+               
 
                 <!-- Filtros de Fecha de Publicación -->
-                <div>
-                    <label class="block text-sm sm:text-base font-medium text-dark-500 mb-2">Filtrar por fecha de
-                        publicación</label>
-                    <div class="space-y-2">
-                        <div class="flex items-center">
-                            <input id="hoy" type="checkbox" class="h-4 w-4 text-primary-600 border-dark-300 rounded">
-                            <label for="hoy" class="ml-2 text-sm text-dark-700 dark:text-light-200">Publicado
-                                hoy</label>
-                        </div>
-                        <div class="flex items-center">
-                            <input id="semana" type="checkbox" class="h-4 w-4 text-primary-600 border-dark-300 rounded">
-                            <label for="semana" class="ml-2 text-sm text-dark-700 dark:text-light-200">Publicado esta
-                                semana</label>
-                        </div>
-                        <div class="flex items-center">
-                            <input id="mes" type="checkbox" class="h-4 w-4 text-primary-600 border-dark-300 rounded">
-                            <label for="mes" class="ml-2 text-sm text-dark-700 dark:text-light-200">Publicado este
-                                mes</label>
-                        </div>
-                    </div>
-                </div>
-
+            
                 <!-- Tipo de Jornada -->
-                <div>
-                    <label for="selectJornada" class="text-sm sm:text-base font-medium text-dark-500 mb-2">Tipo de
-                        Jornada</label>
-                    <select id="selectJornada" name="jornada"
-                        class="form-input w-full border border-dark-300 rounded-lg py-2 px-3">
-                        <option value="">Elige un tipo de jornada</option>
-                        <option value="completa">Jornada completa</option>
-                        <option value="reducida">Jornada reducida</option>
-                        <option value="libre">Jornada libre</option>
-                    </select>
-                </div>
+               
             </div>
         </div>
 
@@ -146,12 +136,10 @@
                     Buscar
                 </button>
                 <h2 class="text-lg font-semibold">Todas las Publicaciones</h2>
-                <button id="clear-filters-button" class="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700">
-                    Limpiar Filtros
-                </button>
+               
             </div>
             <!-- Aquí irán las publicaciones -->
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 " id="jobsContainer">
 
                 @foreach ($jobs as $job)
                     <div
@@ -211,7 +199,7 @@
                                         d="M11.906 1.994a8.002 8.002 0 0 1 8.09 8.421 7.996 7.996 0 0 1-1.297 3.957.996.996 0 0 1-.133.204l-.108.129c-.178.243-.37.477-.573.699l-5.112 6.224a1 1 0 0 1-1.545 0L5.982 15.26l-.002-.002a18.146 18.146 0 0 1-.309-.38l-.133-.163a.999.999 0 0 1-.13-.202 7.995 7.995 0 0 1 6.498-12.518ZM15 9.997a3 3 0 1 1-5.999 0 3 3 0 0 1 5.999 0Z"
                                         clip-rule="evenodd" />
                                 </svg>
-                                <span>{{ $job->locality }}</span> <!-- Localidad -->
+                                <span>Ubicacion: {{ $job->province }} , {{$job->locality}}</span> <!-- Localidad -->
                             </div>
                             
                             <div class="flex items-center text-base pl-2 text-dark-400 dark:text-dark-400">
@@ -221,8 +209,17 @@
                                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
                                         stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
                                 </svg>
-                                <span>{{ $job->work_schedule }}</span> <!-- Horario o tipo de jornada -->
+                                <span>Jornada: {{ $job->work_schedule }}</span> <!-- Horario o tipo de jornada -->
                             </div>
+                           
+
+                            <div class="flex items-center text-base pl-2 text-dark-400 dark:text-dark-400">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6">
+    <path d="M12 11.993a.75.75 0 0 0-.75.75v.006c0 .414.336.75.75.75h.006a.75.75 0 0 0 .75-.75v-.006a.75.75 0 0 0-.75-.75H12ZM12 16.494a.75.75 0 0 0-.75.75v.005c0 .414.335.75.75.75h.005a.75.75 0 0 0 .75-.75v-.005a.75.75 0 0 0-.75-.75H12ZM8.999 17.244a.75.75 0 0 1 .75-.75h.006a.75.75 0 0 1 .75.75v.006a.75.75 0 0 1-.75.75h-.006a.75.75 0 0 1-.75-.75v-.006ZM7.499 16.494a.75.75 0 0 0-.75.75v.005c0 .414.336.75.75.75h.005a.75.75 0 0 0 .75-.75v-.005a.75.75 0 0 0-.75-.75H7.5ZM13.499 14.997a.75.75 0 0 1 .75-.75h.006a.75.75 0 0 1 .75.75v.005a.75.75 0 0 1-.75.75h-.006a.75.75 0 0 1-.75-.75v-.005ZM14.25 16.494a.75.75 0 0 0-.75.75v.006c0 .414.335.75.75.75h.005a.75.75 0 0 0 .75-.75v-.006a.75.75 0 0 0-.75-.75h-.005ZM15.75 14.995a.75.75 0 0 1 .75-.75h.005a.75.75 0 0 1 .75.75v.006a.75.75 0 0 1-.75.75H16.5a.75.75 0 0 1-.75-.75v-.006ZM13.498 12.743a.75.75 0 0 1 .75-.75h2.25a.75.75 0 1 1 0 1.5h-2.25a.75.75 0 0 1-.75-.75ZM6.748 14.993a.75.75 0 0 1 .75-.75h4.5a.75.75 0 0 1 0 1.5h-4.5a.75.75 0 0 1-.75-.75Z" />
+    <path fill-rule="evenodd" d="M18 2.993a.75.75 0 0 0-1.5 0v1.5h-9V2.994a.75.75 0 1 0-1.5 0v1.497h-.752a3 3 0 0 0-3 3v11.252a3 3 0 0 0 3 3h13.5a3 3 0 0 0 3-3V7.492a3 3 0 0 0-3-3H18V2.993ZM3.748 18.743v-7.5a1.5 1.5 0 0 1 1.5-1.5h13.5a1.5 1.5 0 0 1 1.5 1.5v7.5a1.5 1.5 0 0 1-1.5 1.5h-13.5a1.5 1.5 0 0 1-1.5-1.5Z" clip-rule="evenodd" />
+        </svg>
+        <span>Modalidad: {{$job->modality}}</span>
+</div>
 
                             <div class="flex flex-wrap items-center text-base pl-2 text-dark-400 dark:text-dark-400">
                                 <svg class="w-5 h-5 text-primary-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
@@ -231,7 +228,7 @@
                                         stroke-width="2"
                                         d="m17 21-5-4-5 4V3.889a.92.92 0 0 1 .244-.629.808.808 0 0 1 .59-.26h8.333a.81.81 0 0 1 .589.26.92.92 0 0 1 .244.63V21Z" />
                                 </svg>
-                                <span class="text-sm px-1 py-1 rounded-full">{{ $job->category->name }}</span>
+                                <span class="text-sm px-1 py-1 rounded-full">Categoria: {{ $job->category->name }}</span>
                                 <!-- Categoría -->
                             </div>
                             <div class="flex items-center text-base pl-2 text-dark-400 dark:text-dark-400">
@@ -442,4 +439,52 @@
             }
         });
     </script>
+
+
+        <script>
+
+$(document).ready(function() {
+    // Cuando cambie el select de categoría
+    $('#selectCategory, #modality, #work_schedule').on('change', function() {
+        let categoryId = $('#selectCategory').val();  // Obtener el ID de la categoría seleccionada
+        let modality = $('#modality').val();          // Obtener la modalidad seleccionada
+        let workSchedule = $('#work_schedule').val(); // Obtener la jornada seleccionada
+
+        console.log('Categoría seleccionada: ' + categoryId);
+        console.log('Modalidad seleccionada: ' + modality);
+        console.log('Jornada seleccionada: ' + workSchedule);
+
+        // Realizar la búsqueda con los filtros seleccionados
+        performSearch(categoryId, modality, workSchedule);
+    });
+
+    // Función para realizar la solicitud AJAX
+    function performSearch(categoryId, modality, workSchedule) {
+        // Realizar la solicitud AJAX
+        $.ajax({
+            url: '{{ route("jobs.filterByCategory") }}',  // Ruta de la solicitud AJAX
+            method: 'GET',  // Usamos GET para obtener datos
+            data: {
+                category_id: categoryId,  // Enviar el ID de la categoría seleccionada
+                modality: modality,       // Enviar la modalidad seleccionada
+                work_schedule: workSchedule // Enviar la jornada seleccionada
+            },
+            success: function(response) {
+                console.log('Respuesta de la búsqueda: ', response); // Verificar respuesta
+                // Actualizar el contenido de los trabajos con los resultados de la búsqueda
+                $('#jobsContainer').html(response);
+            },
+            error: function(xhr, status, error) {
+                console.error('Error al realizar la búsqueda:', status, error);  // Ver mensaje de error
+                alert('Hubo un error al realizar la búsqueda.');
+            }
+        });
+    }
+});
+
+
+
+
+        </script>
+
 </x-page>

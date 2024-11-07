@@ -4,7 +4,7 @@ use App\Services\Contracts\JobCategoryServiceInterface;
 use App\Services\Contracts\JobServiceInterface;
 use App\Models\JobApplication;
 use App\Notifications\JobApplicationNotification;
-
+use App\Models\Job;
 use Illuminate\Http\Request;
 
 
@@ -35,7 +35,13 @@ class JobController extends Controller
     
         $categories = $this->jobCategoryService->allCategories();
 
-        return view('jobs.index', compact('jobs' , 'categories'));
+        $provinces = Job::select('province')  // Seleccionamos el campo de la provincia
+                    ->distinct()  // Obtenemos valores únicos
+                    ->orderBy('province')  // Opcional: ordenar alfabéticamente
+                    ->get();
+
+
+        return view('jobs.index', compact('jobs' , 'categories' , 'provinces'));
     }
 
 
@@ -147,6 +153,41 @@ public function markAsRead()
 
     return response()->json(['success' => true]);
 }
+
+public function filterByCategory(Request $request)
+{
+    $categoryId = $request->input('category_id');
+    $modality = $request->input('modality');
+    $workSchedule = $request->input('work_schedule');
+
+    // Iniciar la consulta de trabajos
+    $query = Job::query();
+
+    // Filtrar por categoría si se especifica
+    if ($categoryId) {
+        $query->where('category_id', $categoryId);
+    }
+
+    // Filtrar por modalidad si se especifica
+    if ($modality) {
+        $query->where('modality', $modality);
+    }
+
+    // Filtrar por jornada si se especifica
+    if ($workSchedule) {
+        $query->where('work_schedule', $workSchedule);
+    }
+
+    // Obtener los trabajos filtrados
+    $jobs = $query->get();
+
+    // Retornar la vista con los trabajos filtrados
+    return view('partials.jobs', compact('jobs'));
+}
+
+
+
+
 
 }
 
