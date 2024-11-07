@@ -9,7 +9,7 @@
             class="min-h-screen  p-4 bg-light-200 dark:bg-dark-950 overflow-hidden transition-all duration-300 ">
             <div class="flex justify-between">
 
-                <button id="open-modal-btn" class="m-4 p-2 text-light-600 dark:text-light-200 border rounded">
+                <button id="open-modal-btn" class="btn-success m-4 p-2   border rounded">
                     Crear Publicación
                 </button>
 

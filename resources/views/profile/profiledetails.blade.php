@@ -21,10 +21,22 @@
 <x-page>
 <br>
 
-<body >
-    
+<body class="h-screen flex items-center justify-center">
+    <!-- Contenido aquí -->
 
-<div class="w-full max-w-7xl mx-auto px-4 py-6 relative z-10">
+
+<h1 style="font-family: 'Inter', sans-serif; text-align: center; color: #4A90E2; font-size: 3em; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);">
+    Bienvenido al perfil de: {{$profile->first_name}} {{$profile->last_name}}
+</h1>
+
+<br>
+
+
+
+
+<div class="w-full max-w-7xl mx-auto px-4 py-6 relative z-10 flex items-center ">
+
+   
                     <h2 class="text-2xl text-center font-bold text-dark-900 dark:text-dark-200 mb-4"> 
                     </h2>
                     <!-- Contenedor de las burbujas -->
@@ -65,7 +77,7 @@
 </svg>
 
                                         </span>
-                                    </button>
+                                </button>
                                     <button
                                         class="profile_item -left-4 top-20 absolute rounded-full bg-cover cursor-pointer border border-dark-400/50 p-[2px] active:scale-95 hover:scale-95 transition-all duration-500"
                                         id="button2">
@@ -123,19 +135,21 @@
 </svg>
 
                                         </span>
-                                    </button>
-                                    <button
-                                        class="profile_item right-[40%] -bottom-4 absolute rounded-full bg-cover cursor-pointer border border-dark-400/50 p-[2px] active:scale-95 hover:scale-95 transition-all duration-500 "
-                                        id="button6">
-                                        <span
-                                            class="block w-[40px] h-[40px] transition-all duration-500 rounded-full z-[2] bg-light-200 p-1">
-                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6">
-  <path fill-rule="evenodd" d="M5.625 1.5c-1.036 0-1.875.84-1.875 1.875v17.25c0 1.035.84 1.875 1.875 1.875h12.75c1.035 0 1.875-.84 1.875-1.875V12.75A3.75 3.75 0 0 0 16.5 9h-1.875a1.875 1.875 0 0 1-1.875-1.875V5.25A3.75 3.75 0 0 0 9 1.5H5.625ZM7.5 15a.75.75 0 0 1 .75-.75h7.5a.75.75 0 0 1 0 1.5h-7.5A.75.75 0 0 1 7.5 15Zm.75 2.25a.75.75 0 0 0 0 1.5H12a.75.75 0 0 0 0-1.5H8.25Z" clip-rule="evenodd" />
-  <path d="M12.971 1.816A5.23 5.23 0 0 1 14.25 5.25v1.875c0 .207.168.375.375.375H16.5a5.23 5.23 0 0 1 3.434 1.279 9.768 9.768 0 0 0-6.963-6.963Z" />
-</svg>
+                                    <p></p></button>
+                                   <!-- Botón para abrir el modal -->
+<button class="profile_item right-[40%] -bottom-4 absolute rounded-full bg-cover cursor-pointer border border-dark-400/50 p-[2px] active:scale-95 hover:scale-95 transition-all duration-500" id="button6">
+    <span class="block w-[40px] h-[40px] transition-all duration-500 rounded-full z-[2] bg-light-200 p-1">
+        <!-- Icono del botón -->
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6">
+            <path fill-rule="evenodd" d="M5.625 1.5c-1.036 0-1.875.84-1.875 1.875v17.25c0 1.035.84 1.875 1.875 1.875h12.75c1.035 0 1.875-.84 1.875-1.875V12.75A3.75 3.75 0 0 0 16.5 9h-1.875a1.875 1.875 0 0 1-1.875-1.875V5.25A3.75 3.75 0 0 0 9 1.5H5.625ZM7.5 15a.75.75 0 0 1 .75-.75h7.5a.75.75 0 0 1 0 1.5h-7.5A.75.75 0 0 1 7.5 15Zm.75 2.25a.75.75 0 0 0 0 1.5H12a.75.75 0 0 0 0-1.5H8.25Z" clip-rule="evenodd" />
+            <path d="M12.971 1.816A5.23 5.23 0 0 1 14.25 5.25v1.875c0 .207.168.375.375.375H16.5a5.23 5.23 0 0 1 3.434 1.279 9.768 9.768 0 0 0-6.963-6.963Z" />
+        </svg>
+    </span>
+</button>
 
-                                        </span>
-                                    </button>
+<!-- Modal -->
+
+
                                 </div>
                             </div>
                         </div>
@@ -178,6 +192,18 @@
     </div>
 </div>
 
+
+
+<div id="modal" class="fixed inset-0 z-50 hidden bg-dark-800 bg-opacity-75 flex items-center justify-center">
+    <div class="bg-light-200 dark:bg-dark-800 w-full max-w-md mx-4 p-6 rounded-lg shadow-md dark:shadow-[0_0_10px_theme(colors.primary.700/50%)]">
+        <p>Sobre mi</p>
+        <br></br>
+        <div id="modalContent" class="text-center">
+            {{$profile->profile_summary}}
+        </div>
+        <button id="closeModal" class="mt-4 w-full btn-danger text-white py-2 rounded-lg">Cerrar</button>
+    </div>
+</div>
 
 
 <script>
@@ -324,6 +350,34 @@ document.addEventListener("DOMContentLoaded", function() {
 
 
 
+<script>
+    // Obtener elementos
+    const button6 = document.getElementById('button6');
+    const modal = document.getElementById('modal');
+    const closeModal = document.getElementById('closeModal');
+    const modalContent = document.getElementById('modalContent');
+    
+    // Función para abrir el modal
+    button6.addEventListener('click', function() {
+        // Abrir el modal
+        modal.classList.remove('hidden');
+
+        // Cargar información dinámica
+        
+    });
+
+    // Función para cerrar el modal
+    closeModal.addEventListener('click', function() {
+        modal.classList.add('hidden');
+    });
+
+    // Cerrar el modal si el fondo es clickeado
+    modal.addEventListener('click', function(e) {
+        if (e.target === modal) {
+            modal.classList.add('hidden');
+        }
+    });
+</script>
 
 
 
