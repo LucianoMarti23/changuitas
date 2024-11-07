@@ -1,4 +1,4 @@
-<div class="grid grid-cols-1 lg:grid-cols-2 gap-6 " id="jobsContainer">
+
 
 @foreach ($jobs as $job)
     <div
@@ -131,4 +131,4 @@
 
 
 
-</div>
+
