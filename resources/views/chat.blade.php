@@ -23,7 +23,6 @@
                     <li data-id="{{ $user->id }}" class="cursor-pointer hover:bg-gray-200 p-2 rounded {{ $selectedUserId == $user->id ? 'bg-gray-200' : '' }}">
                             <img src="{{ asset('storage/' . ($user->profile->profile_picture ?? 'ruta/a/imagen/default.jpg')) }}" alt="{{ $user->name }}" class="w-8 h-8 rounded-full inline-block mr-2">
                             {{ $user->name }}
-                            <p>Última interacción: {{ $user->last_interaction ? $user->last_interaction->format('d/m/Y H:i') : 'Nunca' }}</p>
                         </li>
                     @endforeach
                 </ul>

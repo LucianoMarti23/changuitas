@@ -34,7 +34,7 @@
             </li>
                 <li>
                 
-                <a href="{{ url('subscriptionInfo') }}" class="block  text-normal text-lg hover:bg-primary-800 hover:text-light-200 rounded-full rounded-r-none pl-2 py-1"
+                <a href="{{ route('profile.subscription') }}" class="block  text-normal text-lg hover:bg-primary-800 hover:text-light-200 rounded-full rounded-r-none pl-2 py-1"
             id="suscripciones">
             <svg version="1.0" xmlns="http://www.w3.org/2000/svg" width="100.000000pt" height="100.000000pt"
                 viewBox="0 0 100.000000 100.000000" class="w-7 h-7 mr-2 inline-block  hover:fill-light-100 "
@@ -98,34 +98,7 @@
                 Publicaciones
             </a>
                 </li>
-           <li>
-           <a href="{{ url('applicationHistory') }}"  class="block  text-normal text-lg hover:bg-primary-800 hover:text-light-200 rounded-full rounded-r-none pl-2 py-1">
-                <svg version="1.0" xmlns="http://www.w3.org/2000/svg" width="100.000000pt" height="100.000000pt"
-                    viewBox="0 0 100.000000 100.000000" class="w-7 h-7 mr-2 inline-block hover:fill-light-100 "
-                    preserveAspectRatio="xMidYMid meet">
-                    <g transform="translate(0,100) scale(0.1,-0.1)" fill="currentColor" stroke="none">
-                        <path d="M322 833 c3 -106 6 -128 18 -128 12 0 16 20 18 108 l3 107 179 0 180
-                            0 0 -100 0 -100 100 0 100 0 0 -280 0 -279 -137 -3 c-115 -3 -138 -6 -138 -18
-                            0 -13 25 -15 158 -18 l157 -3 0 313 0 313 -108 108 -107 107 -213 0 -213 0 3
-                            -127z m558 -65 c0 -4 -27 -8 -60 -8 l-60 0 0 67 0 67 60 -59 c33 -33 60 -63
-                            60 -67z" />
-                        <path d="M264 661 c-57 -26 -73 -64 -72 -176 1 -54 6 -96 13 -105 29 -36 57
-                            -99 53 -121 -2 -19 -17 -29 -75 -54 -89 -37 -134 -79 -136 -126 l-2 -34 295 0
-                            295 0 -2 34 c-2 47 -47 89 -136 126 -62 27 -72 34 -75 58 -2 16 1 34 7 41 41
-                            49 57 103 59 190 2 106 -5 121 -78 159 -61 32 -90 33 -146 8z m128 -43 c24
-                            -12 46 -27 50 -32 4 -6 6 -47 4 -91 -3 -81 -22 -141 -50 -165 -9 -7 -16 -27
-                            -16 -46 0 -24 -5 -34 -20 -39 -37 -12 -60 3 -60 39 0 20 -8 40 -20 51 -11 10
-                            -20 24 -20 30 0 7 -6 18 -13 24 -20 16 -17 191 3 216 33 39 82 44 142 13z
-                            m-73 -422 c10 -12 8 -26 -6 -65 l-18 -51 -102 0 c-65 0 -103 4 -103 10 0 21
-                            51 58 110 79 32 12 62 26 65 31 9 15 41 12 54 -4z m96 4 c3 -5 33 -19 65 -31
-                            59 -21 110 -58 110 -79 0 -6 -38 -10 -104 -10 l-103 0 -17 43 c-9 23 -16 47
-                            -16 53 0 27 51 46 65 24z" />
-                    </g>
-                </svg>
-
-                Postulaciones
-            </a>
-           </li>
+         
             <li>
             <a href="{{ url('/chat') }}" class="block  text-normal text-lg hover:bg-primary-800 hover:text-light-200 rounded-full rounded-r-none pl-2 py-1">
                 <svg class="w-7 h-7 mr-2 inline-block hover:fill-light-100" aria-hidden="true"
@@ -138,7 +111,7 @@
             </a>
             </li>
             <li>
-            <a href="{{ url('/notificationSettings') }}"
+            <a href="{{route('notificaciones.index')}}"
    class="block  text-normal text-lg hover:bg-primary-800 hover:text-light-200 rounded-full rounded-r-none pl-2 py-1"</a>
     <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7 mr-2 inline-block hover:fill-light-100" fill="currentColor"
         viewBox="0 0 24 24">

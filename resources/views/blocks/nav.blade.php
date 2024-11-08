@@ -47,10 +47,7 @@
                     <a href="{{ url('/jobs') }}"
                         class="text-xl font-medium  hover:text-primary-600  block px-4 py-2 rounded">Trabajo</a>
                 </li>
-                <li>
-                    <a href="{{ url('/jobexpress') }}"
-                        class="text-xl font-medium  hover:text-primary-600  block px-4 py-2 rounded">Express</a>
-                </li>
+             
                 <li>
                     <a href="/profiles" class="text-xl font-medium  hover:text-primary-600 block px-4 py-2 rounded">Perfiles</a>
                 </li>
@@ -69,11 +66,7 @@
                     <img src="/img/ico-nav/trabajo.png" class="w-8 h-8" alt="Trabajos" />
                     <span class="text-sm mt-1">Trabajos</span>
                 </a>
-                <a href="{{ url('/jobexpress') }}"
-                    class="flex flex-col items-center text-dark-800 dark:text-dark-300 hover:text-primary-600 hover:shadow-sm">
-                    <img src="/img/ico-nav/male.png" class="w-8 h-8" alt="Trabajos" />
-                    <span class="text-sm mt-1">Express</span>
-                </a>
+            
                 <a href="#"
                     class="flex flex-col items-center text-dark-800 dark:text-dark-100 hover:text-primary-600 hover:shadow-sm">
                     <img src="/img/ico-nav/perfiles.png" class="w-8 h-8" alt="Perfiles" />

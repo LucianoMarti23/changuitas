@@ -1,6 +1,13 @@
 
-<footer class=" bottom-0 left-0 z-20 w-full p-4 bg-light border-t border-dark-200 shadow md:flex md:items-center md:justify-between md:p-6 dark:bg-dark-950 dark:border-dark-600">
-        <span class="text-sm text-dark-500 sm:text-center dark:text-dark-400">© 2024 <a href="" class="hover:underline">Programosos™</a>. Todos los derechos recervados.
+<div class="flex flex-col min-h-screen">
+    <!-- Contenido principal -->
+    <main class="flex-grow">
+        <!-- Aquí va el contenido de la página -->
+    </main>
+
+    <!-- Footer -->
+    <footer class="bottom-0 left-0 z-20 w-full p-4 bg-light border-t border-dark-200 shadow md:flex md:items-center md:justify-between md:p-6 dark:bg-dark-950 dark:border-dark-600">
+        <span class="text-sm text-dark-500 sm:text-center dark:text-dark-400">© 2024 <a href="" class="hover:underline">Programosos™</a>. Todos los derechos reservados.
         </span>
         <ul class="flex flex-wrap items-center mt-3 text-sm font-medium text-dark-500 dark:text-dark-400 sm:mt-0">
             <li>
@@ -13,9 +20,16 @@
                 <a href="#" class="hover:underline me-4 md:me-6">Licencia</a>
             </li>
             <li>
-                <a href="#" class="hover:underline">Contacto</a>
+                <a href="#" class="hover:underline me-4 md:me-6">Contacto</a>
+            </li>
+            <li>
+                <a href="{{ url('/FAQ') }}" class="hover:underline me-4 md:me-6">FAQ</a>
             </li>
         </ul>
+    </footer>
+</div>
+
+
          <!-- Enlaces vacio 
                 <div class="flex items-center space-x-4 p-4">
                     <button id="theme-toggle" type="button" class="text-dark-500 dark:text-dark-400  focus:outline-none focus:ring-4 focus:ring-dark-200 dark:focus:ring-dark-700 rounded-lg text-sm p-2.5">

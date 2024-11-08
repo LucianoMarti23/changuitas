@@ -5,7 +5,7 @@
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Template profiles</title>
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
@@ -34,13 +34,13 @@
 
 
 
-<div class="w-full max-w-7xl mx-auto px-4 py-6 relative z-10 flex items-center ">
+<div class="w-1/5   mx-auto px-4 py-6  flex items-center ">
 
    
                     <h2 class="text-2xl text-center font-bold text-dark-900 dark:text-dark-200 mb-4"> 
                     </h2>
                     <!-- Contenedor de las burbujas -->
-                    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-8">
+                    <div class=" flex justify-center w-1/2">
                         <div class="relative w-64 h-64 mx-auto">
                             <div class="relative h-full w-full flex items-center justify-center">
                                 <div
@@ -78,17 +78,34 @@
 
                                         </span>
                                 </button>
-                                    <button
-                                        class="profile_item -left-4 top-20 absolute rounded-full bg-cover cursor-pointer border border-dark-400/50 p-[2px] active:scale-95 hover:scale-95 transition-all duration-500"
-                                        id="button2">
-                                        <span
-                                            class="block w-[40px] h-[40px] transition-all duration-500 rounded-full z-[2] bg-light-200 p-1">
-                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6">
-  <path fill-rule="evenodd" d="M4.5 3.75a3 3 0 0 0-3 3v10.5a3 3 0 0 0 3 3h15a3 3 0 0 0 3-3V6.75a3 3 0 0 0-3-3h-15Zm4.125 3a2.25 2.25 0 1 0 0 4.5 2.25 2.25 0 0 0 0-4.5Zm-3.873 8.703a4.126 4.126 0 0 1 7.746 0 .75.75 0 0 1-.351.92 7.47 7.47 0 0 1-3.522.877 7.47 7.47 0 0 1-3.522-.877.75.75 0 0 1-.351-.92ZM15 8.25a.75.75 0 0 0 0 1.5h3.75a.75.75 0 0 0 0-1.5H15ZM14.25 12a.75.75 0 0 1 .75-.75h3.75a.75.75 0 0 1 0 1.5H15a.75.75 0 0 1-.75-.75Zm.75 2.25a.75.75 0 0 0 0 1.5h3.75a.75.75 0 0 0 0-1.5H15Z" clip-rule="evenodd" />
-</svg>
+                              <!-- Botón que abre el modal -->
+<!-- Botón que abre el modal -->
+<!-- Botón que abre el modal -->
+<button
+    class="profile_item -left-4 top-20 absolute rounded-full bg-cover cursor-pointer border border-dark-400/50 p-[2px] active:scale-95 hover:scale-95 transition-all duration-500"
+    id="button2">
+    <span class="block w-[40px] h-[40px] transition-all duration-500 rounded-full z-[2] bg-light-200 p-1">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6">
+            <path fill-rule="evenodd" d="M4.5 3.75a3 3 0 0 0-3 3v10.5a3 3 0 0 0 3 3h15a3 3 0 0 0 3-3V6.75a3 3 0 0 0-3-3h-15Zm4.125 3a2.25 2.25 0 1 0 0 4.5 2.25 2.25 0 0 0 0-4.5Zm-3.873 8.703a4.126 4.126 0 0 1 7.746 0 .75.75 0 0 1-.351.92 7.47 7.47 0 0 1-3.522.877 7.47 7.47 0 0 1-3.522-.877.75.75 0 0 1-.351-.92ZM15 8.25a.75.75 0 0 0 0 1.5h3.75a.75.75 0 0 0 0-1.5H15ZM14.25 12a.75.75 0 0 1 .75-.75h3.75a.75.75 0 0 1 0 1.5H15a.75.75 0 0 1-.75-.75Zm.75 2.25a.75.75 0 0 0 0 1.5h3.75a.75.75 0 0 0 0-1.5H15Z" clip-rule="evenodd" />
+        </svg>
+    </span>
+</button>
 
-                                        </span>
-                                    </button>
+<!-- El Modal -->
+<div id="myModal" class="modal fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50 hidden">
+    <div class="modal-content bg-white p-6 rounded-lg w-[90%] max-w-md relative">
+        <!-- Botón para cerrar el modal -->
+        <span id="closeModal" class="absolute top-2 right-2 text-2xl cursor-pointer text-gray-700">×</span>
+        <h2 class="text-lg font-semibold">Este es el título del Modal</h2>
+        <p>Contenido del modal va aquí. Puedes agregar más detalles o elementos.</p>
+    </div>
+</div>
+
+
+
+<!-- El Modal -->
+
+
                                     <button
     class="profile_item -right-4 top-20 absolute rounded-full bg-cover cursor-pointer border border-dark-400/50 p-[2px] active:scale-95 hover:scale-95 transition-all duration-500"
     id="button3">
@@ -160,15 +177,16 @@
 <!-- Modal (inicialmente oculto con la clase 'hidden') -->
 <!-- Modal (inicialmente oculto con la clase 'hidden') -->
 <!-- Modal de Contacto -->
-<div id="contactModal" class="hidden fixed inset-0 bg-black bg-opacity-50 z-50 flex justify-center items-center">
-    <div class="bg-white p-6 rounded-lg w-96">
+<!-- Modal de contacto -->
+<div id="contactModal" class="fixed inset-0 z-50 hidden bg-dark-800 bg-opacity-75 flex items-center justify-center">
+    <div class="bg-light-200 dark:bg-dark-800 w-full max-w-md mx-4 p-6 rounded-lg shadow-md dark:shadow-[0_0_10px_theme(colors.primary.700/50%)]">
         <!-- Cerrar Modal -->
         <button id="closeContactModal" class="absolute top-2 right-2 text-xl font-bold text-gray-600">
             &times;
         </button>
 
         <!-- Formulario de contacto -->
-        <h2 class="text-xl font-semibold mb-4">Contáctame</h2>
+        <h2 class="text-xl font-semibold mb-4">Contácta a {{$profile->first_name}} {{$profile->last_name}}</h2>
         <form id="contactForm">
             <input type="hidden" id="recipient_id" name="recipient_id" value="{{$profile->user_id}}"> <!-- Ajusta recipient_id según el destino -->
             
@@ -180,7 +198,7 @@
             <div class="flex justify-between">
                 <!-- Botón de enviar -->
                 <div class="text-right">
-                    <button type="submit" class="bg-blue-500 text-white py-2 px-4 rounded-md">Enviar</button>
+                    <button type="submit" class="btn-success bg-blue-500 text-white py-2 px-4 rounded-md">Enviar Mensaje</button>
                 </div>
                 
                 <!-- Botón de cancelar -->
@@ -191,6 +209,7 @@
         </form>
     </div>
 </div>
+
 
 
 
@@ -205,24 +224,42 @@
     </div>
 </div>
 
+<!-- El Modal -->
+<div id="myModal" class="modal fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50 hidden">
+    <div class="modal-content bg-white p-6 rounded-lg w-[90%] max-w-md relative">
+        <!-- Botón para cerrar el modal -->
+        <span id="closeModal" class="absolute top-2 right-2 text-2xl cursor-pointer text-gray-700">×</span>
+        <h2 class="text-lg font-semibold">Este es el título del Modal</h2>
+        <p>Contenido del modal va aquí. Puedes agregar más detalles o elementos.</p>
+    </div>
+</div>
+
+
+
+
 
 <script>
-
-document.addEventListener("DOMContentLoaded", function() {
+    document.addEventListener("DOMContentLoaded", function() {
     // Obtener elementos del modal y el formulario
-    const openModalButton = document.getElementById('button1');
-    const contactModal = document.getElementById('contactModal');
-    const closeModalButton = document.getElementById('closeContactModal');
-    const contactForm = document.getElementById('contactForm');
-    const recipientIdInput = document.getElementById('recipient_id');
+    const openModalButton = document.getElementById('button1'); // El botón que abre el modal
+    const contactModal = document.getElementById('contactModal'); // El modal
+    const closeModalButton = document.getElementById('closeContactModal'); // El botón de cerrar modal (&times;)
+    const cancelModalButton = document.getElementById('cancelContactModal'); // El botón de cancelar modal
+    const contactForm = document.getElementById('contactForm'); // El formulario de contacto
+    const recipientIdInput = document.getElementById('recipient_id'); // El campo hidden con recipient_id
     
     // Abrir el modal
     openModalButton.addEventListener('click', function() {
         contactModal.classList.remove('hidden');  // Mostrar el modal
     });
 
-    // Cerrar el modal
+    // Cerrar el modal al hacer clic en el botón de "X"
     closeModalButton.addEventListener('click', function() {
+        contactModal.classList.add('hidden');  // Ocultar el modal
+    });
+
+    // Cerrar el modal al hacer clic en el botón de "Cancelar"
+    cancelModalButton.addEventListener('click', function() {
         contactModal.classList.add('hidden');  // Ocultar el modal
     });
 
@@ -260,7 +297,44 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 });
 
+</script>
 
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        // Obtener el modal y el botón de apertura
+        const openButton = document.getElementById('button2');
+        const modal = document.getElementById('myModal');
+        const closeButton = document.getElementById('closeModal');
+
+        // Función para abrir el modal
+        function openModal() {
+            modal.classList.remove('hidden');  // Muestra el modal
+            modal.classList.add('flex');  // Cambia el modal a flex para hacerlo visible
+        }
+
+        // Función para cerrar el modal
+        function closeModal() {
+            modal.classList.remove('flex');  // Oculta el modal
+            modal.classList.add('hidden');  // Cambia el modal a hidden para hacerlo invisible
+        }
+
+        // Abrir el modal cuando se hace clic en el botón
+        if (openButton) {
+            openButton.addEventListener('click', openModal);
+        }
+
+        // Cerrar el modal cuando se hace clic en la "X"
+        if (closeButton) {
+            closeButton.addEventListener('click', closeModal);
+        }
+
+        // Cerrar el modal si se hace clic fuera del contenido del modal (en el fondo)
+        window.addEventListener('click', function (event) {
+            if (event.target === modal) {
+                closeModal();  // Cierra el modal si se hace clic en el fondo
+            }
+        });
+    });
 </script>
 
 
@@ -269,8 +343,8 @@ document.addEventListener("DOMContentLoaded", function() {
 <!-- Modal de Experiencia Laboral -->
 <!-- Modal de Experiencias Laborales -->
 <!-- Modal de Educación -->
-<div id="educationModal" class="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50 hidden">
-    <div class="bg-white p-6 rounded-lg max-w-lg w-full">
+<div id="educationModal" class="fixed inset-0 z-50 hidden bg-dark-800 bg-opacity-75 flex items-center justify-center">
+    <div class="bg-light-200 dark:bg-dark-800 w-full max-w-md mx-4 p-6 rounded-lg shadow-md dark:shadow-[0_0_10px_theme(colors.primary.700/50%)]">
         <h3 class="text-xl font-semibold text-center mb-4">Educación</h3>
         <div id="educationContent" class="mb-4">
             <p>{{$profile->education}}</p>
@@ -280,8 +354,8 @@ document.addEventListener("DOMContentLoaded", function() {
 </div>
 
 <!-- Modal de Experiencia Laboral -->
-<div id="experienceModal" class="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50 hidden">
-    <div class="bg-white p-6 rounded-lg max-w-lg w-full">
+<div id="experienceModal" class="fixed inset-0 z-50 hidden bg-dark-800 bg-opacity-75 flex items-center justify-center">
+    <div class="bg-light-200 dark:bg-dark-800 w-full max-w-md mx-4 p-6 rounded-lg shadow-md dark:shadow-[0_0_10px_theme(colors.primary.700/50%)]">
         <h3 class="text-xl font-semibold text-center mb-4">Experiencia Laboral</h3>
         <div id="experienceContent" class="mb-4">
 
@@ -378,6 +452,9 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     });
 </script>
+
+
+
 
 
 

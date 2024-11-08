@@ -14,7 +14,8 @@
                          class="w-16 h-16 rounded-full mr-4 object-cover">
                     <div>
                         <h2 class="text-lg font-semibold">{{ $application->userProfile->first_name }} {{ $application->userProfile->last_name }}</h2>
-                        <a href="#" class="text-blue-500 hover:underline">Ver Perfil</a>
+                        <a href="{{ route('profile.profiledetails' , ['id' =>$application->userProfile->id]) }}" class="text-primary-600 hover:text-primary-800">
+    Ver Perfil Completo
                     </div>
                 </div>
             </div>

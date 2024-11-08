@@ -39,35 +39,9 @@
         <form class="max-w-xl mx-auto">
             <div class="flex flex-col space-y-4">
                 <!-- Contenedor para los dropdowns y el buscador -->
-                <div class="flex flex-col sm:flex-row sm:space-x-4 space-y-4 sm:space-y-0">
-                    <!-- Dropdown para Provincias -->
-                    <div class="relative flex-1">
-                        <label for="selectProvincias"
-                            class="block text-sm font-medium text-dark-900 dark:text-light-100">Provincia</label>
-                        <select id="selectProvincias" name="provincia"
-                            class="block w-full mt-1 py-2 px-3 border border-dark-300 bg-dark-50 text-dark-900 rounded-lg shadow-sm focus:ring-primary-500 focus:border-primary-500 dark:bg-dark-700 dark:border-dark-600 dark:text-light-100 dark:focus:border-primary-500">
-                            <option value="selectProvincia">Elige una provincia</option>
-                        </select>
-                    </div>
-
-                    <!-- Dropdown para Localidades -->
-                    <div class="relative flex-1">
-                        <label for="selectLocalidades"
-                            class="block text-sm font-medium text-dark-900 dark:text-light-100">Ciudad</label>
-                        <select id="selectLocalidades" name="localidad"
-                            class="block w-full mt-1 py-2 px-3 border border-dark-300 bg-dark-50 text-dark-900 rounded-lg shadow-sm focus:ring-primary-500 focus:border-primary-500 dark:bg-dark-700 dark:border-dark-600 dark:text-light-100 dark:focus:border-primary-500">
-                            <option value="selectLocalidad">Elige una localidad</option>
-                        </select>
-                    </div>
-                </div>
+                
                 <!-- Campo de búsqueda -->
-                <div class="relative flex-1">
-                    <label for="search-dropdown"
-                        class="block text-sm font-medium text-dark-900 dark:text-light-100">Buscar Categoria</label>
-                    <input type="search" id="search-dropdown" name="search"
-                        class="block w-full mt-1 py-2 px-3 border border-dark-300 bg-dark-50 text-dark-900 rounded-lg shadow-sm focus:ring-primary-500 focus:border-primary-500 dark:bg-dark-700 dark:border-dark-600 dark:text-light-100 dark:focus:border-primary-500"
-                        placeholder="Buscar...">
-                </div>
+               
 
             </div>
         </form>
@@ -928,23 +902,10 @@
 
 
     <section class="mx-auto py-48  bg-light-100 dark:bg-dark-900 dark:text-light-200">
-        <h1 class="text-7xl font-medium mb-8 text-center">¡Únete a Nosotros!</h1>
-        <p class="text-dark-700 dark:text-light-200 text-xl font-base mb-8 text-center">
-            Ayúdanos a seguir ofreciendo grandes servicios. Puedes suscribirte para recibir actualizaciones o donar
-            para apoyar nuestra causa.
-        </p>
+        <h1 class="text-7xl font-medium mb-8 text-center">¡Realiza una donacion!</h1>
+        
 
-        <!-- Sección de Suscripción y Donación -->
-        <div class="flex flex-col sm:flex-row justify-center text-center gap-4 ">
-            <!-- Suscripción -->
-            <div class="flex flex-col py-8">
-                <h2 class="text-xl font-semibold mb-2 text-center">Suscríbete a Nuestro Boletín</h2>
-                <form action="#" method="post" class="flex flex-col items-center">
-                    <input type="email" placeholder="Tu correo electrónico"
-                        class="mb-4 p-2 border border-dark-300 rounded w-full max-w-xs" required>
-                    <button type="submit" class="btn-primary  btn-standard mb-2">Suscribirse</button>
-                </form>
-            </div>
+       
 
             <!-- Donación -->
             <div class="flex flex-col py-8">

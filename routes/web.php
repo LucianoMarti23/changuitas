@@ -111,7 +111,9 @@ Route::post('subir-cv', [CvController::class, 'uploadCv'])->name('upload.cv');
 
 
 
-
+Route::get('/FAQ', function () {
+    return view('info_footer.FAQ');
+})->name('info_footer.FAQ');
 
 
 
