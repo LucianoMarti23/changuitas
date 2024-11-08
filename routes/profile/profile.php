@@ -10,6 +10,11 @@ Route::post('/profile/store', [UserProfileController::class, 'store'])->name('pr
 Route::get('/personalData/{id}', [UserProfileController::class, 'show'])->name('profile.personalData');
 Route::put('/personalData/edit/{id}', [UserProfileController::class, 'update'])->name('personalData.edit');
 
+// routes/web.php
+
+Route::get('/buscar-usuarios', [UserProfileController::class, 'search'])->name('search.users');
+
+
 Route::post('/upload-picture', [UserProfileController::class, 'uploadProfilePicture'])->name('profile.uploadPicture');
 Route::delete('/profile/delete-picture', [UserProfileController::class, 'deleteProfilePicture'])->name('profile.deletePicture');
 

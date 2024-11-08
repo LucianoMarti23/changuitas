@@ -171,6 +171,18 @@ public function showProfileDetail($id){
 
     return view('profile.profiledetails' , compact('workExperiences','profile'));
 }
+
+public function search(Request $request)
+    {
+        $searchTerm = $request->get('query');
+
+        $profiles = UserProfile::where('first_name', 'LIKE', "%{$searchTerm}%")
+                               ->orWhere('last_name', 'LIKE', "%{$searchTerm}%")
+                               ->get();
+
+        return response()->json($profiles);
+    }
+
 }
 
 
