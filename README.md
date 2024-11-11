@@ -41,6 +41,16 @@ En la carpeta ```laravel-server``` ejecutar:
     ```$ php artisan serve```
 1. #### Compilador continuo de Tailwind (watch):
     ```$ tailwindcss -i tailwind.input.css -o ./public/style.global.css --watch```
+1. #### Configura la base de datos:
+    ```$ php artisan migrate```
+1. #### Crear Usuario Administrador:
+
+    - El sistema tiene un seeder para crear un usuario administrador por defecto.
+    ```$ php artisan db:seed```
+    > Nota: Cambia la contraseña o el correo electrónico en el archivo DatabaseSeeder.php antes de desplegar en producción.
+    
+    >>Este ejemplo de documentación ayuda a cualquier persona que configure el proyecto a saber cómo crear y usar un usuario administrador de forma rápida y clara, sin exponer datos sensibles.
+
 
 ### (!) Nota: Escribiendo las vistas
 
