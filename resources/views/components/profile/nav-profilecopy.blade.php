@@ -6,16 +6,11 @@
                
         <a href="{{ route('profile.personalData', Auth::id())}}" class="block  text-normal text-lg hover:bg-primary-800 hover:text-light-200 rounded-full rounded-r-none pl-2 py-1"
             id="informacion-personal">
-            <svg version="1.0" xmlns="http://www.w3.org/2000/svg" width="100.000000pt" height="100.000000pt"
-                viewBox="0 0 100.000000 100.000000" class="w-7 h-7 mr-2 inline-block hover:fill-light-100 "
-                preserveAspectRatio="xMidYMid meet">
-                <g transform="translate(0,100) scale(0.1,-0.1)" fill="currentColor" stroke="none">
-                    <path
-                        d="M420 768 c-132 -67 -132 -249 0 -315 56 -29 104 -29 160 -1 132 67 132 249 0 316 -24 12 -60 22 -80 22 -20 0 -56 -10 -80 -22z m147 -48 c75 -45 84 -148 19 -207 -30 -28 -43 -33 -86 -33 -43 0 -56 5 -86 33 -115 105 20 288 153 207z" />
-                    <path
-                        d="M410 354 c-30 -8 -76 -29 -103 -46 -52 -33 -117 -106 -117 -131 0 -36 24 -26 75 31 72 79 133 106 235 106 102 0 163 -27 235 -106 51 -57 75 -67 75 -31 0 25 -65 97 -117 131 -51 33 -147 62 -198 61 -16 0 -55 -7 -85 -15z" />
-                </g>
-            </svg>
+            
+            <svg class="w-7 h-7 mr-2 inline-block hover:fill-light-100" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+  <path stroke="currentColor" stroke-width="2" d="M7 17v1a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1v-1a3 3 0 0 0-3-3h-4a3 3 0 0 0-3 3Zm8-9a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"/>
+</svg>
+
             Información Personal
         </a>
                 </li>
@@ -24,10 +19,11 @@
             <li>
             <a href="{{route('work_experiences.index')}}"
   class="block  text-normal text-lg hover:bg-primary-800 hover:text-light-200 rounded-full rounded-r-none pl-2 py-1"</a>
-    <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7 mr-2 inline-block hover:fill-light-100" fill="currentColor"
-        viewBox="0 0 24 24">
-        <path d="M21 7h-4V4c0-1.1-.9-2-2-2H9C7.9 2 7 2.9 7 4v3H3c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h18c1.1 0 2-.9 2-2V9c0-1.1-.9-2-2-2zM9 4h6v3H9V4zm10 16H5V9h14v11z"/>
-    </svg>
+    
+    <svg class="w-7 h-7 mr-2 inline-block hover:fill-light-100" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+  <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7H5a2 2 0 0 0-2 2v4m5-6h8M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2m0 0h3a2 2 0 0 1 2 2v4m0 0v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-6m18 0s-4 2-9 2-9-2-9-2m9-2h.01"/>
+</svg>
+
     Experiencia Laboral
 </a>
 
@@ -113,10 +109,11 @@
             <li>
             <a href="{{route('notificaciones.index')}}"
    class="block  text-normal text-lg hover:bg-primary-800 hover:text-light-200 rounded-full rounded-r-none pl-2 py-1"</a>
-    <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7 mr-2 inline-block hover:fill-light-100" fill="currentColor"
-        viewBox="0 0 24 24">
-        <path d="M12 22a2 2 0 002-2h-4a2 2 0 002 2zM18 10V9a6 6 0 00-12 0v1c0 3.25-2.55 6-5 6h2l1 4h14l1-4h2c-2.45 0-5-2.75-5-6z"/>
-    </svg>
+    
+    <svg class="w-7 h-7 mr-2 inline-block hover:fill-light-100" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+  <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 5.365V3m0 2.365a5.338 5.338 0 0 1 5.133 5.368v1.8c0 2.386 1.867 2.982 1.867 4.175 0 .593 0 1.292-.538 1.292H5.538C5 18 5 17.301 5 16.708c0-1.193 1.867-1.789 1.867-4.175v-1.8A5.338 5.338 0 0 1 12 5.365ZM8.733 18c.094.852.306 1.54.944 2.112a3.48 3.48 0 0 0 4.646 0c.638-.572 1.236-1.26 1.33-2.112h-6.92Z"/>
+</svg>
+
     Notificaciones
 </a>
 
@@ -136,10 +133,12 @@
             <li>
             <a href="{{ url('/notificationSettings') }}"
             class="block  text-normal text-lg hover:bg-primary-800 hover:text-light-200 rounded-full rounded-r-none pl-2 py-1">
-    <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7 mr-2 inline-block hover:fill-light-100" fill="currentColor"
-        viewBox="0 0 24 24">
-        <path d="M19.14 12.936c.054-.25.086-.516.086-.786s-.032-.536-.086-.786l2.049-1.58c.144-.11.186-.313.1-.48l-2.4-4.144c-.087-.149-.275-.221-.444-.168l-2.392.934a7.892 7.892 0 00-1.73-.72l-.362-2.687a.364.364 0 00-.36-.313h-5.028a.364.364 0 00-.36.313l-.362 2.687c-.598.151-1.167.37-1.73.72l-2.392-.934c-.169-.054-.357.019-.444.168l-2.4 4.144c-.086.167-.044.37.1.48l2.049 1.58c-.054.25-.086.516-.086.786s.032.536.086.786l-2.049 1.58c-.144.11-.186.313-.1.48l2.4 4.144c.087.149.275.221.444.168l2.392-.934c.563.348 1.131.569 1.73.72l.362 2.687a.364.364 0 00.36.313h5.028a.364.364 0 00.36-.313l.362-2.687c.598-.151 1.167-.37 1.73-.72l2.392.934c.169.054.357-.019.444-.168l2.4-4.144c.086-.167.044-.37-.1-.48l-2.049-1.58zm-7.14 3.064c-3.313 0-6-2.688-6-6s2.688-6 6-6 6 2.688 6 6-2.688 6-6 6z"/>
-    </svg>
+    
+    <svg class="w-7 h-7 mr-2 inline-block hover:fill-light-100" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+  <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13v-2a1 1 0 0 0-1-1h-.757l-.707-1.707.535-.536a1 1 0 0 0 0-1.414l-1.414-1.414a1 1 0 0 0-1.414 0l-.536.535L14 4.757V4a1 1 0 0 0-1-1h-2a1 1 0 0 0-1 1v.757l-1.707.707-.536-.535a1 1 0 0 0-1.414 0L4.929 6.343a1 1 0 0 0 0 1.414l.536.536L4.757 10H4a1 1 0 0 0-1 1v2a1 1 0 0 0 1 1h.757l.707 1.707-.535.536a1 1 0 0 0 0 1.414l1.414 1.414a1 1 0 0 0 1.414 0l.536-.535 1.707.707V20a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1v-.757l1.707-.708.536.536a1 1 0 0 0 1.414 0l1.414-1.414a1 1 0 0 0 0-1.414l-.535-.536.707-1.707H20a1 1 0 0 0 1-1Z"/>
+  <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z"/>
+</svg>
+
     Configuración
 </a>
 

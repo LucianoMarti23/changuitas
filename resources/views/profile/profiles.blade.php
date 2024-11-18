@@ -33,8 +33,8 @@
                 <div class="relative p-4 text-center group">
                     <img src="{{ asset('storage/' . ($profile->profile_picture ? $profile->profile_picture : 'ruta/a/imagen/default.jpg')) }}"
                          class="w-48 h-48 object-cover rounded-full shadow-2xl shadow-primary-500/50 mx-auto border-4 border-primary-600 animate-bounceBubble">
-                    <br><br>
-                    <div class="absolute bottom-0 left-0 right-0 p-2 text-light-800 dark:text-light-200 bg-black bg-opacity-60 rounded-t-full">
+                    
+                    <div class="p-2 text-light-800 dark:text-light-200 bg-black bg-opacity-60 rounded-t-full">
                         <h3 class="text-dm font-semibold truncate">{{$profile->first_name}} {{$profile->last_name}}</h3>
                         <p class="text-sm truncate">Oficio del Usuario {{$profile->user}}</p>
                         <a href="{{ route('profile.profiledetails', ['id' => $profile->id]) }}" class="text-primary-600 hover:text-primary-800">
