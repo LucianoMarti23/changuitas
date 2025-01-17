@@ -287,4 +287,11 @@ public function profilePublic($id){
     return UserProfile::findOrFail($id);
 }
 
+public function photoActualized($id){
+
+    
+    $userProfile =  UserProfile::find($id);
+    return $userProfile->profile_picture;
+}
+
 }

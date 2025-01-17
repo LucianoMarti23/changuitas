@@ -1,43 +1,41 @@
 /** @type {import('tailwindcss').Config} */
 
 
-const colors = require('tailwindcss/colors');
+import { slate, blue, emerald, red, amber, sky, green } from 'tailwindcss/colors';
 
-module.exports = {
-    content: [
-        "./resources/**/*.{php,html,js}",
-        './resources/**/*.blade.php',
-        './resources/**/*.vue',
-    ],
-    darkMode: "class",
-    theme: {
-        fontFamily: {
-            sans: ["Inter", "sans-serif"],
+export const content = [
+    "./resources/**/*.{php,html,js}",
+    './resources/**/*.blade.php',
+    './resources/**/*.vue',
+];
+export const darkMode = "class";
+export const theme = {
+    fontFamily: {
+        sans: ["Inter", "sans-serif"],
+    },
+    colors: {
+        transparent: "transparent",
+        current: "currentColor",
+        light: slate,
+        dark: slate,
+        primary: blue,
+        complem: emerald,
+        danger: red,
+        alert: amber,
+        info: sky,
+        success: green,
+    },
+    extend: {
+        animation: {
+            spin: 'spin 1s linear infinite',
+            marquee: "marquee 15s linear infinite",
         },
-        colors: {
-            transparent: "transparent",
-            current: "currentColor",
-            light: colors.slate,
-            dark: colors.slate,
-            primary: colors.blue,
-            complem: colors.emerald,
-            danger: colors.red,
-            alert: colors.amber,
-            info: colors.sky,
-            success: colors.green,
-        },
-        extend: {
-            animation: {
-                spin: 'spin 1s linear infinite',
-                marquee: "marquee 15s linear infinite",
-            },
-            keyframes: {
-                marquee: {
-                    "0%": { transform: "translateX(0)" },
-                    "100%": { transform: "translateX(-100%)" },
-                },
+        keyframes: {
+            marquee: {
+                "0%": { transform: "translateX(0)" },
+                "100%": { transform: "translateX(-100%)" },
             },
         },
     },
-    plugins: [],
 };
+export const plugins = [];

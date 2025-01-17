@@ -85,7 +85,7 @@
 <div class="relative flex items-center px-2 md:justify-end md:flex-grow">
     <!-- Icono de notificación -->
     <button type="button" id="notification-menu" class="flex items-center justify-center btn-R-neutro" onclick="markNotificationsAsRead()">
-
+    
     <div class="relative inline-block">
         <!-- SVG de la campana -->
         <svg version="1.0" xmlns="http://www.w3.org/2000/svg"
@@ -110,28 +110,58 @@
     </div>
 </button>
 
+
+
+
+
+
     <!-- Lista de notificaciones -->
-    <ul id="notificationList"
-    class="absolute right-0 top-full mt-2 w-48 md:w-60 bg-light-100 divide-y divide-dark-300 rounded-md shadow-lg dark:bg-dark-700 dark:divide-dark-600 hidden z-50">
+    <ul id="notificationList" 
+    class="absolute right-5 top-full mt-2 w-72 md:w-80 lg:w-96 bg-light-100 divide-y divide-dark-300 rounded-md shadow-lg dark:bg-dark-700 dark:divide-dark-600 hidden z-50 p-4">
     @foreach (auth()->user()->notifications->sortByDesc('created_at')->take(4) as $notification)
         <li class="p-3 cursor-pointer hover:bg-light-200 dark:hover:bg-dark-600 transition duration-200">
-
-            
-
             <div class="flex justify-between items-center">
-                
-                <span class="text-sm text-gray-700 dark:text-gray-300">
-                    {{ $notification->data['message'] }} 
-                    <span class="text-gray-500 text-xs">({{ $notification->created_at->diffForHumans() }})</span>
-                </span>
-                <a href="{{ route('postulantes.index', $notification->data['job_id']) }}" class="pl-2 text-info-500 hover:underline">Ver</a>
+                <div class="flex items-center space-x-4 p-3 border-b border-gray-200 dark:border-gray-700">
+                    <!-- Imagen de perfil -->
+                    <img class="w-16 h-16 rounded-full border-2 border-complem-400 md:w-16 md:h-16" 
+                        src="{{ isset($notification->data['picture']) ? Storage::url($notification->data['picture']) : asset('img/default-profile.png') }}" 
+                        alt="Foto de perfil">
+
+                    <div class="flex-1">
+                        <!-- Mensaje de la notificación -->
+                        <p class="text-sm text-gray-700 dark:text-gray-300">
+                            {{ $notification->data['message'] }}
+                        </p>
+
+                        <!-- Fecha de creación de la notificación -->
+                        <div class="flex items-center justify-between text-xs text-gray-500 mt-1">
+                            <span>{{ $notification->created_at->diffForHumans() }}</span>
+                            <a href="{{ route('postulantes.index', $notification->data['job_id']) }}" class="text-info-500 hover:underline">
+                                Ver
+                            </a>
+                        </div>
+                    </div>
+                </div>
             </div>
         </li>
     @endforeach
 </ul>
 
-</div>
 
+</div>
+<button type="button" id="message-menu" class="flex items-center justify-center btn-R-neutro" onclick="markMessagesAsRead()">
+    <div class="relative inline-block">
+        <!-- Ícono Estético de burbuja de chat -->
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8 text-light-600 dark:text-light-300" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M4 4C4 3.44772 4.44772 3 5 3H19C19.5523 3 20 3.44772 20 4V14C20 14.5523 19.5523 15 19 15H5C4.44772 15 4 14.5523 4 14V4Z"/>
+            <path d="M4 14L12 20L20 14" />
+        </svg>
+        <span class="absolute top-0 right-1 bg-complem-500 rounded-full w-4 h-4 border-1 border-complem-800 animate-bounce flex items-center justify-center text-xs text-white">
+            {{ auth()->user()->notifications()->whereNull('read_at')->count() }}
+        </span>
+    </div>
+    </div>
+</button>
 
 
 

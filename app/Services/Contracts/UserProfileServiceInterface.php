@@ -34,4 +34,7 @@ interface UserProfileServiceInterface
     public function showProfiles();
 
     public function profilePublic($id);
+
+
+    public function photoActualized($id);
 }

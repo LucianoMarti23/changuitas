@@ -100,6 +100,8 @@ class JobController extends Controller
     }
 
     // Obtener el perfil de usuario asociado al usuario autenticado
+    $userId = $user->userProfile->profile_picture ;
+
     $userProfile = $user->userProfile; // Asegúrate de que exista esta relación en el modelo User
 
     // Comprobar si el perfil de usuario existe
@@ -118,7 +120,7 @@ class JobController extends Controller
 
     // Obtener el empleador y enviar la notificación
     $employer = $jobPostulate->user; // Suponiendo que 'user' es la relación que indica al empleador
-    $employer->notify(new JobApplicationNotification($user->name, $jobPostulate->job_title ,$jobApplication->job_id ));
+    $employer->notify(new JobApplicationNotification($user->name, $jobPostulate->job_title ,$jobApplication->job_id , $userId ));
 
     return redirect()->back()->with('message', 'Te has postulado exitosamente.');
 }

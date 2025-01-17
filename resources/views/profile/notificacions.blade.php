@@ -2,7 +2,9 @@
 
 
 @section('content')
+
 <ul>
+    
     @foreach (auth()->user()->notifications as $notification)
         <li>
             {{ $notification->data['message'] }} 
