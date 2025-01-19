@@ -158,34 +158,33 @@ public function markAsRead()
 
 public function filterByCategory(Request $request)
 {
-    $categoryId = $request->input('category_id');
-    $modality = $request->input('modality');
-    $workSchedule = $request->input('work_schedule');
+    $filters = [
+        'category_id' => $request->input('category_id'),
+        'modality' => $request->input('modality'),
+        'work_schedule' => $request->input('work_schedule'),
+        'province' => $request->input('province')
+    ];
 
-    // Iniciar la consulta de trabajos
-    $query = Job::query();
-
-    // Filtrar por categoría si se especifica
-    if ($categoryId) {
-        $query->where('category_id', $categoryId);
-    }
-
-    // Filtrar por modalidad si se especifica
-    if ($modality) {
-        $query->where('modality', $modality);
-    }
-
-    // Filtrar por jornada si se especifica
-    if ($workSchedule) {
-        $query->where('work_schedule', $workSchedule);
-    }
-
-    // Obtener los trabajos filtrados
-    $jobs = $query->get();
+    // Filtrar trabajos aplicando condiciones dinámicamente
+    $jobs = Job::query()
+        ->when($filters['category_id'], function ($query, $categoryId) {
+            return $query->where('category_id', $categoryId);
+        })
+        ->when($filters['modality'], function ($query, $modality) {
+            return $query->where('modality', $modality);
+        })
+        ->when($filters['work_schedule'], function ($query, $workSchedule) {
+            return $query->where('work_schedule', $workSchedule);
+        })
+        ->when($filters['province'], function ($query, $province) {
+            return $query->where('province', $province);
+        })
+        ->get();
 
     // Retornar la vista con los trabajos filtrados
     return view('partials.jobs', compact('jobs'));
 }
+
 
 
 

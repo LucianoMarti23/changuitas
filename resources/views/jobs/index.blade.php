@@ -65,6 +65,21 @@
                             <option value="Part time">Parcial</option>
                         </select>
                     </div>
+
+
+
+
+
+                    <div>
+                    <label for="selectProvincias"
+                        class="block mb-2 text-base font-medium text-dark-900 dark:text-light-400">
+                        Ubicacion
+                    </label>
+                    <select id="selectProvincias" name="province" class="mt-1 block form-input w-full" required>
+                        <option value="">Elige una provincia</option>
+                    </select>
+                    </div>
+                    
                 </div>
 </div>
 
@@ -160,19 +175,11 @@
                             </div>
                             <div class="flex items-center space-x-4">
                                 <p class="text-sm sm:text-base text-complem-400 flex items-center space-x-1">
-                                    <span class="hidden text-medium sm:block">Promocionada</span>
                                     
                                 </p>
                                 <div class="relative">
                                     <!-- Botón de menú -->
-                                    <button id="optionsButton" class="focus:outline-none">
-                                        <svg class="w-8 h-8 font-semibold text-dark-900 dark:text-dark-200"
-                                            aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                            fill="none" viewBox="0 0 24 24">
-                                            <path stroke="currentColor" stroke-linecap="round" stroke-width="2"
-                                                d="M12 6h.01M12 12h.01M12 18h.01" />
-                                        </svg>
-                                    </button>
+                                  
                                     <!-- Menú desplegable -->
                                     <div id="optionsMenu"
                                         class="absolute right-0 mt-2 w-36 bg-light-100 dark:bg-dark-700 border border-dark-500 rounded-md shadow-md hidden z-10">
@@ -445,21 +452,24 @@
 
 $(document).ready(function() {
     // Cuando cambie el select de categoría
-    $('#selectCategory, #modality, #work_schedule').on('change', function() {
+    $('#selectCategory, #modality, #work_schedule , #selectProvincias').on('change', function() {
         let categoryId = $('#selectCategory').val();  // Obtener el ID de la categoría seleccionada
         let modality = $('#modality').val();          // Obtener la modalidad seleccionada
         let workSchedule = $('#work_schedule').val(); // Obtener la jornada seleccionada
+        let province = $('#selectProvincias').val();
 
+        
         console.log('Categoría seleccionada: ' + categoryId);
         console.log('Modalidad seleccionada: ' + modality);
         console.log('Jornada seleccionada: ' + workSchedule);
+        console.log('Ubicacion seleccionada' + province );
 
         // Realizar la búsqueda con los filtros seleccionados
-        performSearch(categoryId, modality, workSchedule);
+        performSearch(categoryId, modality, workSchedule , province);
     });
 
     // Función para realizar la solicitud AJAX
-    function performSearch(categoryId, modality, workSchedule) {
+    function performSearch(categoryId, modality, workSchedule , province) {
         // Realizar la solicitud AJAX
         $.ajax({
             url: '{{ route("jobs.filterByCategory") }}',  // Ruta de la solicitud AJAX
@@ -467,7 +477,8 @@ $(document).ready(function() {
             data: {
                 category_id: categoryId,  // Enviar el ID de la categoría seleccionada
                 modality: modality,       // Enviar la modalidad seleccionada
-                work_schedule: workSchedule // Enviar la jornada seleccionada
+                work_schedule: workSchedule,
+                province: province, // Enviar la jornada seleccionada
             },
             success: function(response) {
                 console.log('Respuesta de la búsqueda: ', response); // Verificar respuesta
