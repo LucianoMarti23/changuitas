@@ -38,7 +38,7 @@ class JobApplicationNotification extends Notification
             'applicant_name' => $this->applicantName,
             'job_title' => $this->jobTitle,
             'message' => "{$this->applicantName} se ha postulado para el trabajo '{$this->jobTitle}'",
-            'picture' => UserProfile::find($this->applicantPhoto),
+            'picture' => $this->applicantPhoto,
 
             'created_at' => now(),
 
