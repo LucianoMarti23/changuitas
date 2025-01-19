@@ -1,14 +1,33 @@
 
 
+// Función para cargar provincias
+function provincia(tipo) {
+    fetch(`https://apis.datos.gob.ar/georef/api/provincias?campos=id,nombre`)
+        .then(res => res.ok ? res.json() : Promise.reject(res))
+        .then(json => {
+            let $options = `<option value="">Elige una provincia</option>`;
+            json.provincias.forEach(el => {
+                $options += `<option value="${el.nombre}">${el.nombre}</option>`;
+            });
 
-// Función para cargar localidades basadas en la provincia seleccionada.
+            // Actualizar el select dependiendo del tipo
+            if (tipo === 'crear') {
+                document.getElementById("selectProvincias").innerHTML = $options;
+            } else if (tipo === 'filtro') {
+                document.getElementById("selectProvinciasFiltro").innerHTML = $options;
+            }
+        })
+        .catch(error => {
+            let message = error.statusText || "Ocurrió un error";
+            if (tipo === 'crear') {
+                document.getElementById("selectProvincias").nextElementSibling.innerHTML = `Error: ${error.status}: ${message}`;
+            } else if (tipo === 'filtro') {
+                document.getElementById("selectProvinciasFiltro").nextElementSibling.innerHTML = `Error: ${error.status}: ${message}`;
+            }
+        });
+}
 
-//Este código define dos funciones principales: localidad y provincia. 
-//La función localidad carga las localidades de una provincia seleccionada y las muestra en un elemento <select>.
-//La función provincia carga todas las provincias y las muestra en otro elemento <select>. 
-//Al iniciar el documento, se cargan las provincias, y cuando se selecciona una provincia, 
-//se cargan las localidades correspondientes.
-// Funciones para cargar provincias y localidades
+// Función para cargar localidades basadas en la provincia seleccionada
 function localidad(provincia) {
     if (!provincia) return;
 
@@ -27,30 +46,26 @@ function localidad(provincia) {
         });
 }
 
-function provincia() {
-    fetch(`https://apis.datos.gob.ar/georef/api/provincias?campos=id,nombre`)
-        .then(res => res.ok ? res.json() : Promise.reject(res))
-        .then(json => {
-            let $options = `<option value="">Elige una provincia</option>`;
-            json.provincias.forEach(el => {
-                $options += `<option value="${el.nombre}">${el.nombre}</option>`;
-            });
-            document.getElementById("selectProvincias").innerHTML = $options;
-        })
-        .catch(error => {
-            let message = error.statusText || "Ocurrió un error";
-            document.getElementById("selectProvincias").nextElementSibling.innerHTML = `Error: ${error.status}: ${message}`;
-        });
-}
-
-// Inicializar las provincias al cargar el documento
+// Inicializar las provincias para la creación de publicación y filtro
 document.addEventListener("DOMContentLoaded", () => {
-    provincia();
+    // Llamar a la función para cargar provincias al crear una publicación
+    provincia('crear');
 
-    // Cargar localidades cuando se selecciona una provincia
-    const selectProvincias = document.getElementById("selectProvincias");
-    if (selectProvincias) {
-        selectProvincias.addEventListener("change", e => {
+    // Llamar a la función para cargar provincias al filtrar
+    provincia('filtro');
+
+    // Cargar localidades cuando se selecciona una provincia (filtrar)
+    const selectProvinciasFiltro = document.getElementById("selectProvinciasFiltro");
+    if (selectProvinciasFiltro) {
+        selectProvinciasFiltro.addEventListener("change", e => {
+            localidad(e.target.value);
+        });
+    }
+
+    // Cargar localidades cuando se selecciona una provincia (crear publicación)
+    const selectProvinciasCrear = document.getElementById("selectProvincias");
+    if (selectProvinciasCrear) {
+        selectProvinciasCrear.addEventListener("change", e => {
             localidad(e.target.value);
         });
     }

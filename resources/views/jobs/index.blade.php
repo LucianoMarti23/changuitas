@@ -71,11 +71,11 @@
 
 
                     <div>
-                    <label for="selectProvincias"
+                    <label for="selectProvinciasFiltro"
                         class="block mb-2 text-base font-medium text-dark-900 dark:text-light-400">
                         Ubicacion
                     </label>
-                    <select id="selectProvincias" name="province" class="mt-1 block form-input w-full" required>
+                    <select id="selectProvinciasFiltro" name="province" class="mt-1 block form-input w-full" required>
                         <option value="">Elige una provincia</option>
                     </select>
                     </div>
@@ -452,11 +452,11 @@
 
 $(document).ready(function() {
     // Cuando cambie el select de categoría
-    $('#selectCategory, #modality, #work_schedule , #selectProvincias').on('change', function() {
+    $('#selectCategory, #modality, #work_schedule , #selectProvinciasFiltro').on('change', function() {
         let categoryId = $('#selectCategory').val();  // Obtener el ID de la categoría seleccionada
         let modality = $('#modality').val();          // Obtener la modalidad seleccionada
         let workSchedule = $('#work_schedule').val(); // Obtener la jornada seleccionada
-        let province = $('#selectProvincias').val();
+        let province = $('#selectProvinciasFiltro').val();
 
         
         console.log('Categoría seleccionada: ' + categoryId);

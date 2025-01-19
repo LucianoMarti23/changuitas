@@ -45,33 +45,38 @@
 <hr>
 <br>
 <!-- Sección para mostrar las experiencias laborales -->
-<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+<!-- Sección para mostrar las experiencias laborales -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
     @foreach($workExperiences as $workExperience)
-        <div class="bg-white shadow-lg rounded-lg p-6 cursor-pointer work-experience transition-transform duration-300 ease-in-out transform hover:scale-105 hover:shadow-2xl hover:ring hover:ring-blue-300"
-             data-id="{{ $workExperience->id }}" 
-             data-job-title="{{ $workExperience->job_title }}" 
-             data-company="{{ $workExperience->company }}" 
-             data-start-date="{{ $workExperience->start_date }}" 
-             data-end-date="{{ $workExperience->end_date }}">
-             
-            <h3 class="text-xl font-bold text-gray-800">Cargo: {{ $workExperience->job_title }}</h3>
-            <p class="text-gray-600 text-md">Empresa: {{ $workExperience->company }}</p>
-            <p class="text-gray-500 text-sm">Inicio: {{ \Carbon\Carbon::parse($workExperience->start_date)->format('d/m/Y') }}</p>
-            <p class="text-gray-500 text-sm">
-                Finalización: {{ $workExperience->end_date ? \Carbon\Carbon::parse($workExperience->end_date)->format('d/m/Y') : 'Actualidad' }}
-            </p>
+        <div class="bg-white shadow-md rounded-lg overflow-hidden transform transition-all duration-300 hover:scale-105 hover:shadow-2xl">
+            <div class="p-6 cursor-pointer work-experience" 
+                 data-id="{{ $workExperience->id }}" 
+                 data-job-title="{{ $workExperience->job_title }}" 
+                 data-company="{{ $workExperience->company }}" 
+                 data-start-date="{{ $workExperience->start_date }}" 
+                 data-end-date="{{ $workExperience->end_date }}">
+                 
+                <h3 class="text-2xl font-semibold text-gray-800 mb-2">{{ $workExperience->job_title }}</h3>
+                <p class="text-gray-600 text-lg mb-4">{{ $workExperience->company }}</p>
+                <div class="text-sm text-gray-500">
+                    <p><span class="font-medium">Inicio:</span> {{ \Carbon\Carbon::parse($workExperience->start_date)->format('d/m/Y') }}</p>
+                    <p><span class="font-medium">Finalización:</span> {{ $workExperience->end_date ? \Carbon\Carbon::parse($workExperience->end_date)->format('d/m/Y') : 'Actualidad' }}</p>
+                    <p>Total {{ $workExperience->years }} años y {{ $workExperience->months }} meses</p>
 
-            <div class="mt-4 flex justify-between items-center">
+                </div>
+            </div>
+            <div class="bg-gray-50 p-4 flex justify-between items-center">
                 <form action="{{ route('work_experiences.destroy', $workExperience->id) }}" method="POST">
                     @csrf
                     @method('DELETE')
-                    <button class="btn-danger bg-red-600 text-white hover:bg-red-700 rounded-lg px-4 py-2 transition duration-300 ease-in-out" type="submit">Eliminar</button>
+                    <button class="bg-red-600 text-white rounded-lg px-4 py-2 hover:bg-red-700 focus:outline-none focus:ring focus:ring-red-300 transition duration-300 ease-in-out" type="submit">Eliminar</button>
                 </form>
-                <button id="openModalBtn" class="btn-complem bg-blue-600 text-white hover:bg-blue-700 rounded-lg px-4 py-2 transition duration-300 ease-in-out" type="button">Editar</button>
+                <button id="openModalBtn" class="bg-blue-600 text-white rounded-lg px-4 py-2 hover:bg-blue-700 focus:outline-none focus:ring focus:ring-blue-300 transition duration-300 ease-in-out" type="button">Editar</button>
             </div>
         </div>
     @endforeach
 </div>
+
 
 
 

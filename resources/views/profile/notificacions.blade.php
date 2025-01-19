@@ -1,16 +1,40 @@
 @extends('components.profile.page-profile')
 
-
 @section('content')
 
-<ul>
+<div class="max-w-7xl mx-auto px-4 py-10">
+    <h2 class="text-3xl font-semibold text-center text-dark-900 dark:text-dark-100 mb-8">
+        Notificaciones
+    </h2>
     
-    @foreach (auth()->user()->notifications as $notification)
-        <li>
-            {{ $notification->data['message'] }} 
-            <span>{{ $notification->created_at->diffForHumans() }}</span>
-        </li>
-    @endforeach
-</ul>
+    <div class="space-y-4">
+        @foreach (auth()->user()->notifications->sortByDesc('created_at') as $notification)
+            <div class="p-4 bg-white dark:bg-dark-800 rounded-lg shadow-sm hover:shadow-lg transition duration-300 ease-in-out transform hover:scale-105">
+                <div class="flex items-center space-x-4">
+                    <!-- Imagen de perfil -->
+                    <img class="w-16 h-16 rounded-full border-2 border-complem-400"
+                        src="{{ isset($notification->data['picture']) ? Storage::url($notification->data['picture']) : asset('img/default-profile.png') }}"
+                        alt="Foto de perfil">
+
+                    <div class="flex-1">
+                        <!-- Mensaje de la notificación -->
+                        <p class="text-sm text-gray-700 dark:text-gray-300 mb-2">
+                            {{ $notification->data['message'] }}
+                        </p>
+
+                        <!-- Fecha de creación de la notificación -->
+                        <div class="flex justify-between items-center text-xs text-gray-500 dark:text-gray-400">
+                            <span>{{ $notification->created_at->diffForHumans() }}</span>
+                            <a href="{{ route('postulantes.index', $notification->data['job_id']) }}" class="text-info-500 hover:text-info-700 font-medium hover:underline">
+                                Ver Detalles
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        @endforeach
+    </div>
+</div>
 
 @endsection
+

@@ -6,7 +6,7 @@ use App\Models\WorkExperience;
 use App\Models\UserProfile;
 use App\Services\Contracts\AuthServiceInterface;
 use Illuminate\Http\Request;
-
+use Carbon\Carbon;
 class WorkExperienceController extends Controller
 {
     /**
@@ -22,21 +22,34 @@ class WorkExperienceController extends Controller
         $this->userAuth = $userAuth;
       
     }
+    
+
     public function index()
     {
-
         $userProfile = $this->userAuth->getAuthenticatedUser();
-
+    
         $userId = $userProfile->id;
-
+    
         // Encontrar el perfil del usuario por su ID
         $userProfile = UserProfile::where('user_id', $userId)->firstOrFail();
-
+    
         // Obtener todas las experiencias laborales del usuario
         $workExperiences = $userProfile->workExperiences;
+    
+        // Añadir el cálculo del tiempo transcurrido a cada experiencia laboral
+        foreach ($workExperiences as $workExperience) {
+            $startDate = Carbon::parse($workExperience->start_date);
+            $endDate = $workExperience->end_date ? Carbon::parse($workExperience->end_date) : Carbon::now();
+    
+            // Calcular la diferencia en años y meses
+            $workExperience->years = floor($startDate->diffInYears($endDate)); // Asegura que sea un número entero de años
+$workExperience->months = floor($startDate->diffInMonths($endDate) % 12); // Asegura que los meses también sean enteros
 
+        }
+    
         return view('profile.workexperience', compact('workExperiences', 'userProfile'));
     }
+    
 
     /**
      * Mostrar el formulario para crear una nueva experiencia laboral.
