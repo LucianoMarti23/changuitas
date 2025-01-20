@@ -22,6 +22,32 @@ class UserController extends Controller
         return view('login.register'); // Muestra el formulario de registro
     }
 
+    public function previewStorePassword(Request $request){
+
+ try {
+        $request->validate(['password' => [
+                'required',
+                'string',
+                'min:8',
+                'regex:/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/',
+                'confirmed'
+            ],
+            
+        ]);
+
+        return response()->json([
+            'available' => true,
+            'message' => 'El  está disponible.'
+        ], 200);
+    } catch (\Illuminate\Validation\ValidationException $e) {
+        return response()->json([
+            'available' => false,
+            'message' => 'El formato no es valido.'
+        ], 200);
+    }
+
+    }
+
 
     public function previewStoreName(Request $request)
 {

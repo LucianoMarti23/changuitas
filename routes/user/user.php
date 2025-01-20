@@ -7,8 +7,9 @@ Route::get('register', [UserController::class, 'create'])->name('register');
 Route::post('register', [UserController::class, 'store'])->name('register');
 Route::post('nameAvaibility' , [UserController::class , 'previewStoreName'])->name('previewName');
 Route::post('emailAvaibility' , [UserController::class , 'previewStoreEmail'])->name('previewEmail');
+Route::post('passowrdAvaibility' , [UserController::class , 'previewStorePassword'])->name('previewPassword');
 
-// web.php
+// web.phpS
 
 Route::get('/filter-users', [UserController::class, 'filterUsers'])->name('filter.users');
 

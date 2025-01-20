@@ -216,4 +216,46 @@
 </script>
 
 
+<script>
+
+
+$(document).ready(function() {
+    $('#password, #password_confirmation').on('input', function() {
+        // Obtén los valores de los campos
+        var password = $('#password').val();
+        var passwordConfirmation = $('#password_confirmation').val();
+
+        // Realiza la petición AJAX solo si ambos campos tienen valores
+        if (password && passwordConfirmation) {
+            $.ajax({
+                url: '{{ route('previewPassword') }}', // Sustituye por la ruta de tu controlador
+                type: 'POST',
+                data: {
+                    _token: '{{ csrf_token() }}',  // Token CSRF para proteger la solicitud
+                    password: password,
+                    password_confirmation: passwordConfirmation
+                },
+                success: function(response) {
+                    // Aquí manejas la respuesta si la validación es correcta o no
+                    if (response.available) {
+                        // Puedes mostrar un mensaje de éxito o cambiar el estilo del input
+                        $('#password, #password_confirmation').css('border', '2px solid green');
+                        $('#password_error').text('El formato es correcto.');
+                    } else {
+                        // Muestra un mensaje de error y cambia el estilo del input
+                        $('#password, #password_confirmation').css('border', '2px solid red');
+                        $('#password_error').text('El formato no es válido.');
+                    }
+                },
+                error: function(xhr, status, error) {
+                    // Manejo de errores si algo sale mal con la solicitud
+                    console.error(error);
+                }
+            });
+        }
+    });
+});
+</script>
+
+
 </x-layout>
