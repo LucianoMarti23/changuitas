@@ -34,6 +34,8 @@ class JobApplicationNotification extends Notification
     public function toDatabase($notifiable)
     {
         return [
+
+            'type' => 'job_application',
             'job_id' => $this->jobId,
             'applicant_name' => $this->applicantName,
             'job_title' => $this->jobTitle,

@@ -119,6 +119,8 @@
     <ul id="notificationList" 
     class="absolute right-5 top-full mt-2 w-72 md:w-80 lg:w-96 bg-light-100 divide-y divide-dark-300 rounded-md shadow-lg dark:bg-dark-700 dark:divide-dark-600 hidden z-50 p-4">
     @foreach (auth()->user()->notifications->sortByDesc('created_at')->take(4) as $notification)
+    @if($notification->data['type'] === 'job_application')
+
         <li class="p-3 cursor-pointer hover:bg-light-200 dark:hover:bg-dark-600 transition duration-200">
             <div class="flex justify-between items-center">
                 <div class="flex items-center space-x-4 p-3 border-b border-gray-200 dark:border-gray-700">
@@ -130,14 +132,39 @@
                     <div class="flex-1">
                         <!-- Mensaje de la notificación -->
                         <p class="text-sm text-gray-700 dark:text-gray-300">
-                            {{ $notification->data['message'] }}
+                             {{ $notification->data['message'] }}
                         </p>
 
                         <!-- Fecha de creación de la notificación -->
                         <div class="flex items-center justify-between text-xs text-gray-500 mt-1">
                             <span>{{ $notification->created_at->diffForHumans() }}</span>
-                            <a href="{{ route('postulantes.index', $notification->data['job_id']) }}" class="text-info-500 hover:underline">
-                                Ver
+                            
+                           
+
+                            <a href="{{ route('postulantes.index', $notification->data['job_id']) }}" class="pl-2 text-info-500 hover:underline">Ver</a>
+@elseif($notification->data['type'] === 'message')
+<li class="p-3 cursor-pointer hover:bg-light-200 dark:hover:bg-dark-600 transition duration-200">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center space-x-4 p-3 border-b border-gray-200 dark:border-gray-700">
+                    <!-- Imagen de perfil -->
+                    <img class="w-16 h-16 rounded-full border-2 border-complem-400 md:w-16 md:h-16" 
+                        src="{{ isset($notification->data['picture']) ? Storage::url($notification->data['picture']) : asset('img/default-profile.png') }}" 
+                        alt="Foto de perfil">
+
+                    <div class="flex-1">
+                        <!-- Mensaje de la notificación -->
+                        <p class="text-sm text-gray-700 dark:text-gray-300">
+                        {{ $notification->data['sender_name'] }} te ha enviado un Mensaje
+                        </p>
+
+                        <!-- Fecha de creación de la notificación -->
+                        <div class="flex items-center justify-between text-xs text-gray-500 mt-1">
+                            <span>{{ $notification->created_at->diffForHumans() }}</span>
+                            
+
+
+@endif
+
                             </a>
                         </div>
                     </div>

@@ -9,7 +9,7 @@ use App\Models\User;
 use App\Services\Contracts\AuthServiceInterface;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-
+use App\Notifications\NewMessageNotification;
 class ChatController extends Controller
 {
  
@@ -84,6 +84,10 @@ class ChatController extends Controller
         'recipient_id' => $request->recipient_id,
         'message' => $request->message,
     ]);
+
+    $recipient = $message->recipient;
+    
+    $recipient->notify(new NewMessageNotification($message));
 
     // Verificar si $message->created_at tiene un valor válido
 

@@ -25,9 +25,12 @@
                         <!-- Fecha de creación de la notificación -->
                         <div class="flex justify-between items-center text-xs text-gray-500 dark:text-gray-400">
                             <span>{{ $notification->created_at->diffForHumans() }}</span>
-                            <a href="{{ route('postulantes.index', $notification->data['job_id']) }}" class="text-info-500 hover:text-info-700 font-medium hover:underline">
-                                Ver Detalles
-                            </a>
+                            @if($notification->data['type'] === 'job_application')
+                            
+    <a href="{{ route('postulantes.index', $notification->data['job_id']) }}" class="pl-2 text-info-500 hover:underline">Ver Detalles</a>
+@elseif($notification->data['type'] === 'message')
+    <p>Mensaje de: {{ $notification->data['sender_name'] }}</p>
+@endif
                         </div>
                     </div>
                 </div>
