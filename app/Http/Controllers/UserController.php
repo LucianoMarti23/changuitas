@@ -22,6 +22,59 @@ class UserController extends Controller
         return view('login.register'); // Muestra el formulario de registro
     }
 
+
+    public function previewStoreName(Request $request)
+{
+    try {
+        // Validar el campo 'name' con la regla 'unique'
+         $request->validate([
+            'name' => 'required|string|max:255|unique:users,name'
+        ]);
+
+        // Si pasa la validación, el nombre está disponible
+        return response()->json([
+            'available' => true,
+            'message' => 'El nombre está disponible.'
+        ], 200);
+    } catch (\Illuminate\Validation\ValidationException $e) {
+        // Si falla la validación, el nombre no está disponible
+        return response()->json([
+            'available' => false,
+            'message' => 'El nombre ya está en uso.'
+        ], 200);
+    }
+    
+}
+
+public function previewStoreEmail(Request $request){
+
+    try {
+        $request->validate(['email' => [
+                'required',
+                'email',
+                'max:255',
+                'unique:users,email',
+                'regex:/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/'
+            ],
+            
+        ]);
+
+        return response()->json([
+            'available' => true,
+            'message' => 'El email está disponible.'
+        ], 200);
+    } catch (\Illuminate\Validation\ValidationException $e) {
+        return response()->json([
+            'available' => false,
+            'message' => 'El email ya está en uso.'
+        ], 200);
+    }
+
+    
+}
+
+
+
     public function store(Request $request)
     {
         $data = $request->validate([

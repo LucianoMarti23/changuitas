@@ -91,17 +91,19 @@
 
         <div class="mb-4">
             <label for="name" class="block text-sm font-medium text-dark-800 dark:text-dark-200">Nombre de usuario</label>
-            <input type="text" id="name" name="name" value="{{ old('name') }}" class="form-input w-full" required>
+            <input type="text" id="nameDisponible" name="name" value="{{ old('name') }}" class="form-input w-full" required>
+            <p id="nameDisponible" class="text-red-500 text-xs mt-1"></p>
+
 
             
             @error('name')
-                <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
-            @enderror
+        <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+    @enderror
         </div>
 
         <div class="mb-4">
             <label for="email" class="block text-sm font-medium text-dark-800 dark:text-dark-200">Email</label>
-            <input type="email" id="email" name="email" value="{{ old('email') }}" class="form-input w-full" required>
+            <input type="email" id="emailDisponible" name="email" value="{{ old('email') }}" class="form-input w-full" required>
             @error('email')
                 <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
             @enderror
@@ -146,6 +148,72 @@
 
 
 </div>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    // Función para manejar la validación del nombre al escribir
+    $('#nameDisponible').on('blur', function() {
+        var name = $(this).val();  // Obtener el valor del campo
+
+        // Realizar la solicitud AJAX
+        $.ajax({
+            url: '{{route('previewName')}}',  // Ruta donde se procesará la validación
+            type: 'POST',
+            data: {
+                name: name,
+                _token: '{{ csrf_token() }}'  // Incluir el token CSRF para la seguridad
+            },
+            success: function(response) {
+                // Mostrar el mensaje de disponibilidad basado en la respuesta
+                if (response.available) {
+                    $('#nameDisponible').text('El nombre está disponible.').css('border', '2px solid green');
+                } else {
+                    $('#nameDisponible').text(response.message).css('border', '2px solid red');
+                }
+            },
+            error: function(xhr, status, error) {
+                // Manejo de errores si algo sale mal
+                $('#nameDisponible').text('Hubo un error al verificar el nombre.').css('color', 'danger');
+            }
+        });
+    });
+
+
+
+</script>
+
+
+
+<script>
+    // Función para manejar la validación del nombre al escribir
+    $('#emailDisponible').on('blur', function() {
+        var email = $(this).val();  // Obtener el valor del campo
+
+        // Realizar la solicitud AJAX
+        $.ajax({
+            url: '{{route('previewEmail')}}',  // Ruta donde se procesará la validación
+            type: 'POST',
+            data: {
+                email: email,
+                _token: '{{ csrf_token() }}'  // Incluir el token CSRF para la seguridad
+            },
+            success: function(response) {
+                // Mostrar el mensaje de disponibilidad basado en la respuesta
+                if (response.available) {
+                    $('#emailDisponible').text('El email está disponible.').css('border', '2px solid green');
+                } else {
+                    $('#emailDisponible').text(response.message).css('border', '2px solid red');
+                }
+            },
+            error: function(xhr, status, error) {
+                // Manejo de errores si algo sale mal
+                $('#nameDisponible').text('Hubo un error al verificar el email.').css('color', 'danger');
+            }
+        });
+    });
+
+
+    
+</script>
 
 
 </x-layout>

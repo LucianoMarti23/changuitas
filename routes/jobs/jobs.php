@@ -6,8 +6,13 @@ use App\Http\Controllers\JobController;
 use Illuminate\Support\Facades\Route;
 
 
-
+Route::middleware(['auth'])->group(function () {
 Route::get('/jobs', [JobController::class, 'index'])->name('jobs');
+});
+
+
+
+
 Route::get('/jobinfo/{id}', [JobController::class, 'showInfo'])->name('jobsInfo');
 Route::post('/jobs', [JobController::class, 'store'])->name('jobs.store');
 Route::get('/jobs/filter', [JobController::class, 'filterByCategory'])->name('jobs.filterByCategory');
