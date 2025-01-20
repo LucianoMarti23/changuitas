@@ -84,10 +84,11 @@ class ChatController extends Controller
         'recipient_id' => $request->recipient_id,
         'message' => $request->message,
     ]);
-
+    $photo = auth()->user();
+    $picture = $photo->userProfile->profile_picture;
     $recipient = $message->recipient;
-    
-    $recipient->notify(new NewMessageNotification($message));
+
+    $recipient->notify(new NewMessageNotification($message , picture: $picture));
 
     // Verificar si $message->created_at tiene un valor válido
 

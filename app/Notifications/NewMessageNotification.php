@@ -10,10 +10,13 @@ class NewMessageNotification extends Notification
 {
     protected $message;
 
+    protected $picture;
+
     // Constructor para recibir el mensaje
-    public function __construct(Message $message)
+    public function __construct(Message $message , String $picture)
     {
         $this->message = $message;
+        $this->picture = $picture;
     }
 
     // El método que define cómo se va a enviar la notificación
@@ -32,6 +35,7 @@ class NewMessageNotification extends Notification
             'sender_name' => $this->message->sender->name,
             'message_id' => $this->message->id,
             'created_at' => $this->message->created_at,
+            'picture' => $this->picture,
         ];
     }
 }
