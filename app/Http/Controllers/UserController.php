@@ -26,9 +26,22 @@ class UserController extends Controller
     {
         $data = $request->validate([
             'name' => 'required|string|max:255|unique:users,name',
-            'email' => 'required|email|max:255|unique:users,email',
-            'password' => 'required|string|min:8|confirmed',
+            'email' => [
+                'required',
+                'email',
+                'max:255',
+                'unique:users,email',
+                'regex:/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/'
+            ],
+            'password' => [
+                'required',
+                'string',
+                'min:8',
+                'regex:/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/',
+                'confirmed'
+            ],
         ]);
+        
 
         $data['password'] = bcrypt($data['password']);
 

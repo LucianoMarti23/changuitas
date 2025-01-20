@@ -111,7 +111,6 @@
             <label for="password" class="block text-sm font-medium text-dark-800 dark:text-dark-200">Contraseña</label>
             <input type="password" id="password" name="password"
                                 class="form-input w-full"
-                                required minlength="8" pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{8,}"
                                 title="La contraseña debe tener al menos 8 caracteres, una mayúscula, una minúscula y un número">
             @error('password')
                 <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
@@ -122,7 +121,6 @@
             <label for="password_confirmation" class="block text-sm font-medium text-dark-800 dark:text-dark-200">Confirmar Contraseña</label>
             <input type="password" id="password_confirmation" name="password_confirmation"
                                 class="form-input w-full"
-                                required minlength="8" pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{8,}"
                                 title="La contraseña debe tener al menos 8 caracteres, una mayúscula, una minúscula y un número">
             @error('password_confirmation')
                 <p class="text-red-500 text-xs mt-1">{{ $message }}</p>

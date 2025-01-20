@@ -184,7 +184,7 @@
             <path d="M4 14L12 20L20 14" />
         </svg>
         <span class="absolute top-0 right-1 bg-complem-500 rounded-full w-4 h-4 border-1 border-complem-800 animate-bounce flex items-center justify-center text-xs text-white">
-            {{ auth()->user()->notifications()->whereNull('read_at')->count() }}
+{{ auth()->user()->notifications()->whereNull('read_at')->where('data->type', 'message')->count() }}
         </span>
     </div>
     </div>
