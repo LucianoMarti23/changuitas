@@ -37,7 +37,7 @@ class UserController extends Controller
 
         return response()->json([
             'available' => true,
-            'message' => 'El  está disponible.'
+            'message' => 'El formato es correcto .'
         ], 200);
     } catch (\Illuminate\Validation\ValidationException $e) {
         return response()->json([

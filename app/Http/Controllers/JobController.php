@@ -151,7 +151,7 @@ public function cancelApplication($jobId)
 public function markAsRead()
 {
     $user = auth()->user();
-    $user->notifications()->whereNull('read_at')->update(['read_at' => now()]);
+    $user->notifications()->whereNull('read_at')->where('data->type' , 'job_application')->update(['read_at' => now()]);
 
     return response()->json(['success' => true]);
 }

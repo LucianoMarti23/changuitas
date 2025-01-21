@@ -118,7 +118,7 @@
     <!-- Lista de notificaciones -->
     <ul id="notificationList" 
     class="absolute right-5 top-full mt-2 w-72 md:w-80 lg:w-96 bg-light-100 divide-y divide-dark-300 rounded-md shadow-lg dark:bg-dark-700 dark:divide-dark-600 hidden z-50 p-4">
-    @foreach (auth()->user()->notifications->sortByDesc('created_at')->take(4) as $notification)
+    @foreach (auth()->user()->notifications->whereNull('read_at')->sortByDesc('created_at')->take(4) as $notification)
     @if($notification->data['type'] === 'job_application')
 
         <li class="p-3 cursor-pointer hover:bg-light-200 dark:hover:bg-dark-600 transition duration-200">
@@ -176,7 +176,7 @@
 
 
 </div>
-<button type="button" id="message-menu" class="flex items-center justify-center btn-R-neutro" onclick="markMessagesAsRead()">
+<button type="button" id="message-menu" class="flex items-center justify-center btn-R-neutro" onclick="">
     <div class="relative inline-block">
         <!-- Ícono Estético de burbuja de chat -->
         <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8 text-light-600 dark:text-light-300" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
