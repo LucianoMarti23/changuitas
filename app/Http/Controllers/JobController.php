@@ -156,6 +156,14 @@ public function markAsRead()
     return response()->json(['success' => true]);
 }
 
+public function markAsReadMessage()
+    {
+        $user = auth()->user();
+        $user->notifications()->whereNull('read_at')->where('data->type' , 'message')->update(['read_at' => now()]);
+        return response()->json(['sucess' => true]);
+
+    }
+
 public function filterByCategory(Request $request)
 {
     $filters = [

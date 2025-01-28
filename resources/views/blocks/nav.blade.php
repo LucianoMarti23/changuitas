@@ -164,7 +164,7 @@
 
 
 </div>
-<button type="button" id="message-menu" class="flex items-center justify-center btn-R-neutro" onclick="">
+<button type="button" id="message-menu" class="flex items-center justify-center btn-R-neutro" onclick="markNotificationsAsReadMessage()">
     <div class="relative inline-block">
         <!-- Ícono Estético de burbuja de chat -->
         <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8 text-light-600 dark:text-light-300" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
@@ -189,7 +189,7 @@
 // Selecciona el botón y la lista de notificaciones
 const notificationButton = document.getElementById('notification-menu');
 const notificationList = document.getElementById('notificationList');
-const mensajesButton = document.getElementById('mensajes-menu');
+const mensajesButton = document.getElementById('message-menu');
 const mensajesList = document.getElementById('mensajesList');
 
 // Variable para controlar si el menú está abierto
@@ -219,6 +219,28 @@ function markNotificationsAsRead() {
     })
     .catch(error => console.error('Error:', error));
 }
+
+
+
+function markNotificationsAsReadMessage() {
+    fetch('{{ route('notifications.markAsReadMessage') }}', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRF-TOKEN': '{{ csrf_token() }}', // Asegúrate de incluir el token CSRF
+        },
+    })
+    .then(response => {
+        if (response.ok) {
+            // Si la respuesta es exitosa, actualiza la cantidad de notificaciones
+            document.querySelector('#message-menu .absolute.top-0.right-1').textContent = '0';
+ // Cambiar el contador a 0
+        }
+    })
+    .catch(error => console.error('Error:', error));
+}
+
+
 
 // Cerrar el menú si se hace clic fuera
 document.addEventListener('click', function(event) {

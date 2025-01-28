@@ -24,6 +24,7 @@ Route::get('/user-publicaciones/edit/{id}', [JobController::class, 'show'])->nam
 
 Route::post('/notifications/mark-as-read', action: [JobController::class, 'markAsRead'])->name('notifications.markAsRead');
 
+Route::post('/notifications/mark-as-read-message', action: [JobController::class, 'markAsReadMessage'])->name('notifications.markAsReadMessage');
 
 
 Route::put('/user-publicaciones/edit/{id}', [JobController::class, 'updateJob'])->name('updatePub'); 
