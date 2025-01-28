@@ -140,19 +140,50 @@
 
         <!-- Contenido derecho: Publicaciones -->
         <div class="flex-grow p-6">
-            <div class="flex items-center justify-between mb-4">
-                <button id="show-filters-button"
-                    class="flex items-center px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24"
-                        stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M21 21l-4.35-4.35m0 0A7.5 7.5 0 1114.35 5.5a7.5 7.5 0 012.3 10.15z" />
-                    </svg>
-                    Buscar
-                </button>
-                <h2 class="text-lg font-semibold">Todas las Publicaciones</h2>
-               
-            </div>
+        <div class="flex items-center justify-between mb-4">
+    <!-- Botón para iniciar la búsqueda -->
+    <button id="show-search-button" 
+        class="flex items-center px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24"
+            stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M21 21l-4.35-4.35m0 0A7.5 7.5 0 1114.35 5.5a7.5 7.5 0 012.3 10.15z" />
+        </svg>
+        Buscar
+    </button>
+
+    <!-- Campo de texto de búsqueda, inicialmente oculto -->
+    <div id="search-input" class="hidden flex items-center w-full">
+        <input type="text" id="selectTitleFiltro" placeholder="Escribe tu búsqueda..." 
+            class="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500" />
+        <button id="cancel-search-button" 
+            class="ml-2 px-4 py-2 btn-danger red-600 text-white rounded hover:bg-red-700">
+            Cancelar
+        </button>
+    </div>
+</div>
+
+
+<script>
+    document.getElementById('show-search-button').addEventListener('click', function () {
+    const searchButton = document.getElementById('show-search-button');
+    const searchInput = document.getElementById('search-input');
+
+    // Ocultar el botón "Buscar" y mostrar el campo de texto
+    searchButton.classList.add('hidden');
+    searchInput.classList.remove('hidden');
+});
+
+document.getElementById('cancel-search-button').addEventListener('click', function () {
+    const searchButton = document.getElementById('show-search-button');
+    const searchInput = document.getElementById('search-input');
+
+    // Ocultar el campo de texto y mostrar el botón "Buscar"
+    searchInput.classList.add('hidden');
+    searchButton.classList.remove('hidden');
+});
+
+</script>
             <!-- Aquí irán las publicaciones -->
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 " id="jobsContainer">
 
@@ -452,24 +483,22 @@
 
 $(document).ready(function() {
     // Cuando cambie el select de categoría
-    $('#selectCategory, #modality, #work_schedule , #selectProvinciasFiltro').on('change', function() {
+    $('#selectCategory, #modality, #work_schedule , #selectProvinciasFiltro , #selectTitleFiltro ' ).on('change', function() {
         let categoryId = $('#selectCategory').val();  // Obtener el ID de la categoría seleccionada
         let modality = $('#modality').val();          // Obtener la modalidad seleccionada
         let workSchedule = $('#work_schedule').val(); // Obtener la jornada seleccionada
         let province = $('#selectProvinciasFiltro').val();
+        let title = $('#selectTitleFiltro').val();
 
         
-        console.log('Categoría seleccionada: ' + categoryId);
-        console.log('Modalidad seleccionada: ' + modality);
-        console.log('Jornada seleccionada: ' + workSchedule);
-        console.log('Ubicacion seleccionada' + province );
+        
 
         // Realizar la búsqueda con los filtros seleccionados
-        performSearch(categoryId, modality, workSchedule , province);
+        performSearch(categoryId, modality, workSchedule , province , title);
     });
 
     // Función para realizar la solicitud AJAX
-    function performSearch(categoryId, modality, workSchedule , province) {
+    function performSearch(categoryId, modality, workSchedule , province , title) {
         // Realizar la solicitud AJAX
         $.ajax({
             url: '{{ route("jobs.filterByCategory") }}',  // Ruta de la solicitud AJAX
@@ -478,7 +507,8 @@ $(document).ready(function() {
                 category_id: categoryId,  // Enviar el ID de la categoría seleccionada
                 modality: modality,       // Enviar la modalidad seleccionada
                 work_schedule: workSchedule,
-                province: province, // Enviar la jornada seleccionada
+                province: province,
+                title : title, // Enviar la jornada seleccionada
             },
             success: function(response) {
                 console.log('Respuesta de la búsqueda: ', response); // Verificar respuesta
