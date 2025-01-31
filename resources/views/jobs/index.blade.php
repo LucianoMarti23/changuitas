@@ -142,25 +142,21 @@
         <div class="flex-grow p-6">
         <div class="flex items-center justify-between mb-4">
     <!-- Botón para iniciar la búsqueda -->
-    <button id="show-search-button" 
-        class="flex items-center px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24"
-            stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                d="M21 21l-4.35-4.35m0 0A7.5 7.5 0 1114.35 5.5a7.5 7.5 0 012.3 10.15z" />
-        </svg>
-        Buscar
-    </button>
+    
+                <button id="show-filters-button"
+                    class="flex items-center px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M21 21l-4.35-4.35m0 0A7.5 7.5 0 1114.35 5.5a7.5 7.5 0 012.3 10.15z" />
+                    </svg>
+                    
+                </button>
+                <h2 class="text-lg font-semibold">Todas las Publicaciones</h2>
+               
 
     <!-- Campo de texto de búsqueda, inicialmente oculto -->
-    <div id="search-input" class="hidden flex items-center w-full">
-        <input type="text" id="selectTitleFiltro" placeholder="Escribe tu búsqueda..." 
-            class="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500" />
-        <button id="cancel-search-button" 
-            class="ml-2 px-4 py-2 btn-danger red-600 text-white rounded hover:bg-red-700">
-            Cancelar
-        </button>
-    </div>
+  
 </div>
 
 

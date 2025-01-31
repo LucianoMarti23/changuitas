@@ -171,7 +171,7 @@ public function filterByCategory(Request $request)
         'modality' => $request->input('modality'),
         'work_schedule' => $request->input('work_schedule'),
         'province' => $request->input('province'),
-        'title' => $request->input('title')
+      
     ];
 
     // Filtrar trabajos aplicando condiciones dinámicamente
@@ -187,9 +187,6 @@ public function filterByCategory(Request $request)
         })
         ->when($filters['province'], function ($query, $province) {
             return $query->where('province', $province);
-        })
-        ->when($filters['title'], function ($query, $title) {
-            return $query->where('job_title', $title);
         })
         ->get();
 
