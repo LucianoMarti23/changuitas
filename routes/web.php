@@ -26,7 +26,7 @@ Route::get('/chat', [ChatController::class, 'index']);
 Route::post('/send-message', [ChatController::class, 'sendMessage'])->name('sendMessage');
 
 
-Route::get('/messages/{recipient_id}', [ChatController::class, 'getMessages']);
+Route::get('/messages/{recipient_id}', [ChatController::class, 'getMessages'])->name('messages.show');
 
 
 // web.php

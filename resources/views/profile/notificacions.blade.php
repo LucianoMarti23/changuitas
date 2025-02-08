@@ -8,7 +8,7 @@
     </h2>
     
     <div class="space-y-4">
-        @foreach (auth()->user()->notifications->sortByDesc('created_at') as $notification)
+        @foreach ($notifications as $notification)
             <div class="p-4 bg-white dark:bg-dark-800 rounded-lg shadow-sm hover:shadow-lg transition duration-300 ease-in-out transform hover:scale-105">
                 <div class="flex items-center space-x-4">
                     <!-- Imagen de perfil -->
@@ -26,17 +26,22 @@
                         <div class="flex justify-between items-center text-xs text-gray-500 dark:text-gray-400">
                             <span>{{ $notification->created_at->diffForHumans() }}</span>
                             @if($notification->data['type'] === 'job_application')
-                            
-    <a href="{{ route('postulantes.index', $notification->data['job_id']) }}" class="pl-2 text-info-500 hover:underline">Ver Detalles</a>
-@elseif($notification->data['type'] === 'message')
-    <p>Mensaje de: {{ $notification->data['sender_name'] }}</p>
-@endif
+                                <a href="{{ route('postulantes.index', $notification->data['job_id']) }}" class="pl-2 text-info-500 hover:underline">Ver Detalles</a>
+                            @elseif($notification->data['type'] === 'message')
+                                <p>Mensaje de: {{ $notification->data['sender_name'] }}</p>
+                            @endif
                         </div>
                     </div>
                 </div>
             </div>
         @endforeach
     </div>
+
+    <!-- Paginación -->
+    <div class="mt-6">
+        {{ $notifications->links() }}
+    </div>
+
 </div>
 
 @endsection

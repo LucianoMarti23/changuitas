@@ -160,11 +160,54 @@
     @endif
 </ul>
 
-</ul>
 
 
 </div>
-<button type="button" id="message-menu" class="flex items-center justify-center btn-R-neutro" onclick="markNotificationsAsReadMessage()">
+<ul id="messageNotificationList" 
+    class="absolute right-5 top-full mt-2 w-72 md:w-80 lg:w-96 bg-light-100 divide-y divide-dark-300 rounded-md shadow-lg dark:bg-dark-700 dark:divide-dark-600 hidden z-50 p-4">
+    
+    @php
+        $messageNotifications = auth()->user()->notifications()
+            ->whereNull('read_at')
+            ->where('data->type', 'message')
+            ->orderByDesc('created_at')
+            ->take(4)
+            ->get();
+    @endphp
+
+    @if ($messageNotifications->isEmpty())
+        <p>No hay mensajes nuevos.</p>
+    @else
+        @foreach ($messageNotifications as $notification)
+            <li class="p-3 cursor-pointer hover:bg-light-200 dark:hover:bg-dark-600 transition duration-200">
+                <div class="flex justify-between items-center">
+                    <div class="flex items-center space-x-4 p-3 border-b border-gray-200 dark:border-gray-700">
+                        <!-- Imagen de perfil -->
+                        <img class="w-16 h-16 rounded-full border-2 border-complem-400 md:w-16 md:h-16" 
+                            src="{{ isset($notification->data['picture']) ? Storage::url($notification->data['picture']) : asset('img/default-profile.png') }}" 
+                            alt="Foto de perfil">
+
+                        <div class="flex-1">
+                            <!-- Mensaje de la notificación -->
+                            <p class="text-sm text-gray-700 dark:text-gray-300">
+                                 {{ $notification->data['message'] }}
+                            </p>
+
+                            <!-- Fecha de creación de la notificación -->
+                            <div class="flex items-center justify-between text-xs text-gray-500 mt-1">
+                                <span>{{ $notification->created_at->diffForHumans() }}</span>
+                                <a href="{{ route('messages.show', $notification->data['message_id']) }}" class="pl-2 text-info-500 hover:underline">Ver</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </li>
+        @endforeach
+    @endif
+</ul>
+
+<!-- Botón de notificaciones de mensajes -->
+<button type="button" id="message-menu" class="flex items-center justify-center btn-R-neutro" onclick="toggleMessageNotifications()">
     <div class="relative inline-block">
         <!-- Ícono Estético de burbuja de chat -->
         <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8 text-light-600 dark:text-light-300" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
@@ -172,9 +215,8 @@
             <path d="M4 14L12 20L20 14" />
         </svg>
         <span class="absolute top-0 right-1 bg-complem-500 rounded-full w-4 h-4 border-1 border-complem-800 animate-bounce flex items-center justify-center text-xs text-white">
-{{ auth()->user()->notifications()->whereNull('read_at')->where('data->type', 'message')->count() }}
+            {{ auth()->user()->notifications()->whereNull('read_at')->where('data->type', 'message')->count() }}
         </span>
-    </div>
     </div>
 </button>
 
@@ -183,6 +225,37 @@
 
 
 
+<script>
+    function toggleMessageNotifications() {
+        let messageList = document.getElementById("messageNotificationList");
+        messageList.classList.toggle("hidden");
+
+        // Si el menú se muestra, marcar notificaciones como leídas
+        if (!messageList.classList.contains("hidden")) {
+            markNotificationsAsReadMessage();
+        }
+    }
+
+    function markNotificationsAsReadMessage() {
+        fetch('{{ route('notifications.markAsReadMessage') }}', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRF-TOKEN': '{{ csrf_token() }}', // Asegurar el token CSRF
+            },
+        })
+        .then(response => {
+            if (response.ok) {
+                // Cambiar el contador a 0
+                let notificationCounter = document.querySelector('#message-menu .absolute.top-0.right-1');
+                if (notificationCounter) {
+                    notificationCounter.textContent = '0';
+                }
+            }
+        })
+        .catch(error => console.error('Error:', error));
+    }
+</script>
 
 
 <script>
@@ -222,23 +295,7 @@ function markNotificationsAsRead() {
 
 
 
-function markNotificationsAsReadMessage() {
-    fetch('{{ route('notifications.markAsReadMessage') }}', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            'X-CSRF-TOKEN': '{{ csrf_token() }}', // Asegúrate de incluir el token CSRF
-        },
-    })
-    .then(response => {
-        if (response.ok) {
-            // Si la respuesta es exitosa, actualiza la cantidad de notificaciones
-            document.querySelector('#message-menu .absolute.top-0.right-1').textContent = '0';
- // Cambiar el contador a 0
-        }
-    })
-    .catch(error => console.error('Error:', error));
-}
+
 
 
 

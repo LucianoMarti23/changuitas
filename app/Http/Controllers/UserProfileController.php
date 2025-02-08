@@ -156,7 +156,8 @@ public function showPostulants($jobId)
 
 
 public function showNotifications(){
-    return view('profile.notificacions');
+    $notifications = auth()->user()->notifications()->orderBy('created_at', 'desc')->paginate(10);
+    return view('profile.notificacions', compact('notifications'));
 }
 
 public function showProfiles(){
