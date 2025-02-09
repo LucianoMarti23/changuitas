@@ -189,7 +189,6 @@ public function filterByCategory(Request $request)
             return $query->where('province', $province);
         })
         ->get();
-
     // Retornar la vista con los trabajos filtrados
     return view('partials.jobs', compact('jobs'));
 }

@@ -123,7 +123,9 @@
         </div>
         
     </div>
-@endforeach
+
+    @endforeach
+
 
 <!-- Ejemplo de publicación FIN -->
 

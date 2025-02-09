@@ -299,8 +299,12 @@ document.getElementById('cancel-search-button').addEventListener('click', functi
                         
                     </div>
                 @endforeach
-
+                <br>
                 <!-- Ejemplo de publicación FIN -->
+                <div class="mt-6">
+                    {{ $jobs->links('vendor.pagination.tailwind') }}
+
+                </div>
 
                 <!-- Repite el bloque anterior para más publicaciones -->
 

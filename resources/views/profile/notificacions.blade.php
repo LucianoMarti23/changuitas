@@ -39,7 +39,8 @@
 
     <!-- Paginación -->
     <div class="mt-6">
-        {{ $notifications->links() }}
+        {{ $notifications->links('vendor.pagination.tailwind') }}
+
     </div>
 
 </div>

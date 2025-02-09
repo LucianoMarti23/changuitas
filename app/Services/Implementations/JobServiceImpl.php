@@ -27,7 +27,7 @@ class JobServiceImpl implements JobServiceInterface{
 
     public function showJobsAndCategory(){
 
-        $jobs = Job::with(['userProfile', 'category'])->get();
+        $jobs = Job::with(['userProfile', 'category'])->paginate(6);
         
 
         return $jobs;
