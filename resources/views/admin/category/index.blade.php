@@ -1,13 +1,13 @@
 <x-layoutadmin>
-    
+
 
     <!-- CONTENIDO PRINCIPAL -->
     <div class="flex flex-col gap-2 w-full max-w-full mx-auto px-2 sm:px-6 lg:px-8 bg-light-300 p-1 ">
-    @if(session('success'))
-    <div id="success-message" class="bg-green-500 text-white p-4 rounded">
-        {{ session('success') }}
-    </div>
-@endif
+        @if(session('success'))
+        <div id="success-message" class="bg-green-500 text-white p-4 rounded">
+            {{ session('success') }}
+        </div>
+        @endif
 
 
 
@@ -36,9 +36,9 @@
                     <option value="name_asc">Nombre (A-Z)</option>
                     <option value="name_desc">Nombre (Z-A)</option>
                 </select>
-               
-               
-               
+
+
+
             </div>
         </div>
 
@@ -46,29 +46,32 @@
         <div class="overflow-x-auto">
             <table class="min-w-full bg-light-200 border border-dark-300">
                 <thead class="bg-dark-500">
-                    <tr >
+                    <tr>
                         <th class="p-2 text-left">Nombre</th>
                         <th class="p-2 text-left">Fecha de Creación</th>
                         <th class="p-2 text-left">Acciones</th>
                     </tr>
                 </thead>
-                <tbody id ="userTableBody">
+                <tbody id="userTableBody">
                     @foreach($categories as $category)
-                        <tr class="border-b border-gray-300 hover:bg-gray-100">
-                            <td class="p-2">{{ $category->name }}</td>
+                    <tr class="border-b border-dark-300 hover:bg-dark-100">
+                        <td class="p-2">{{ $category->name }}</td>
 
-                            <td class="p-2">{{ $category->created_at->format('d/m/Y') }}</td> <!-- Fecha de creación -->
-                            <td class="p-2">
-                                    <a href="{{ route('admin.category.edit', $category->id) }}" class="text-alert-500 hover:text-alert-700 ml-4">Editar</a>
+                        <td class="p-2">{{ $category->created_at->format('d/m/Y') }}</td> <!-- Fecha de creación -->
+                        <td class="p-2">
+                            <a href="{{ route('admin.category.edit', $category->id) }}"
+                                class="text-alert-500 hover:text-alert-700 ">Editar</a>
 
-                                    <form action="{{ route('admin.category.destroy', $category->id) }}" method="POST">
-    @csrf
-    @method('DELETE')
-    <button type="submit">Eliminar</button>
-</form>
+                            <form action="{{ route('admin.category.destroy', $category->id) }}" method="POST"
+                                class="inline-block">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="text-danger-500 hover:text-danger-700"
+                                    onclick="return confirm('¿Estás seguro de que deseas eliminar esta categoria?');">Eliminar</button>
+                            </form>
 
-                            </td>
-                        </tr>
+                        </td>
+                    </tr>
                     @endforeach
                 </tbody>
             </table>
@@ -88,19 +91,19 @@
         var filterCategoryUrl = "{{ route('admin.category.search') }}";
     </script>
 
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const successMessage = document.getElementById('success-message');
-        if (successMessage) {
-            setTimeout(() => {
-                successMessage.style.opacity = '0';
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const successMessage = document.getElementById('success-message');
+            if (successMessage) {
                 setTimeout(() => {
-                    successMessage.style.display = 'none';
-                }, 500); // tiempo para desvanecer
-            }, 3000); // tiempo antes de desvanecer
-        }
-    });
-</script>
+                    successMessage.style.opacity = '0';
+                    setTimeout(() => {
+                        successMessage.style.display = 'none';
+                    }, 500); // tiempo para desvanecer
+                }, 3000); // tiempo antes de desvanecer
+            }
+        });
+    </script>
 
 
 

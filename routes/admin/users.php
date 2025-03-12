@@ -59,6 +59,8 @@ Route::put('/users/{id}', [AdminUserController::class, 'update'])->name('users.u
 
 
 
+
+
 Route::get('/admin/users/{user}/edit', [AdminUserController::class, 'edit'])->name('admin.users.edit');
 
 Route::prefix('admin')->group(function () {

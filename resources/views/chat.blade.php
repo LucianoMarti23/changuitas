@@ -10,17 +10,18 @@
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 </head>
-<body class="bg-gray-100">
+<body class=" text-dark-900 bg-light-100 dark:text-dark-100 dark:bg-dark-900 ">
+
     <div class="max-w-3xl mx-auto mt-10 p-5 bg-white shadow-md rounded">
         <h1 class="text-2xl font-bold mb-4">Tus Mensajes</h1>
 
         <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
             <!-- Lista de usuarios -->
-            <div class="border border-gray-300 p-4 rounded-md h-96 overflow-y-auto">
+            <div class="border border-dark-300 p-4 rounded-md h-96 overflow-y-auto">
                 <h2 class="text-lg font-semibold mb-2">Usuarios</h2>
                 <ul id="user-list">
                     @foreach ($users as $user)
-                    <li data-id="{{ $user->id }}" class="cursor-pointer hover:bg-gray-200 p-2 rounded {{ $selectedUserId == $user->id ? 'bg-gray-200' : '' }}">
+                    <li data-id="{{ $user->id }}" class="cursor-pointer hover:bg-dark-200 p-2 rounded {{ $selectedUserId == $user->id ? 'bg-dark-200' : '' }}">
                             <img src="{{ asset('storage/' . ($user->profile->profile_picture ?? 'ruta/a/imagen/default.jpg')) }}" alt="{{ $user->name }}" class="w-8 h-8 rounded-full inline-block mr-2">
                             {{ $user->name }}
                         </li>
@@ -29,7 +30,7 @@
             </div>
 
             <!-- Área de mensajes -->
-            <div class="col-span-2 border border-gray-300 p-4 rounded-md flex flex-col h-96">
+            <div class="col-span-2 border border-dark-300 p-4 rounded-md flex flex-col h-96">
                 <h2 class="text-lg  font-semibold mb-2">Conversación</h2>
                 <div id="chat-messages" class="flex-1 overflow-y-auto">
                     @foreach ($messages as $message)
@@ -43,7 +44,7 @@
                 </div>
 
                 <form id="chat-form" class="flex mt-4">
-                    <input type="text" id="message" placeholder="Escribe tu mensaje..." required class="flex-1 border border-gray-300 p-2 rounded">
+                    <input type="text" id="message" placeholder="Escribe tu mensaje..." required class="flex-1 border border-dark-300 p-2 rounded">
                     <button type="submit" class="ml-2 bg-blue-500 text-white p-2 rounded">Enviar</button>
                 </form>
             </div>
@@ -101,7 +102,7 @@
     const messageHTML = `
         <strong>${message.sender_id === {{ Auth::id() }} ? 'Tú' : message.sender.name}:</strong> 
         <span class="flex-1 ml-2">${message.message}</span> 
-        <span class="text-gray-500 ml-4 text-sm">${time}</span>
+        <span class="text-dark-500 ml-4 text-sm">${time}</span>
     `;
     
     // Asignar el HTML a messageElement

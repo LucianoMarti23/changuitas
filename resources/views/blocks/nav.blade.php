@@ -104,7 +104,7 @@
             </g>
         </svg>
         <!-- Punto de notificación con conteo -->
-        <span class="absolute top-0 right-1 bg-complem-500 rounded-full w-4 h-4 border-1 border-complem-800 animate-bounce flex items-center justify-center text-xs text-white">
+        <span class="absolute top-0 right-1 bg-complem-500 rounded-full w-4 h-4 border-1 border-complem-800  flex items-center justify-center text-xs text-white">
             {{ auth()->user()->notifications()->whereNull('read_at')->count() }}
         </span>
     </div>
@@ -237,17 +237,16 @@ document.addEventListener('click', function(event) {
                     </div>
                     <ul class="py-2 text-sm md:text-base">
                         <li><a href="{{ url('/subscription') }}"
-                                class="block px-4 py-2 text-dark-700 dark:text-dark-200 hover:text-primary-600 dark:hover:text-primary-600">Subcripción</a>
+                                class="block px-4 py-2 text-dark-700 dark:text-dark-200 hover:text-primary-600 dark:hover:text-primary-600"></a>
                         </li>
                         <li><a href="#"
-                                class="block px-4 py-2 text-dark-700 dark:text-dark-200 hover:text-primary-600 dark:hover:text-primary-600">Configuración
-                                de Notificaciones</a>
+                                class="block px-4 py-2 text-dark-700 dark:text-dark-200 hover:text-primary-600 dark:hover:text-primary-600"></a>
                         </li>
                         <li><a href="#"
-                                class="block px-4 py-2 text-dark-700 dark:text-dark-200 hover:text-primary-600 dark:hover:text-primary-600">Mensajes</a>
+                                class="block px-4 py-2 text-dark-700 dark:text-dark-200 hover:text-primary-600 dark:hover:text-primary-600"></a>
                         </li>
                         <li><a href="#"
-                                class="block px-4 py-2 text-dark-700 dark:text-dark-200 hover:text-primary-600 dark:hover:text-primary-600">Soporte</a>
+                                class="block px-4 py-2 text-dark-700 dark:text-dark-200 hover:text-primary-600 dark:hover:text-primary-600"></a>
                         </li>
                         <li>
                         <form action="{{ route('logout') }}" method="POST" class="inline">

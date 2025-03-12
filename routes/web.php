@@ -35,7 +35,22 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/chatnew', function () {
+    return view('chatmejorado');
+});
 
+//nueva vista sin funcionalidad  °°°
+Route::get('/analysis', function () {
+    return view('admin.analysis.index');
+})->name('admin.analysis');
+//nueva vista sin funcionalidad  °°°
+Route::get('/ayuda', function () {
+    return view('admin.ayuda.index');
+})->name('admin.ayuda');
+
+Route::get('/ayuda/manual_usuario', function () {
+    return view('admin.ayuda.manual_usuario');
+})->name('admin.ayuda.manual_usuario');
 
 
 //inicio-registro

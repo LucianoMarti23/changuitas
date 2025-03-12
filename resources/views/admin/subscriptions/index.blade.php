@@ -1,44 +1,47 @@
 <x-layoutadmin>
-    <div class="py-8 px-4 sm:px-6 lg:px-8">
-        <div class="flex justify-between items-center mb-6">
-            <h1 class="text-3xl font-semibold text-gray-900">Suscripciones</h1>
-            <a href="{{ route('subscriptions.create') }}" class="bg-blue-600 text-white px-4 py-2 rounded-lg shadow-md hover:bg-blue-700 transition duration-300">Crear Suscripción</a>
+    <div class="flex flex-col w-full max-w-full mx-auto px-4 sm:px-6 lg:px-8">
+
+        <!-- subcripcion -->
+        <div class="flex flex-wrap py-2 gap-2 items-center">
+
+            <a href="{{ route('subscriptions.create') }}"
+                class="bg-info-700 text-light-100 px-4 py-2 rounded-md hover:bg-info-500">Crear Suscripción</a>
         </div>
 
         <!-- Tabla de Suscripciones -->
         <div class="overflow-x-auto">
-            <table class="min-w-full bg-white border border-gray-300 rounded-lg shadow-sm">
-                <thead>
-                    <tr class="bg-gray-200 text-gray-700 uppercase text-xs">
-                        <th class="py-3 px-4 border-b">Nombre</th>
-                        <th class="py-3 px-4 border-b">Precio</th>
-                        <th class="py-3 px-4 border-b">Descripción</th>
-                        <th class="py-3 px-4 border-b text-center">Acciones</th>
+            <table class="min-w-full bg-light-200 border border-dark-300">
+                <thead class="bg-dark-500">
+                    <tr>
+                        <th class="p-2 text-left">Nombre</th>
+                        <th class="p-2 text-left">Precio</th>
+                        <th class="p-2 text-left">Descripción</th>
+                        <th class="p-2 text-left text-center">Acciones</th>
                     </tr>
                 </thead>
-                <tbody class="text-gray-800 text-sm">
-                @foreach($subs as $sub)
-                <tr class="border-b hover:bg-gray-50">
-                    <td class="py-3 px-4">{{ $sub->name }}</td>
-                    <td class="py-3 px-4">${{ number_format($sub->price, 2) }}</td>
-                    <td class="py-3 px-4">{{ $sub->description }}</td>
-                    <td class="py-3 px-4 text-center">
-                        <a href="{{ route('subscriptions.edit', $sub->id) }}" class="bg-yellow-500 text-white px-3 py-1 rounded-lg shadow-sm hover:bg-yellow-600 transition duration-300">Editar</a>
-                        
-                        <form action="{{ route('subscriptions.destroy', $sub->id) }}" method="POST" style="display:inline;">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="bg-red-500 text-white px-3 py-1 rounded-lg shadow-sm hover:bg-red-600 transition duration-300">Eliminar</button>
-                        </form>
-                    </td>
-                </tr>
-                @endforeach
+                <tbody class="text-dark-800 text-sm">
+                    @foreach($subs as $sub)
+                    <tr class="border-b border-dark-300 hover:bg-dark-100">
+                        <td class="p-2 text-left">{{ $sub->name }}</td>
+                        <td class="p-2 text-left">${{ number_format($sub->price, 2) }}</td>
+                        <td class="p-2 text-left">{{ $sub->description }}</td>
+                        <td class="pp-2 text-left text-center">
+                            <a href="{{ route('subscriptions.edit', $sub->id) }}"
+                                class="text-alert-500 hover:text-alert-700">Editar</a>
+
+                            <form action="{{ route('subscriptions.destroy', $sub->id) }}" method="POST"
+                                style="display:inline;">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit"
+                                class="text-danger-500 hover:text-danger-700"
+                                onclick="return confirm('¿Estás seguro de que deseas eliminar esta subcripcion?');">Eliminar</button>
+                            </form>
+                        </td>
+                    </tr>
+                    @endforeach
                 </tbody>
             </table>
         </div>
     </div>
 </x-layoutadmin>
-
-
-
-
