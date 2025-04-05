@@ -22,89 +22,107 @@ class UserController extends Controller
         return view('login.register'); // Muestra el formulario de registro
     }
 
-    public function previewStorePassword(Request $request){
-
- try {
-        $request->validate(['password' => [
+    public function previewStorePassword(Request $request)
+{
+    try {
+        $request->validate([
+            'password' => [
                 'required',
                 'string',
                 'min:8',
                 'regex:/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/',
                 'confirmed'
             ],
-            
+        ], [
+            'password.required' => 'La contraseña es obligatoria.',
+            'password.string' => 'La contraseña debe ser una cadena de texto.',
+            'password.min' => 'La contraseña debe tener al menos 8 caracteres.',
+            'password.regex' => 'La contraseña debe tener al menos una mayúscula, una minúscula, un número y un carácter especial (@$!%*?&).',
+            'password.confirmed' => 'La confirmación de la contraseña no coincide.'
         ]);
 
         return response()->json([
             'available' => true,
-            'message' => 'El formato es correcto .'
+            'message' => 'El formato de contrase es correcto.'
         ], 200);
     } catch (\Illuminate\Validation\ValidationException $e) {
         return response()->json([
             'available' => false,
-            'message' => 'El formato no es valido.'
+            'errors' => $e->validator->errors()->get('password') // ← array de errores
         ], 200);
-    }
+        
+}
 
-    }
-
+}
 
     public function previewStoreName(Request $request)
-{
-    try {
-        // Validar el campo 'name' con la regla 'unique'
-         $request->validate([
-            'name' => 'required|string|max:255|unique:users,name'
-        ]);
-
-        // Si pasa la validación, el nombre está disponible
-        return response()->json([
-            'available' => true,
-            'message' => 'El nombre está disponible.'
-        ], 200);
-    } catch (\Illuminate\Validation\ValidationException $e) {
-        // Si falla la validación, el nombre no está disponible
-        return response()->json([
-            'available' => false,
-            'message' => 'El nombre ya está en uso.'
-        ], 200);
+    {
+        try {
+            // Validar con reglas y mensajes personalizados
+            $request->validate([
+                'name' => 'required|string|max:15|unique:users,name'
+            ], [
+                'name.required' => 'El nombre es obligatorio.',
+                'name.string' => 'El nombre debe ser una cadena de texto válida.',
+                'name.max' => 'El nombre no puede superar los 15 caracteres.',
+                'name.unique' => 'Este nombre ya está en uso. Por favor elige otro.',
+            ]);
+    
+            // Si pasa la validación, el nombre está disponible
+            return response()->json([
+                'available' => true,
+                'message' => 'El nombre está disponible.'
+            ], 200);
+        } catch (\Illuminate\Validation\ValidationException $e) {
+            // Obtener el mensaje de error específico
+            $errors = $e->validator->errors();
+    
+            return response()->json([
+                'available' => false,
+                'message' => $errors->first('name')  // Devuelve el mensaje específico
+            ], 200);
+        }
     }
     
-}
 
-public function previewStoreEmail(Request $request){
-
-    try {
-        $request->validate(['email' => [
-                'required',
-                'email',
-                'max:255',
-                'unique:users,email',
-                'regex:/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/'
-            ],
-            
-        ]);
-
-        return response()->json([
-            'available' => true,
-            'message' => 'El email está disponible.'
-        ], 200);
-    } catch (\Illuminate\Validation\ValidationException $e) {
-        return response()->json([
-            'available' => false,
-            'message' => 'El email ya está en uso.'
-        ], 200);
-    }
-
+    public function previewStoreEmail(Request $request)
+    {
+        try {
+            $request->validate([
+                'email' => [
+                    'required',
+                    'email',
+                    'max:255',
+                    'unique:users,email',
+                    'regex:/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/'
+                ],
+            ], [
+                'email.required' => 'El email es obligatorio.',
+                'email.email' => 'Debes ingresar un email válido.',
+                'email.max' => 'El email no puede superar los 255 caracteres.',
+                'email.unique' => 'Este email ya está en uso. Por favor utiliza otro.',
+                'email.regex' => 'El formato del email no es válido. Asegúrate de que sea correcto.',
+            ]);
     
-}
+            return response()->json([
+                'available' => true,
+                'message' => 'El email está disponible.'
+            ], 200);
+        } catch (\Illuminate\Validation\ValidationException $e) {
+            return response()->json([
+                'available' => false,
+                'message' => $e->validator->errors()->first('email') // mensaje específico
+            ], 200);
+        }
+    }
+    
 
 
 
     public function store(Request $request)
     {
         $data = $request->validate([
-            'name' => 'required|string|max:255|unique:users,name',
+            'name' => 'required|string|max:15|unique:users,name',
             'email' => [
                 'required',
                 'email',
