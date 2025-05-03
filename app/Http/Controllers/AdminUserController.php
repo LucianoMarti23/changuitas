@@ -31,8 +31,6 @@ class AdminUserController extends Controller
 
     public function dashboard(){
 
-            $this->userAuth->checkAdmin();
-
             $subCount = Subscription::count();
             $userCount = User::count();
             $pubCount = Job::count();
@@ -45,20 +43,17 @@ class AdminUserController extends Controller
 
     public function index()
     {
-        $this->userAuth->checkAdmin();
         $users = $this->userService->getAllUsers();
         return view('admin.users.index', compact('users'));
     }
 
     public function create()
     {
-        $this->userAuth->checkAdmin();
         return view('admin.users.create');
     }
     
     public function store(Request $request)
     {
-        $this->userAuth->checkAdmin();
 
         $request->validate([
             'name' => 'required|string|max:255',
@@ -81,7 +76,6 @@ class AdminUserController extends Controller
 
     public function edit(User $user)
     {
-        $this->userAuth->checkAdmin(); // Verificación de rol
         // Usa el servicio para obtener el usuario
         $user = $this->userService->getUserById($user->id);
         return view('admin.users.edit', compact('user'));
@@ -89,7 +83,6 @@ class AdminUserController extends Controller
 
     public function update(Request $request, $id)
     {
-        $this->userAuth->checkAdmin(); // Verificación de rol
 
         // Extraer los datos validados del request
         $data = $request->only(['name', 'email']);
@@ -107,7 +100,6 @@ class AdminUserController extends Controller
 
     public function destroy(User $user)
     {
-        $this->userAuth->checkAdmin(); // Verificación de rol
 
         $result = $this->userService->deleteUser($user->id);
         return redirect()->route('users.index')->with('success', $result['message']);
@@ -115,14 +107,12 @@ class AdminUserController extends Controller
 
 
     public function indexPublicaciones(){
-        $this->userAuth->checkAdmin();
         $jobs = Job::all();
         $categories = JobCategory::all();
         return view('admin.publications.index', compact('jobs' , 'categories'));
     }
 
     public function destroyPub($id){
-        $this->userAuth->checkAdmin();
         $result =  $this->job->destroy($id);
         return redirect()->route('admin.jobs')->with('success' , $result);
 

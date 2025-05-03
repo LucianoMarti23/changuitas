@@ -43,7 +43,7 @@ class UserController extends Controller
 
         return response()->json([
             'available' => true,
-            'message' => 'El formato de contrase es correcto.'
+            'message' => 'El formato de contraseña es correcto.'
         ], 200);
     } catch (\Illuminate\Validation\ValidationException $e) {
         return response()->json([
@@ -55,34 +55,44 @@ class UserController extends Controller
 
 }
 
-    public function previewStoreName(Request $request)
-    {
-        try {
-            // Validar con reglas y mensajes personalizados
-            $request->validate([
-                'name' => 'required|string|max:15|unique:users,name'
-            ], [
-                'name.required' => 'El nombre es obligatorio.',
-                'name.string' => 'El nombre debe ser una cadena de texto válida.',
-                'name.max' => 'El nombre no puede superar los 15 caracteres.',
-                'name.unique' => 'Este nombre ya está en uso. Por favor elige otro.',
-            ]);
-    
-            // Si pasa la validación, el nombre está disponible
-            return response()->json([
-                'available' => true,
-                'message' => 'El nombre está disponible.'
-            ], 200);
-        } catch (\Illuminate\Validation\ValidationException $e) {
-            // Obtener el mensaje de error específico
-            $errors = $e->validator->errors();
-    
-            return response()->json([
-                'available' => false,
-                'message' => $errors->first('name')  // Devuelve el mensaje específico
-            ], 200);
-        }
+public function previewStoreName(Request $request)
+{
+    try {
+        // Validar con reglas y mensajes personalizados
+        $request->validate([
+            'name' => [
+                'required',
+                'string',
+                'min:6',
+                'max:15',
+                'unique:users,name',
+                'regex:/^(?![0-9]+$)[a-zA-Z0-9]+$/'
+            ]
+        ], [
+            'name.required' => 'El nombre es obligatorio.',
+            'name.string' => 'El nombre debe ser una cadena de texto válida.',
+            'name.min' => 'El nombre debe tener mínimo 6 caracteres.',
+            'name.max' => 'El nombre no puede superar los 15 caracteres.',
+            'name.unique' => 'Este nombre ya está en uso. Por favor elige otro.',
+            'name.regex' => 'El nombre debe contener letras y no puede ser solo números.',
+        ]);
+
+        // Si pasa la validación, el nombre está disponible
+        return response()->json([
+            'available' => true,
+            'message' => 'El nombre está disponible.'
+        ], 200);
+    } catch (\Illuminate\Validation\ValidationException $e) {
+        // Obtener el mensaje de error específico
+        $errors = $e->validator->errors();
+
+        return response()->json([
+            'available' => false,
+            'message' => $errors->first('name')  // Devuelve el mensaje específico
+        ], 200);
     }
+}
+
     
 
     public function previewStoreEmail(Request $request)

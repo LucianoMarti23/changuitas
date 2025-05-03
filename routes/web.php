@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\ChatController;
 
+use App\Http\Controllers\WelcomeController;
 
 use App\Http\Controllers\DonationController;
 
@@ -31,9 +32,8 @@ Route::get('/messages/{recipient_id}', [ChatController::class, 'getMessages'])->
 
 // web.php
 
-Route::get('/', function () {
-    return view('welcome');
-});
+
+Route::get('/', [WelcomeController::class, 'index']);
 
 
 
