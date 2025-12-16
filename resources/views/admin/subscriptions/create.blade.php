@@ -2,7 +2,7 @@
     <div class="py-8 px-4 sm:px-6 lg:px-8">
         <h1 class="text-2xl font-bold text-dark-800 mb-4">Crear Suscripción</h1>
 
-        <form action="{{ route('subscriptions.store') }}" method="POST" enctype="multipart/form-data">
+        <form action="{{ route('admin.subscriptions.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="mb-4">
                 <label for="name" class="block text-sm font-medium text-gray-700">Nombre</label>

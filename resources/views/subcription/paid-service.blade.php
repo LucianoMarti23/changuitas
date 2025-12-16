@@ -1,5 +1,4 @@
 <x-page>
-
     <main class="space-y-4 pt-64 bg-light-100 dark:bg-dark-950">
         <div class="flex flex-col justify-center py-4 texto-center">
             <h1 class="text-center text-3xl pb-8 font-bold text-dark-600 dark:text-ligth-200">¡Suscríbete y Conéctate con
@@ -67,7 +66,7 @@
                         <!-- Botón plan 2 -->
                         <div class="p-4">
                             <button class="w-full px-4 py-2 shadow-lg btn-primary shadow-primary-500/50"
-                                onclick="window.location.href='{{ url('/payment-gateway') }}';">
+                                onclick="window.location.href='{{ route('subcription.payment-gateway') }}?id={{ $sub->id }}';">
 
                                 Contratar
                             </button>

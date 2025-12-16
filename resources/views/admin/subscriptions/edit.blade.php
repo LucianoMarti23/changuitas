@@ -2,7 +2,7 @@
     <div class="py-8 px-4 sm:px-6 lg:px-8">
         <h1 class="text-2xl font-bold text-dark-800 mb-4">Editar Suscripción</h1>
 
-        <form action="{{ route('subscriptions.update', $sub->id) }}" method="POST" enctype="multipart/form-data">
+        <form action="{{ route('admin.subscriptions.update', $sub->id) }}" method="POST" enctype="multipart/form-data">
             @csrf
             @method('PUT')
             

@@ -38,6 +38,45 @@ class SubscriptionController extends Controller
         $subs = $this->subService->getAllSubs();
         return view('subcription.paid-service' , compact('subs'));
     }
+
+    public function showPaymentGateway($id)
+    {
+        $sub = $this->subService->getSubById($id);
+        return view('subcription.payment-gateway', compact('sub'));
+    }
+
+    public function processPayment(Request $request)
+    {
+        $request->validate([
+            'subscription_id' => 'required|exists:subscriptions,id',
+        ]);
+
+        $sub = $this->subService->getSubById($request->subscription_id);
+
+        \MercadoPago\SDK::setAccessToken(config('services.mercadopago.token'));
+
+        $preference = new \MercadoPago\Preference();
+        
+        $item = new \MercadoPago\Item();
+        $item->title = $sub->name;
+        $item->quantity = 1;
+        $item->unit_price = $sub->price;
+        $item->currency_id = "ARS"; 
+        
+        $preference->items = [$item];
+        
+        $preference->back_urls = [
+            "success" => route('subcription.alert-sub', ['status' => 'success']),
+            "failure" => route('subcription.alert-sub', ['status' => 'failure']),
+            "pending" => route('subcription.alert-sub', ['status' => 'pending'])
+        ];
+        $preference->auto_return = "approved";
+
+        $preference->save();
+
+        return redirect($preference->init_point);
+    }
+
     public function destroy(Subscription $subscription)
     {
         $this->authUser->checkadmin(); // Verificación de rol

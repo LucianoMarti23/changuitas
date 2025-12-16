@@ -46,7 +46,7 @@
 
         <div class="px-4 py-4 mt-4 bg-dark-50 dark:bg-dark-800 rounded-lg shadow-sm">
             <h3 class="font-semibold text-xl sm:text-2xl text-primary-700">Opciones</h3>
-            <p class="mb-2"><a href="{{ url('/paid-service') }}" class="text-complem-400 hover:text-complem-200 hover:underline">Mejorar Suscripción</a></p>
+            <p class="mb-2"><a href="{{ route('subcription.paid-service') }}" class="text-complem-400 hover:text-complem-200 hover:underline">Mejorar Suscripción</a></p>
             <p class="mb-2"><a href="#" class="text-primary-500 hover:text-primary-700 hover:underline">Comparar Niveles</a></p>
             <p class="mb-2"><a href="#" class="text-primary-500 hover:text-primary-700 hover:underline">Historial de Facturación</a></p>
             <p class="mb-2"><a href="#" class="text-primary-500 hover:text-primary-700 hover:underline">Renovar Manualmente</a></p>
