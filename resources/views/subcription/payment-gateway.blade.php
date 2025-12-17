@@ -16,25 +16,27 @@
                 <div class="mb-6">
                     <label class="block text-dark-700 text-sm font-bold mb-2 dark:text-light-200">Plan
                         Seleccionado:</label>
-                    <p class="text-lg font-medium text-dark-600 dark:text-light-400">Plan Premium - 1 Año</p>
+                    <p class="text-lg font-medium text-dark-600 dark:text-light-400">
+                        {{ $sub->name }}
+                    </p>
                 </div>
 
                 <div class="mb-6">
                     <label class="block text-dark-700 text-sm font-bold mb-2 dark:text-light-200">Detalles del
                         Plan:</label>
-                    <ul class="list-disc list-inside text-dark-600 dark:text-light-400">
-                        <li>Acceso completo a todas las funcionalidades</li>
-                        <li>Soporte prioritario</li>
-                        <li>Publicidad destacada</li>
-                        <li>10 publicaciones destacadas</li>
-                    </ul>
+                        <p class="text-lg font-medium text-dark-600 dark:text-light-400">
+                        {{ $sub->description }}
+                    </p>
+                    
                 </div>
 
                 <div class="mb-6">
                     <label class="block text-dark-700 text-sm font-bold mb-2 dark:text-light-200">Precio:</label>
-                    <p class="text-lg font-medium text-dark-600 dark:text-light-400">
-                        <span class="text-gray-500 line-through mr-2">USD 100.00</span> <!-- Precio anterior -->
-                        <span class="text-info-800">USD 80.00</span> <!-- Precio final con descuento -->
+                    <p class="text-lg font-medium text-dark-600 dark:text-light-400 ">
+                        Precio anterior <span class="line-through text-red-500">${{ $sub->price + 800 }}</span> <!-- Precio regular tachado -->
+                        <br>
+                        Precio Actual
+                        <span class="text-info-800">${{ $sub->price }}</span> <!-- Precio final con descuento -->
                     </p>
                 </div>
 
@@ -47,11 +49,14 @@
                 </div>
 
                 <div class="mb-4">
-                    <button type="submit"
-                        class="w-98 bg-info-800 text-light-100 font-bold py-2 px-4 rounded-md hover:bg-info-500 focus:outline-none focus:ring-2 focus:ring-info-500 focus:ring-opacity-50"
-                        onclick="window.location.href='{{ url('/alert-sub') }}';">
-                        Confirmar y Pagar
-                    </button>
+                    <form action="{{ route('subcription.processPayment') }}" method="POST">
+                            @csrf
+                        <input type="hidden" name="subscription_id" value="{{ $sub->id }}">
+                        <button type="submit"
+                            class="w-98 bg-info-800 text-light-100 font-bold py-2 px-4 rounded-md hover:bg-info-500 focus:outline-none focus:ring-2 focus:ring-info-500 focus:ring-opacity-50">
+                            Confirmar y Pagar
+                        </button>
+                    </form>
                 </div>
             </section>
 

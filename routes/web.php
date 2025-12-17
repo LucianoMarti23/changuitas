@@ -71,9 +71,7 @@ Route::get('/courses', function () {
 
 //Alertas Tecnicas
 
-Route::get('/payment-gateway', function () {
-    return view('subcription.payment-gateway');
-})->name('subcription.payment-gateway');
+
 
 // Route handled by controller when an id is provided (used from paid-service view)
 Route::get('/payment-gateway/{id}', [SubscriptionController::class, 'showPaymentGateway'])->name('payment.gateway');
@@ -81,6 +79,13 @@ Route::get('/alert-sub', function () {
     return view('subcription.alert-sub');
 })->name('subcription.alert-sub');
 
+
+Route::get('/payment-gateway', function () {
+    return view('subcription.payment-gateway');
+})->name('subcription.payment-gateway');
+
+Route::post('/process-payment', [SubscriptionController::class, 'processPayment'])
+    ->name('subcription.processPayment');
 
 // Ruta subscrip
 Route::get('/paid-service', [SubscriptionController::class, 'indexUser'])

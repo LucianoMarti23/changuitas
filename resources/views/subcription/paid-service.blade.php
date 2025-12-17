@@ -1,3 +1,5 @@
+
+
 <x-page>
     <main class="space-y-4 pt-64 bg-light-100 dark:bg-dark-950">
         <div class="flex flex-col justify-center py-4 texto-center">
@@ -13,9 +15,15 @@
           
                 <!-- PLAN 2-->
                 @foreach ( $subs as $sub )
-                <div
-                    class="overflow-hidden transition-transform duration-300 transform border rounded-lg shadow-md cursor-pointer w-xl bg-ligth-300 border-primary-700 hover:scale-90 max-w-64 max-h-auto">
-                    <div class="flex justify-center p-4 ">
+                    
+                    @php
+                        $description = ltrim($sub->description, '-');
+                        $features = explode(' -', $description);
+                    @endphp
+                    
+                <div 
+                    class="overflow-hidden transition-transform duration-300 transform border rounded-lg shadow-md cursor-pointer w-xl bg-primary-50 border-primary-700 hover:scale-110 max-w-64 max-h-auto ">
+                    <div class="flex justify-center p-4">
                     <img src="{{ asset('images/subscriptions/' . $sub->image) }}" alt="Imagen de {{ $sub->name }}" class="w-40 h-40">
 
                     </div>
@@ -28,46 +36,24 @@
                         <p class="text-3xl font-bold">${{$sub->price}}</p>
                     </div>
                     <!-- Lista de íconos en 2 columnas -->
-                    <div class="p-4 ">
+                    <div class="p-4 w-70 mx-auto">
                         <ul class="grid grid-cols-2 gap-4">
-                            <li class="flex items-center space-x-2 truncate text-success-600">
-                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                                    xmlns="http://www.w3.org/2000/svg">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M5 13l4 4L19 7"></path>
-                                </svg>
-                                <span class="truncate">Incluye Plan Básico. </span>
-                            </li>
-                            <li class="flex items-center space-x-2 truncate text-success-600">
-                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                                    xmlns="http://www.w3.org/2000/svg">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M5 13l4 4L19 7"></path>
-                                </svg>
-                                <span class="truncate">Aplicación Avanzada</span>
-                            </li>
-                            <li class="flex items-center space-x-2 truncate text-success-600">
-                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                                    xmlns="http://www.w3.org/2000/svg">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M5 13l4 4L19 7"></path>
-                                </svg>
-                                <span class="truncate">Herramientas de Análisis</span>
-                            </li>
-                            <li class="flex items-center space-x-2 truncate text-success-600">
-                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                                    xmlns="http://www.w3.org/2000/svg">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M5 13l4 4L19 7"></path>
-                                </svg>
-                                <span class="truncate">Evaluaciones de Habilidades</span>
-                            </li>
+                            @foreach ($features as $feature)
+                                <li class="flex items-start text-success-600">
+                                    <svg class="w-5 h-5 mr-2 mt-1 flex-shrink-0"
+                                         fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                              d="M5 13l4 4L19 7"/>
+                                    </svg>
+                                    <span>{{ trim($feature) }}</span>
+                                </li>
+                            @endforeach
+                            
                         </ul>
                         <!-- Botón plan 2 -->
                         <div class="p-4">
                             <button class="w-full px-4 py-2 shadow-lg btn-primary shadow-primary-500/50"
-                                onclick="window.location.href='{{ route('subcription.payment-gateway') }}?id={{ $sub->id }}';">
-
+                                onclick="window.location.href='{{ route('payment.gateway', $sub->id) }}';">
                                 Contratar
                             </button>
                         </div>
