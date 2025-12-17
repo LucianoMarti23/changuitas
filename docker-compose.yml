@@ -1,21 +1,54 @@
-version: '3.9'
-
 services:
   app:
-    build: .
-    container_name: laravel_app
+    # Contenedor principal de la aplicación Laravel
+    build:
+      context: .
+      dockerfile: Dockerfile
+        # Nombre fijo del contenedor para facilitar exec/debug
+   
+    container_name: changuitas_app
+      # Expone el puerto 8000 del contenedor al host
+    # Permite acceder a la app desde http://localhost:8000
+   
     ports:
       - "8000:8000"
-      - "5173:5173"
+   
     volumes:
-      - .:/var/www/html
-      - ./vendor:/var/www/html/vendor
-      - /var/www/html/node_modules
-      - ./database:/var/www/html/database
+     # Monta el código fuente del proyecto dentro del contenedor
+     # Permite hot-reload al editar archivos en el host
+      - ./:/var/www/html
+      # Volumen separado para vendor
+      # Evita conflictos entre dependencias del host y del contenedor
+      - vendor:/var/www/html/vendor
+      # Volumen persistente para SQLite
+      # Aquí se guarda el archivo .sqlite y no se pierde al bajar contenedores
+      - sqlite-data:/var/www/html/database
+   
     env_file:
       - .env
-    environment:
-      APP_ENV: local
-      APP_DEBUG: true
-      DB_CONNECTION: sqlite
-    command: bash -c "php artisan serve --host=0.0.0.0 --port=8000"
+
+    # Comando de arranque del contenedor
+    # Usa el servidor embebido de Laravel (solo para desarrollo)
+    command: php artisan serve --host=0.0.0.0 --port=8000
+
+      # Asegura que el contenedor db esté disponible antes de iniciar app
+    depends_on:
+      - db
+
+  db:
+   # Contenedor "pasivo" para persistir SQLite
+    # Alpine es una imagen Linux mínima (no es un motor de base de datos)
+    image: alpine
+
+    
+    container_name: changuitas_db
+    volumes:
+    # Funciona como disco persistente para la base SQLite
+      - sqlite-data:/var/www/html/database
+
+       # Mantiene el contenedor vivo sin ejecutar servicios
+    command: tail -f /dev/null
+
+volumes:
+  vendor:
+  sqlite-data:

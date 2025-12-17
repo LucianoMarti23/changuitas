@@ -1,7 +1,8 @@
 # Dockerfile
 FROM php:8.2-fpm
 
-# Instalar extensiones y herramientas necesarias
+
+# Actualizar paquetes e instalar herramientas y extensiones PHP
 RUN apt-get update && apt-get install -y \
     git \
     unzip \
@@ -11,9 +12,10 @@ RUN apt-get update && apt-get install -y \
     sqlite3 \
     libsqlite3-dev \
     curl \
-    npm \
+    && curl -fsSL https://deb.nodesource.com/setup_20.x | bash - \
+    && apt-get install -y nodejs \
     && docker-php-ext-install pdo pdo_sqlite mbstring zip
-
+    
 # Instalar Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
