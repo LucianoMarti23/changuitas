@@ -28,7 +28,7 @@
 
                     </div>
                     <!-- Mes -->
-                    <div class="p-4 text-center">
+                    <div class="p-4 text-center"
                         <h2 class="text-xl font-semibold">{{$sub->name}}</h2>
                     </div>
                     <!-- Precio -->

@@ -73,14 +73,7 @@
                     </div>
 
                     <!-- Sueldo -->
-                    <div class="flex items-center text-base pl-2 text-dark-400 dark:text-dark-400 mb-1">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-1 text-primary-500" viewBox="0 0 24 24" fill="currentColor">
-                            <path fill-rule="evenodd"
-                                d="M18 2.993a.75.75 0 0 0-1.5 0v1.5h-9V2.994a.75.75 0 1 0-1.5 0v1.5H4.25a.75.75 0 0 0 0 1.5h.67l.958 13.41a2.25 2.25 0 0 0 2.246 2.09h7.752a2.25 2.25 0 0 0 2.246-2.09l.958-13.41h.67a.75.75 0 0 0 0-1.5H18v-1.5ZM7.39 19.533 6.457 6.993h11.086l-.933 12.54a.75.75 0 0 1-.749.697H8.139a.75.75 0 0 1-.749-.697Z"
-                                clip-rule="evenodd" />
-                        </svg>
-                        <span>Sueldo: ${{ $job->salary }}</span>
-                    </div>
+                    
 
                     <!-- Modalidad -->
                     <div class="flex items-center text-base pl-2 text-dark-400 dark:text-dark-400 mb-1">
