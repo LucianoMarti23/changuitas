@@ -139,3 +139,6 @@ Route::get('/FAQ', function () {
 
 
 
+use App\Http\Controllers\AdminUserController;
+
+Route::patch('admin/users/{id}/restore', [AdminUserController::class, 'restore'])->name('admin.users.restore');

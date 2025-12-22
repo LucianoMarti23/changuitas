@@ -43,8 +43,9 @@ class AdminUserController extends Controller
 
     public function index()
     {
-        $users = $this->userService->getAllUsers();
-        return view('admin.users.index', compact('users'));
+          $users = User::withTrashed()->get();
+
+    return view('admin.users.index', compact('users'));
     }
 
     public function create()
@@ -70,8 +71,9 @@ class AdminUserController extends Controller
         if (isset($result['errors'])) {
             return redirect()->back()->withErrors($result['errors'])->withInput();
         }
+return redirect()->route('admin.users')->with('success', 'Usuario creado exitosamente.');
 
-        return redirect()->route('users.index')->with('success', 'Usuario creado exitosamente.');
+        
     }
 
     public function edit(User $user)
@@ -90,19 +92,20 @@ class AdminUserController extends Controller
         try {
             // Llamar al método del servicio para actualizar el usuario
             $user = $this->userService->updateUser($id, $data);
-            return redirect()->route('users.index')->with('success', 'Usuario actualizado correctamente');
+            return redirect()->route('admin.users')->with('success', 'Usuario actualizado correctamente');
+
         } catch (\Illuminate\Validation\ValidationException $e) {
             return redirect()->back()->withErrors($e->errors());
         } catch (\Exception $e) {
             return redirect()->back()->withErrors(['error' => $e->getMessage()]);
         }
     }
-
+//SOFDELETE
     public function destroy(User $user)
     {
 
         $result = $this->userService->deleteUser($user->id);
-        return redirect()->route('users.index')->with('success', $result['message']);
+        return redirect()->route('admin.users')->with('success', $result['message']);
     }
 
 
@@ -167,7 +170,12 @@ class AdminUserController extends Controller
     
 
     
-    
+    public function restore($id)
+{
+    $user = User::withTrashed()->findOrFail($id);
+    $user->restore();
+    return redirect()->route('admin.users')->with('success', 'Usuario restaurado correctamente.');
+}
 
 
 

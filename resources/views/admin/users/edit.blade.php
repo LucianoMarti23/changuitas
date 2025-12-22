@@ -1,4 +1,5 @@
 <x-layoutadmin>
+    @section('title', 'Editando usuario')
     <div class="flex flex-col gap-2 w-full max-w-full mx-auto px-2 sm:px-6 lg:px-8 bg-light-300 p-2">
         <div class="flex items-center justify-between border-b-2 border-light-200 p-2">
             <div class="flex items-center gap-2">
@@ -17,7 +18,8 @@
             </div>
             <div class="flex gap-2">
                 <button type="submit" form="edit-form" class="bg-info-700 text-sm text-light-100 px-2 py-1 rounded-md hover:bg-info-500">Guardar</button>
-                <a href="{{ route('users.index') }}" class="bg-alert-700 text-sm text-light-100 px-2 py-1 rounded-md hover:bg-alert-500">Cancelar</a>
+                <a href="{{ route('admin.users') }}" class="bg-alert-700 text-sm text-light-100 px-2 py-1 rounded-md hover:bg-alert-500">Cancelar</a>
+
             </div>
         </div>
 

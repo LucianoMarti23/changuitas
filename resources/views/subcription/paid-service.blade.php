@@ -1,107 +1,90 @@
-
-
 <x-page>
-    <main class="space-y-4 pt-64 bg-light-100 dark:bg-dark-950">
-        <div class="flex flex-col justify-center py-4 texto-center">
-            <h1 class="text-center text-3xl pb-8 font-bold text-dark-600 dark:text-ligth-200">¡Suscríbete y Conéctate con
-                Confianza!
+    <div class="space-y-4 pt-20 bg-light-100 dark:bg-dark-950">
+        <!-- Título y descripción -->
+        <div class="flex flex-col justify-center py-4 text-center">
+            <h1 class="text-3xl pb-8 font-bold text-dark-600 dark:text-light-200">
+                ¡Suscríbete y Conéctate con Confianza!
             </h1>
-            <p class=" text-center text-xl pb-8 font-normal text-dark-600 dark:text-ligth-300">¡Accede a más
-                oportunidades y aumenta tu visibilidad profesional!
-                Suscríbete hoy y conecta con personas de confianza que buscan tus habilidades.</p>
+            <p class="text-xl pb-8 font-normal text-dark-600 dark:text-light-300">
+                ¡Accede a más oportunidades y aumenta tu visibilidad profesional!
+                Suscríbete hoy y conecta con personas de confianza que buscan tus habilidades.
+            </p>
         </div>
-        <!-- Cards "SUBCRIPCION" -->
-        <section class="flex justify-center py-8">
-          
-                <!-- PLAN 2-->
-                @foreach ( $subs as $sub )
-                    
-                    @php
-                        $description = ltrim($sub->description, '-');
-                        $features = explode(' -', $description);
-                    @endphp
-                    
-                <div 
-                    class="overflow-hidden transition-transform duration-300 transform border rounded-lg shadow-md cursor-pointer w-xl bg-primary-50 border-primary-700 hover:scale-110 max-w-64 max-h-auto ">
-                    <div class="flex justify-center p-4">
-                    <img src="{{ asset('images/subscriptions/' . $sub->image) }}" alt="Imagen de {{ $sub->name }}" class="w-40 h-40">
 
+        <!-- Sección de Cards de suscripción -->
+        <section class="flex flex-wrap justify-center gap-6 py-8">
+            @foreach($subs as $sub)
+                @php
+                    $description = ltrim($sub->description, '-');
+                    $features = explode(' -', $description);
+                @endphp
+
+                <div class="max-w-xs w-full bg-primary-50 border border-primary-700 rounded-lg shadow-md overflow-hidden transform transition-transform duration-300 hover:scale-105 cursor-pointer">
+                    <!-- Imagen -->
+                    <div class="flex justify-center p-4">
+                        <img src="{{ asset('images/subscriptions/' . $sub->image) }}" alt="Imagen de {{ $sub->name }}" class="w-40 h-40 object-contain">
                     </div>
-                    <!-- Mes -->
-                    <div class="p-4 text-center"
-                        <h2 class="text-xl font-semibold">{{$sub->name}}</h2>
+
+                    <!-- Nombre del plan -->
+                    <div class="p-4 text-center">
+                        <h2 class="text-xl font-semibold">{{ $sub->name }}</h2>
                     </div>
+
                     <!-- Precio -->
                     <div class="p-4 text-center">
-                        <p class="text-3xl font-bold">${{$sub->price}}</p>
+                        <p class="text-3xl font-bold">${{ $sub->price }}</p>
                     </div>
-                    <!-- Lista de íconos en 2 columnas -->
-                    <div class="p-4 w-70 mx-auto">
-                        <ul class="grid grid-cols-2 gap-4">
-                            @foreach ($features as $feature)
-                                <li class="flex items-start text-success-600">
-                                    <svg class="w-5 h-5 mr-2 mt-1 flex-shrink-0"
-                                         fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                              d="M5 13l4 4L19 7"/>
-                                    </svg>
-                                    <span>{{ trim($feature) }}</span>
-                                </li>
-                            @endforeach
-                            
-                        </ul>
-                        <!-- Botón plan 2 -->
-                        <div class="p-4">
+
+                    <!-- Lista de características -->
+                    <div class="p-4">
+                        <ul class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+    @foreach($features as $feature)
+        <li class="flex items-start gap-2 p-2 bg-light-200 dark:bg-dark-700 rounded-lg shadow-sm">
+            <svg class="w-6 h-6 text-success-600 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+            </svg>
+            <span class="text-dark-700 dark:text-light-200 text-sm sm:text-base leading-snug">
+                {{ trim($feature) }}
+            </span>
+        </li>
+    @endforeach
+</ul>
+
+                        <!-- Botón contratar -->
+                        <div class="mt-4">
                             <button class="w-full px-4 py-2 shadow-lg btn-primary shadow-primary-500/50"
-                                onclick="window.location.href='{{ route('payment.gateway', $sub->id) }}';">
+                                    onclick="window.location.href='{{ route('payment.gateway', $sub->id) }}';">
                                 Contratar
                             </button>
                         </div>
                     </div>
                 </div>
-
-                     
-                     
-                @endforeach
-                
-
-                <!-- PLAN 3 -->
-               
+            @endforeach
         </section>
 
-
-
-        <!-- Tabla: Niveles de SUBCRIPCIONES -->
-        <div class="flex justify-center py-32">
-        <table id="benefitsTable" class="table-auto w-1/2  text-base font-light border-2 shadow-inner  shadow-primary-700/50 border-primary-900 text-light-300 dark:text-light-300"">
-            <thead class="shadow-md shadow-primary-700/50 bg-primary-950 dark:bg-opacity-50 dark:bg-primary-800">
-                <tr class="divide-x divide-dark-600 dark:divide-dark-700 ">
-                    <th class="px-4 py-2">Beneficio</th>
-                    <th class="px-4 py-2">
-                        <div class="relative">
-                            <!-- Imagen promos descuento->hidden 
-                                 no descuento inline-block -->
-                            <img src="/imgtempprofile/s-descuento.png" alt="Descuento"
-                                class="absolute bottom-0 inline-block object-cover w-12 h-12" id="descuento%">
-                        </div>Plan Básico
-                    </th>
-                    <th class="px-4 py-2">Plan Intermedio</th>
-                    <th class="px-4 py-2">Plan Avanzado</th>
-                    <th class="px-4 py-2">
-                        <div class="relative">
-                            <!-- Imagen promos-->
-                            <img src="/imgtempprofile/s-regalo.png" alt="Descuento"
-                                class="absolute bottom-0  inline-block object-cover w-12 h-12" id="regalo%">
-                        </div>Plan Premium
-                    </th>
-                </tr>
-            </thead>
-            <tbody id="tableBody">
-                <!-- Aquí se generarán las filas dinámicamente -->
-            </tbody>
-        </table>
+        <!-- Tabla comparativa de suscripciones 
+        <div class="flex justify-center py-32 overflow-x-auto">
+            <table class="table-auto w-full max-w-4xl text-base font-light border-2 border-primary-900 shadow-inner shadow-primary-700/50 text-light-300 dark:text-light-300">
+                <thead class="bg-primary-950 dark:bg-opacity-50 dark:bg-primary-800 shadow-md shadow-primary-700/50">
+                    <tr class="divide-x divide-dark-600 dark:divide-dark-700">
+                        <th class="px-4 py-2 text-left">Beneficio</th>
+                        <th class="px-4 py-2 text-left relative">
+                            Plan Básico
+                            <img src="/imgtempprofile/s-descuento.png" alt="Descuento" class="absolute bottom-0 w-12 h-12">
+                        </th>
+                        <th class="px-4 py-2 text-left">Plan Intermedio</th>
+                        <th class="px-4 py-2 text-left">Plan Avanzado</th>
+                        <th class="px-4 py-2 text-left relative">
+                            Plan Premium
+                            <img src="/imgtempprofile/s-regalo.png" alt="Regalo" class="absolute bottom-0 w-12 h-12">
+                        </th>
+                    </tr>
+                </thead>
+                <tbody id="tableBody">
+                    
+                </tbody>
+            </table>
+             Las filas se generarán dinámicamente -->
         </div>
-
-    </main>
     
 </x-page>

@@ -1,5 +1,6 @@
 <!-- Formulario para crear un nuevo usuario -->
 <x-layoutadmin>
+    @section('title', 'Crear Usuario')
 <form action="{{ route('admin.users.store') }}" method="POST" class="p-4 bg-white rounded shadow-md">
     @csrf
     <div class="mb-4">

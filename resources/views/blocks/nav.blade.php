@@ -51,10 +51,7 @@
                 <li>
                     <a href="/profiles" class="text-xl font-medium  hover:text-primary-600 block px-4 py-2 rounded">Perfiles</a>
                 </li>
-                <li>
-                    <a href="{{route('notificaciones.index')}}"
-                        class="text-xl font-medium  hover:text-primary-600  block px-4 py-2 rounded">Notificación</a>
-                </li>
+                
             </ul>
         </div>
         <div class="flex">
@@ -72,11 +69,7 @@
                     <img src="/img/ico-nav/perfiles.png" class="w-8 h-8" alt="Perfiles" />
                     <span class="text-sm mt-1">Perfiles</span>
                 </a>
-                <a href="#"
-                    class="flex flex-col items-center text-dark-800 dark:text-dark-100 hover:text-primary-500 dark:hover:text-primary-400">
-                    <img src="/img/ico-nav/campana.png" class="w-8 h-8" alt="Notificación" />
-                    <span class="text-sm mt-1">Notificación</span>
-                </a>
+                
             </div>
             <div class="flex">
 

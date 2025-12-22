@@ -13,13 +13,9 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
-
-        User::factory()->create([
-            'name' => 'admin',
-            'email' => 'test@example.com',
-            'role' => 'admin',
-            'password' => '123456admin',
-        ]);
+        $this->call([
+    JobCategorySeeder::class,
+    AdminUserSeeder::class,
+]);
     }
 }

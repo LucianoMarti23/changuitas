@@ -1,4 +1,8 @@
 <x-page>
+    <!-- //-- Payment Gateway Page for Subscription   
+     resources/views/subcription/payment-gateway.blade.php 
+     Extends the main page layout 
+     Displays the selected subscription plan and payment options  -->
     <main class="pt-32  bg-light-100 dark:bg-dark-950">
         <section
             class="space-y-4 pt-4 max-w-4xl mx-auto text-xl border-b text-dark-500 border-dark-200 dark:text-dark-400 dark:border-dark-700">

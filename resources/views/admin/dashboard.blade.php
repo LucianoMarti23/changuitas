@@ -1,5 +1,5 @@
 <x-layoutadmin>
-
+@section('title', 'Dashboard')
         <!-- Contenido Principal -->
         <main class="flex-1 p-6 bg-gray-100">
 

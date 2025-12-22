@@ -1,4 +1,5 @@
 <x-layoutadmin>
+    @section('title', 'Crear Subcripcion')
     <div class="py-8 px-4 sm:px-6 lg:px-8">
         <h1 class="text-2xl font-bold text-dark-800 mb-4">Crear Suscripción</h1>
 

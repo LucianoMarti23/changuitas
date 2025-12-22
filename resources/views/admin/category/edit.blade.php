@@ -1,4 +1,5 @@
 <x-layoutadmin>
+    @section('title', 'Editar Categorias')
     <div class="flex flex-col items-center w-full max-w-lg mx-auto px-4 sm:px-6 lg:px-8 py-8 bg-light-350 shadow-md rounded-lg">
         <h1 class="text-2xl font-bold text-dark-800 mb-6">Editar Categoría</h1>
 

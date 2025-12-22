@@ -1,4 +1,5 @@
 <x-layoutadmin>
+    @section('title', 'Subcripciones')
     <div class="py-8 px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between items-center mb-6">
             <h1 class="text-3xl font-semibold text-gray-900">Suscripciones</h1>

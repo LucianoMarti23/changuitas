@@ -1,5 +1,5 @@
 <x-layoutadmin>
-
+@section('title', 'reportes')
     <!-- CONTENIDO PRINCIPAL -->
     <div
         class="flex flex-col items-center w-full max-w-lg mx-auto px-4 sm:px-6 lg:px-8 py-8 bg-light-350 shadow-md rounded-lg">

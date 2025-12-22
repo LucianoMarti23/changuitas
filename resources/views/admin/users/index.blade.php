@@ -1,5 +1,5 @@
 <x-layoutadmin>
-
+@section('title', 'Usuarios')
         <!-- CONTENIDO PRINCIPAL -->
         <div class="flex flex-col w-full max-w-full mx-auto px-4 sm:px-6 lg:px-8">
 
@@ -31,6 +31,25 @@
         <option value="admin">Administrador</option>
         <option value="user">Usuario</option>
     </select>
+  @if(session('success'))
+    <div id="successMessage" class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded mb-4">
+        {{ session('success') }}
+    </div>
+
+    <script>
+        // Espera 3 segundos (3000 ms) y oculta el mensaje
+        setTimeout(function() {
+            const msg = document.getElementById('successMessage');
+            if (msg) {
+                msg.style.transition = 'opacity 0.5s';
+                msg.style.opacity = '0';
+                setTimeout(() => msg.remove(), 500); // lo elimina del DOM
+            }
+        }, 3000);
+    </script>
+@endif
+
+
 </div>
 
 <!-- Tabla de Usuarios -->
@@ -47,26 +66,35 @@
             </tr>
         </thead>
         <tbody id="userTableBody">
-            @foreach($users as $user)
-            <tr class="border-b border-gray-300 hover:bg-gray-100">
-                <td class="p-2">{{ $user->name }}</td>
-                <td class="p-2 text-left">{{ $user->email }}</td>
-                <td class="p-2 text-left">{{ $user->status }}</td>
-                <td class="p-2">{{ $user->created_at->format('d/m/Y') }}</td>
-                <td class="p-2">{{ $user->role }}</td>
-                <td class="p-2">
-                    <div class="flex space-x-2">
-                        <a href="{{ route('admin.users.edit', ['user' => $user->id]) }}" class="text-alert-500 hover:text-alert-700">Editar</a>
-                        <form action="{{ route('admin.users.destroy', ['user' => $user->id]) }}" method="POST" class="inline-block">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="text-danger-500 hover:text-danger-700" onclick="return confirm('¿Estás seguro de que deseas eliminar este usuario?');">Eliminar</button>
-                        </form>
-            
-                    </div>
-                </td>
-            </tr>
-            @endforeach
+           @foreach($users as $user)
+<tr class="border-b border-gray-300 hover:bg-gray-100 {{ $user->trashed() ? 'bg-gray-200 text-gray-500' : '' }}">
+    <td class="p-2">{{ $user->name }}</td>
+    <td class="p-2">{{ $user->email }}</td>
+    <td class="p-2 text-left">
+        {{ $user->trashed() ? 'Eliminado' : $user->status }}
+    </td>
+    <td class="p-2">{{ $user->created_at->format('d/m/Y') }}</td>
+    <td class="p-2">{{ $user->role }}</td>
+    <td class="p-2">
+        <div class="flex space-x-2">
+            @if(!$user->trashed())
+                <a href="{{ route('admin.users.edit', $user->id) }}" class="text-alert-500 hover:text-alert-700">Editar</a>
+                <form action="{{ route('admin.users.destroy', $user->id) }}" method="POST" class="inline-block">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" class="text-danger-500 hover:text-danger-700" onclick="return confirm('¿Seguro que deseas eliminar este usuario?');">Eliminar</button>
+                </form>
+            @else
+                <form action="{{ route('admin.users.restore', $user->id) }}" method="POST" class="inline-block">
+                    @csrf
+                    @method('PATCH')
+                    <button type="submit" class="text-info-500 hover:text-info-700">Restaurar</button>
+                </form>
+            @endif
+        </div>
+    </td>
+</tr>
+@endforeach
         </tbody>
     </table>
 </div>

@@ -234,6 +234,73 @@ closeModalBtn.addEventListener('click', function() {
     });
     </script>
 
+<script>
+document.getElementById('fileInput').addEventListener('change', function(event) {
+    const file = event.target.files[0];
+    const preview = document.getElementById('imagePreview');
+
+    if (!file) return;
+
+    // Solo permitir tipos de imagen específicos
+    const validTypes = ['image/jpeg', 'image/png', 'image/gif'];
+    if (!validTypes.includes(file.type)) {
+        alert("Por favor, selecciona una imagen válida (JPEG, PNG o GIF).");
+        event.target.value = '';
+        return;
+    }
+
+    const maxWidth = 500; // ancho máximo permitido
+    const maxHeight = 500; // alto máximo permitido
+    const maxSizeKB = 2048; // tamaño máximo permitido en KB
+
+    const reader = new FileReader();
+    reader.onload = function(e) {
+        const img = new Image();
+        img.src = e.target.result;
+
+        img.onload = function() {
+            let canvas = document.createElement('canvas');
+            let ctx = canvas.getContext('2d');
+
+            let width = img.width;
+            let height = img.height;
+
+            // Redimensionar si excede las dimensiones máximas
+            if (width > maxWidth || height > maxHeight) {
+                const ratio = Math.min(maxWidth / width, maxHeight / height);
+                width = width * ratio;
+                height = height * ratio;
+            }
+
+            canvas.width = width;
+            canvas.height = height;
+            ctx.drawImage(img, 0, 0, width, height);
+
+            // Convertir a blob y verificar tamaño
+            canvas.toBlob(function(blob) {
+                const sizeKB = blob.size / 1024;
+                if (sizeKB > maxSizeKB) {
+                    alert("La imagen es demasiado grande incluso después de redimensionar. Reduce la calidad o el tamaño.");
+                    event.target.value = '';
+                    return;
+                }
+
+                // Previsualizar la imagen
+                preview.src = URL.createObjectURL(blob);
+
+                // Reemplazar el archivo original por el blob redimensionado
+                const newFile = new File([blob], file.name, { type: file.type });
+                const dataTransfer = new DataTransfer();
+                dataTransfer.items.add(newFile);
+                event.target.files = dataTransfer.files;
+
+            }, file.type, 0.9); // 0.9 es la calidad de compresión para JPEG/PNG
+        }
+    }
+
+    reader.readAsDataURL(file);
+});
+</script>
 
 
 

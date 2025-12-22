@@ -53,7 +53,7 @@
 
         <!-- Información del Usuario -->
         <div class="flex items-center space-x-4">
-            <span class="font-semibold">Hola, [Admin]</span>
+            <span class="font-semibold">Hola, Admin</span>
         </div>
 
         <!-- Notificaciones -->
@@ -72,7 +72,9 @@
         <nav class="bg-dark-800 shadow-xl w-48 px-4 h-screen px-2">
             <!-- Logo -->
             <div class="flex items-center my-4">
-                <a href="#" class="text-info-400 text-xl font-medium mr-2">{{ $title ?? '[Panel]' }}</a>
+                <a href="#" class="text-info-400 text-xl font-medium mr-2">
+    @yield('title', '[Panel]')
+</a>
                 <svg class="w-6 h-6 text-info-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
                     height="24" fill="currentColor" viewBox="0 0 24 24">
                     <path
@@ -94,7 +96,7 @@
                 <li><a href="{{ route('admin.category') }}" class="text-dark-300 hover:text-light-200 block">Categoria</a>
                 </li>
                 
-                <li><a href="#" class="text-dark-300 hover:text-light-200 block">Análisis</a>
+                
                 </li>
                 
                

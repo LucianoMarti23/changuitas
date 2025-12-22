@@ -1,4 +1,5 @@
 <x-layoutadmin>
+    @section('title', 'Crear Categorias')
     <!-- Formulario de Creación de Categoría -->
     <form action="{{ route('admin.category.store') }}" method="POST" class="w-1/4 h-2/4 p-6 mx-auto my-4 border-2 border-light-200 rounded-lg shadow-md bg-light-300 ">
         @csrf <!-- Token CSRF -->

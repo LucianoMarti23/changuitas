@@ -126,6 +126,8 @@
 
     @endforeach
 
+<!-- Links de paginación -->
+<!-- Paginación -->
 
 <!-- Ejemplo de publicación FIN -->
 
